@@ -3,12 +3,14 @@
 /* homepage */
 
 /* informations */
-
+@import 'variables.css';
 html{
     font-size: 10px;
 
 }
-
+.informations_homepage{
+    padding: 12rem 0;
+}
 .informations_homepage .presentation{
     
     display: flex;
@@ -21,7 +23,11 @@ html{
 .informations_homepage .name .inner_name{
     font-size: 7rem;
 }
-
+.informations_homepage .name{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 .informations_homepage .name, .informations_homepage .picture{
     flex: 0 50%;
 }
@@ -52,6 +58,9 @@ html{
 .informations_homepage .picture img{
     max-width: 100%;
     width: 100%;
+}
+.slogan{
+    font-size: 2rem;
 }
 
 @media screen and (min-width: 768px) {
