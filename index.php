@@ -1,13 +1,30 @@
 <?php
+define('ABS_PATH', __DIR__);
 
-require_once './vendor/autoload.php';
+/* controllers */
+require_once 'src/controllers/back/form.php';
 
-$loader = new \Twig\Loader\FilesystemLoader('./src/views');
-$twig = new \Twig\Environment($loader, []);
-
-// define all globals variable usable in twig
-
-$twig->addGlobal('img_assets', 'src/assets/img/');
+require_once 'twig.php';
 
 
-echo $twig->render('index.twig');
+//routeur
+if (isset($_GET['action']) && $_GET['action'] !== '') {
+
+    // if send contact at form
+
+	if ($_GET['action'] === 'confirmationForm') {
+        if(confirmationForm()){
+            echo $twig->render('elements/confirm.twig',array(
+                'firstname'=>$_POST['firstname'],
+                'lastname'=>$_POST['lastname'],
+                'email'=>$_POST['email'],
+                'message'=>$_POST['message']
+            ));
+        }
+        
+    }
+}else{
+    echo $twig->render('index.twig');
+}
+
+// echo $twig->render('index.twig');

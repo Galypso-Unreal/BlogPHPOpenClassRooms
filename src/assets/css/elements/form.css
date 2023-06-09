@@ -1,0 +1,99 @@
+.container_form{
+    padding: 10rem 0;
+}
+
+.container_form form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+.container_form form .input.full{
+    max-width: 100%;
+    flex: 0 100%;
+}
+.container_form form label{
+    font-size: 1.7rem;
+}
+input,textarea{
+    padding: 0.5rem;
+    font-weight: 500;
+    font-size: 1.5rem;
+    border: none;
+    background-color: rgb(241, 241, 250);
+    resize: none;
+}
+textarea{
+    height: 10rem;
+}
+input:focus,textarea:focus{
+    outline: none;
+}
+
+.container_form form .input{
+    flex: 0 100%;
+    max-width: 100%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* confirmation form */
+.confirmation-form{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 3rem;
+    padding: 10rem 2rem !important;
+}
+.confirmation-form {
+    width: 100%;
+    position: relative;
+}
+.confirmation-form .informations{
+    flex: 0 75%;
+}
+.confirmation-form .informations p{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.confirmation-form .conf-svg{
+    display: flex;
+    justify-content: center;
+    flex: 0 25%;
+}
+.confirmation-form .conf-svg svg{
+    width: 50%;
+}
+.confirmation-form > div{
+    flex: 0 50%;
+    max-width: 0 calc(50% - 3rem);
+    text-align: center;
+
+}
+.return-home{
+    background-color: aliceblue;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+@media screen and (min-width: 992px) {
+    .container_form form{
+        flex-direction: row;
+    }
+    .confirmation-form .informations p{
+        align-items: unset;
+    }
+    .container_form form .input{
+        flex: 0 50%;
+        max-width: calc(50% - 1.5rem);
+    }
+    .confirmation-form > div{
+        text-align: unset;
+    }
+}
+

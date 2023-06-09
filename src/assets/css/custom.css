@@ -3,13 +3,15 @@
 /* homepage */
 
 /* informations */
-@import 'variables.css';
 html{
     font-size: 10px;
 
 }
 .informations_homepage{
-    padding: 12rem 0;
+    padding: 12rem 0 0rem;
+}
+.main .container{
+    padding: 10rem 0;
 }
 .informations_homepage .presentation{
     
