@@ -30,3 +30,11 @@ function confirmationForm(){
         return 1;
     }
 }
+
+function sendMailContact(string $firstname, string $lastname, string $email, string $message, string $to='johann.moser0681@gmail.com'){
+
+    $subject = 'Demande de contact';
+    $message = 'Prénom : '.$firstname.PHP_EOL.'Nom : '.$lastname.PHP_EOL.'Email : '.$email.PHP_EOL.'Message : '.$message.PHP_EOL;
+    mail($to, $subject, $message);
+
+}

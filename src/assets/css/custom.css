@@ -65,6 +65,14 @@ html{
     font-size: 2rem;
 }
 
+.separator{
+    margin: 2rem 0;
+    height: 0.2rem;
+    background-color: var(--bs-body-color);
+    width: 100%;
+    max-width: 15rem;
+}
+
 @media screen and (min-width: 768px) {
     .informations_homepage .presentation{
     
