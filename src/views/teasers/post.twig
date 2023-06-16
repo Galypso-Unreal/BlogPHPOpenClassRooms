@@ -1,13 +1,15 @@
 <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html">
-                            <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-                            <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 24, 2023
-                        </p>
-                    </div>
-                    <hr class="my-4" />
+<article class="post_{{post.id}}">
+    <div class="post-preview">
+	<a href="/actualite/{{post.id}}">
+		<h2 class="post-title">{{post.title}}</h2>
+		<h3 class="post-subtitle">{{post.chapo}}</h3>
+	</a>
+	<p class="post-meta">
+
+        Posté le {{post.modified_at|date("m/d/Y")}}
+	</p>
+</div>
+<hr class="my-4"/>
+</article>
+

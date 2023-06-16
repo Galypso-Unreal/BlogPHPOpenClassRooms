@@ -1,0 +1,18 @@
+{% extends "layouts/layout.twig" %}
+
+
+{% block title %}
+Acutalités
+{% endblock %}
+
+{% block content %}
+<div class="padding-container container">
+        {% for post in posts %}
+
+    {% include "teasers/post.twig" with {'post': post} %}
+        
+    {% endfor %}
+</div>
+
+    
+{% endblock %}

@@ -44,6 +44,14 @@ a.anim{
     position: relative;
 
 }
+.padding-container{
+    padding: 10rem 2rem;
+}
+.container{
+    max-width: 144rem;
+    margin: 0 auto;
+}
+
 a.anim::after{
     position: absolute;
     content: "";
