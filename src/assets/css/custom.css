@@ -3,13 +3,15 @@
 /* homepage */
 
 /* informations */
-@import 'variables.css';
 html{
     font-size: 10px;
 
 }
 .informations_homepage{
-    padding: 12rem 0;
+    padding: 12rem 0 0rem;
+}
+.main .container{
+    padding: 10rem 0;
 }
 .informations_homepage .presentation{
     
@@ -61,6 +63,14 @@ html{
 }
 .slogan{
     font-size: 2rem;
+}
+
+.separator{
+    margin: 2rem 0;
+    height: 0.2rem;
+    background-color: var(--bs-body-color);
+    width: 100%;
+    max-width: 15rem;
 }
 
 @media screen and (min-width: 768px) {
