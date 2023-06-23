@@ -10,23 +10,7 @@ function confirmationPostAdd(){
     return 0;
 }
 
-function addPost($title,$chapo,$content,$id_user){
-    $database = new DatabaseConnection();
-    $db = $database->getConnection();
 
-
-    $sql = "INSERT INTO b_post (titre,chapo,contenu,fk_utilisateur_id) VALUES (:titre,:chapo,:contenu,:fk_utilisateur_id)";
-    $insert = $db->prepare($sql);
-    $insert->execute(array(
-        ":titre"=>$title,
-        ":chapo"=>$chapo,
-        ":contenu"=>$content,
-        ":fk_utilisateur_id"=>$id_user,
-    ));
-
-    header('Location: http://blog.local/admin/post/add');
-
-}
 
 
 function getPosts(){
@@ -60,13 +44,14 @@ function getAuthor(int $id): Array{
     $database = new DatabaseConnection();
     $db = $database->getConnection();
 
-    $sql = "SELECT prenom,nom,email FROM b_utilisateur WHERE id=:id";
+    $sql = "SELECT id,prenom,nom,email FROM b_utilisateur WHERE id=:id";
 
     $data = $db->prepare($sql);
 
     $data->execute(array(':id'=>$id));
     while(($row = $data->fetch(PDO::FETCH_ASSOC))){
         $author = [
+            'id'=>$row['id'],
             'firstname'=>$row['prenom'],
             'lastname'=>$row['nom'],
             'email'=>$row['email']
@@ -102,6 +87,65 @@ function getPost(int $id){
     }
     
     return $post;
+}
+
+function addPost($title,$chapo,$content,$id_user){
+    $database = new DatabaseConnection();
+    $db = $database->getConnection();
+
+
+    $sql = "INSERT INTO b_post (titre,chapo,contenu,fk_utilisateur_id) VALUES (:titre,:chapo,:contenu,:fk_utilisateur_id)";
+    $insert = $db->prepare($sql);
+    $insert->execute(array(
+        ":titre"=>$title,
+        ":chapo"=>$chapo,
+        ":contenu"=>$content,
+        ":fk_utilisateur_id"=>$id_user,
+    ));
+
+    header('Location: http://blog.local/admin/post/add');
+
+}
+
+function modifyPost($id,$title,$chapo,$content,$id_user){
+    $database = new DatabaseConnection();
+    $db = $database->getConnection();
+
+
+    $sql = "UPDATE b_post SET titre=:titre,chapo=:chapo,contenu=:contenu,fk_utilisateur_id=:fk_utilisateur_id,modified_at=:modified_at WHERE id=:id";
+    $insert = $db->prepare($sql);
+    $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
+    $datef = $date->format('Y-m-d H:i:s');
+    $dd = '2023-06-23 12:22:29';
+    var_dump($datef);
+
+    $insert->bindParam(':titre', $title);
+    $insert->bindParam(':chapo', $chapo);
+    $insert->bindParam(':contenu', $content);
+    $insert->bindParam(':fk_utilisateur_id', $id_user);
+    $insert->bindParam(':modified_at', $dd);
+    $insert->bindParam(':id', $id);
+
+    $insert->execute();
+
+    die();
+    header('Location: http://blog.local/admin/posts');
+
+}
+
+function deletePost($id){
+    if(isset($id) && $id >=0){
+        $database = new DatabaseConnection();
+        $db = $database->getConnection();
+
+        $sql = "DELETE FROM b_post WHERE id=:id";
+
+        $delete = $db->prepare($sql);
+        $delete->execute(array(':id'=>$id));
+
+        header('Location: http://blog.local/admin/posts');
+    }
+    
 }
 
 function getAdmins(){

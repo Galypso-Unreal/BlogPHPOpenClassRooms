@@ -55,6 +55,26 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
         
     }
+    if ($_GET['action'] === 'modifyPost') {
+        if(isset($_GET['id']) && $_GET['id']>0){
+            if(confirmationPostAdd()){
+                $title = $_POST['title'];
+                $chapo = $_POST['chapo'];
+                $content = $_POST['content'];
+                $id_user = $_POST['id_user'];
+                modifyPost($title,$chapo,$content,$id_user,$_GET['id']);
+            }
+            else{
+                echo "error";
+            }
+        }
+        else{
+            echo "error2";
+        }
+        
+
+        
+    }
 }else{
     
     
@@ -87,6 +107,20 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         echo $twig->render('admin/post/posts.twig',array(
             'posts'=>getPosts(),
         ));
+    }
+    elseif(strpos($host, "admin/post/delete")){
+        if(isset($_GET['id'])){
+            deletePost($_GET['id']);
+        }
+    }
+    elseif(strpos($host, "admin/post/modify")){
+        if(isset($_GET['id'])){
+            echo $twig->render('admin/post/modify.twig',array(
+                'post'=>getPost($_GET['id']),
+                'admins'=>getAdmins()
+            ));
+        }
+        
     }
     else{
         echo $twig->render('index.twig');

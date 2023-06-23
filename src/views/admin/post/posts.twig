@@ -15,6 +15,7 @@
                 <th>Created At</th>
                 <th>Modified At</th>
                 <th>Created By</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@
                 <td>{{post.created_at}}</td>
                 <td>{{post.modified_at}}</td>
                 <td>{{post.author.firstname}} {{post.author.lastname}}</td>
+                <td><a href="admin/post/modify/?id={{post.id}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>  <a href="'admin/post/delete/?id={{post.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
 
             </tr>
             {% endfor %}
