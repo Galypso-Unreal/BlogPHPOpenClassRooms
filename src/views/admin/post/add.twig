@@ -1,0 +1,32 @@
+{% extends "layouts/layout-admin.twig" %}
+
+{% block title %} Ajouter un post {% endblock %}
+
+{% block content %}
+
+<form action="index.php?action=addPost" method="post">
+    <div class="input">
+    <input type="text" placeholder="titre" name="title" maxlength="80">
+    </div>
+    <div class="input">
+        <input type="text" placeholder="chapo" name="chapo">
+    </div>
+    <div class="input">
+        <textarea name="content" id="" cols="30" rows="10" placeholder="contenu"></textarea>
+    </div>
+    {% if admins %}
+    <div>
+        <select name="id_user">
+            {% for admin in admins %}
+                <option value="{{admin.id}}">{{admin.firstname}} {{admin.lastname}} ({{admin.email}})</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% endif %}
+    
+
+    <button type="submit">Ajouter le post</button>
+    
+</form>
+
+{% endblock %}

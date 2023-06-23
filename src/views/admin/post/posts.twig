@@ -1,0 +1,47 @@
+{% extends "layouts/layout-admin.twig" %}
+
+{% block title %}Les posts{% endblock %}
+
+{% block content %}
+
+{% if posts %}
+
+<div class="datatable-container">
+    <table id="datatablesSimple" class="datatable-table">
+        <thead>
+            <tr>
+                <th><a href>ID</a></th>
+                <th>Title</th>
+                <th>Created At</th>
+                <th>Modified At</th>
+                <th>Created By</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{post.id}}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.created_at}}</td>
+                <td>{{post.modified_at}}</td>
+                <td>{{post.author.firstname}} {{post.author.lastname}}</td>
+
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+</div>
+
+{% for post in posts %}
+
+{% endfor %}
+
+
+{% else %}
+
+Une erreur est survenu sur la page
+
+{% endif %}
+
+{% endblock %}

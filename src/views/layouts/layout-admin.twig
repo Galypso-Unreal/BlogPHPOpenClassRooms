@@ -15,8 +15,14 @@
     {% endblock %}
     </head>
     <body class="sb-nav-fixed">
+        {% include "global/admin/header.twig" %}
+        <div id="layoutSidenav_content">
+            <main>
         {% block content %}
             contenu
         {% endblock %}
+            </div>
+        </main>
+        {% include "global/admin/footer.twig" %}
     </body>
 </html>
