@@ -10,9 +10,7 @@ html{
 .informations_homepage{
     padding: 12rem 0 0rem;
 }
-.main .container{
-    padding: 10rem 0;
-}
+
 .informations_homepage .presentation{
     
     display: flex;
