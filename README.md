@@ -26,11 +26,15 @@ After cloning the project :
 
 3 / Change following values by yours :
   
-  YOUR_HOST
-  YOUR_PORT
-  YOUR_DATABASE_NAME
-  YOUR_USERNAME
-  YOUR_PASSWORD
+          - YOUR_HOST
+          
+          - YOUR_PORT
+          
+          - YOUR_DATABASE_NAME
+          
+          - YOUR_USERNAME
+          
+          - YOUR_PASSWORD
 
 IMPORTANT : Why database is not created directly in the project ? 
 To prevent futur hacking of password to the databse connection. NEVER PUSH YOUR ENVIRONEMENT PASSWORD AND USERNAME EVEN ITS JUST ONLY A TEST !
