@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\elementType;
+
 define('ABS_PATH', __DIR__);
 require_once 'src/lib/database.php';
 /* models */
@@ -38,6 +40,41 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         }
         
     }
+    if ($_GET['action'] === 'addPost') {
+
+        if(confirmationPostAdd()){
+            $title = $_POST['title'];
+            $chapo = $_POST['chapo'];
+            $content = $_POST['content'];
+            $id_user = $_POST['id_user'];
+            addPost($title,$chapo,$content,$id_user);
+        }
+        else{
+            echo "error";
+        }
+
+        
+    }
+    if ($_GET['action'] === 'modifyPost') {
+        if(isset($_GET['id']) && $_GET['id']>0){
+            if(confirmationPostAdd()){
+                $title = $_POST['title'];
+                $chapo = $_POST['chapo'];
+                $content = $_POST['content'];
+                $id_user = $_POST['id_user'];
+                modifyPost($_GET['id'],$title,$chapo,$content,$id_user);
+            }
+            else{
+                echo "error";
+            }
+        }
+        else{
+            echo "error2";
+        }
+        
+
+        
+    }
 }else{
     
     
@@ -60,6 +97,30 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     }
     elseif($host === '/admin/dashboard'){
         echo $twig->render('admin/dashboard.twig');
+    }
+    elseif($host === '/admin/post/add'){
+        echo $twig->render('admin/post/add.twig',array(
+            'admins'=>getAdmins(),
+        ));
+    }
+    elseif($host === '/admin/posts'){
+        echo $twig->render('admin/post/posts.twig',array(
+            'posts'=>getPosts(),
+        ));
+    }
+    elseif(strpos($host, "admin/post/delete")){
+        if(isset($_GET['id'])){
+            deletePost($_GET['id']);
+        }
+    }
+    elseif(strpos($host, "admin/post/modify")){
+        if(isset($_GET['id'])){
+            echo $twig->render('admin/post/modify.twig',array(
+                'post'=>getPost($_GET['id']),
+                'admins'=>getAdmins()
+            ));
+        }
+        
     }
     else{
         echo $twig->render('index.twig');
