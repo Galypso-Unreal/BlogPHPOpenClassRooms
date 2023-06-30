@@ -62,7 +62,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
                 $chapo = $_POST['chapo'];
                 $content = $_POST['content'];
                 $id_user = $_POST['id_user'];
-                modifyPost($title,$chapo,$content,$id_user,$_GET['id']);
+                modifyPost($_GET['id'],$title,$chapo,$content,$id_user);
             }
             else{
                 echo "error";

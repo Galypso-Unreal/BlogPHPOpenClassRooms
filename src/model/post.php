@@ -116,19 +116,16 @@ function modifyPost($id,$title,$chapo,$content,$id_user){
     $insert = $db->prepare($sql);
     $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
     $datef = $date->format('Y-m-d H:i:s');
-    $dd = '2023-06-23 12:22:29';
-    var_dump($datef);
 
     $insert->bindParam(':titre', $title);
     $insert->bindParam(':chapo', $chapo);
     $insert->bindParam(':contenu', $content);
     $insert->bindParam(':fk_utilisateur_id', $id_user);
-    $insert->bindParam(':modified_at', $dd);
+    $insert->bindParam(':modified_at', $datef);
     $insert->bindParam(':id', $id);
 
     $insert->execute();
 
-    die();
     header('Location: http://blog.local/admin/posts');
 
 }
@@ -153,7 +150,7 @@ function getAdmins(){
     $database = new DatabaseConnection();
     $db = $database->getConnection();
     
-    $sql = "SELECT id,nom,prenom,email FROM b_utilisateur WHERE fk_role_id = 1";
+    $sql = "SELECT u.id,u.nom,u.prenom,u.email FROM b_utilisateur u JOIN b_role r ON r.id = u.fk_role_id WHERE r.label = 'Administrateur'";
 
     $data = $db->prepare($sql);
 
