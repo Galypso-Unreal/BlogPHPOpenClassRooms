@@ -6,25 +6,25 @@ After cloning the project :
 
 2 / Adding this code :
 
-/* create database connection */
-<?php
-class DatabaseConnection
-{
-	public ?PDO $database = null;
+        /* create database connection */
+        <?php
+        class DatabaseConnection
+        {
+        	public ?PDO $database = null;
+        
+        	public function getConnection(): PDO
+        	{
+            	if ($this->database === null) {
+                	$this->database = new PDO('mysql:host=YOUR_HOST:YOUR_PORT;dbname=YOUR_DATABASE_NAME;charset=utf8', 'YOUR_USERNAME', 'YOUR_PASSWORD');
+            	}
+        
+            	return $this->database;
+        	}
+        }
+        
+        /* end of create database connection */
 
-	public function getConnection(): PDO
-	{
-    	if ($this->database === null) {
-        	$this->database = new PDO('mysql:host=YOUR_HOST:YOUR_PORT;dbname=YOUR_DATABASE_NAME;charset=utf8', 'YOUR_USERNAME', 'YOUR_PASSWORD');
-    	}
-
-    	return $this->database;
-	}
-}
-
-/* end of create database connection */
-
-3 / Change follwing values by yours :
+3 / Change following values by yours :
   
   YOUR_HOST
   YOUR_PORT
