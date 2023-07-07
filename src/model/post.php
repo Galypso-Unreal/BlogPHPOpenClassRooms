@@ -1,5 +1,6 @@
 <?php
 
+
 function confirmationPostAdd(){
     if(isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['content']) && isset($_POST['id_user'])){
         if(strlen($_POST['title']) > 80){

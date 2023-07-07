@@ -11258,3 +11258,14 @@ body {
     justify-content: space-evenly;
     gap: 20px;
 }
+.modify-control > div, .modify-control > form{
+    flex: 0 25%;
+    display: flex;
+    justify-content: center;
+}
+
+button[type="submit"]{
+    background-color: transparent;
+    border: none;
+    color: unset;
+}
