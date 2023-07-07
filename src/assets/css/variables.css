@@ -15,8 +15,11 @@ h2,.h2_style{
 h3,.h3_style{
     font-size: 2.5rem !important;
 }
-p{
+p,div{
     font-size: 2rem !important;
+}
+a{
+    font-size: 1.5rem;
 }
 @media screen and (min-width: 992px) {
     h1,.h1_style{

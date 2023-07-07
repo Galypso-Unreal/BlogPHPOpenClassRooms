@@ -40,6 +40,14 @@ function getPosts(){
     return $posts;
 }
 
+function getIdPost(){
+    $host = $_SERVER['REQUEST_URI'];
+    $id = explode('/',$host);
+    $id = end($id);
+
+    return $id;
+}
+
 function getAuthor(int $id): Array{
     $database = new DatabaseConnection();
     $db = $database->getConnection();
