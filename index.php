@@ -1,18 +1,10 @@
 <?php
 
-use function PHPSTORM_META\elementType;
-
 define('ABS_PATH', __DIR__);
-require_once 'src/lib/database.php';
-/* models */
 
-require_once('src/model/post.php');
+require_once('src/controllers/post.php');
 
-/* controllers */
-require_once 'src/controllers/back/form.php';
-require_once 'src/controllers/front/post.php';
-require_once 'src/controllers/user.php';
-require_once 'src/controllers/comment.php';
+use Application\Controllers\Post\PostController;
 
 require_once 'twig.php';
 
@@ -26,6 +18,19 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     // if send contact at form homepage
 
+    if($_GET['action'] === 'getPost'){
+
+        $id = $_GET['id'];
+        $post = (new PostController())->getPost($id);
+        
+        echo $twig->render('post.twig',array(
+            'post'=>$post,
+            // 'comments'=>getComments($id)
+        ));
+
+        die();
+        
+    }
 
 	if ($_GET['action'] === 'confirmationForm') {
 
@@ -114,20 +119,10 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     
     if($host === "/actualites/"){
         echo $twig->render('posts.twig',array(
-            'posts'=> getPosts(),
+            'posts'=> (new PostController())->getPosts(),
         ));
     }
-    elseif(strpos($host, "actualite/")){
-        
-        $id = explode('/',$host);
-        $id = end($id);
-
-            echo $twig->render('post.twig',array(
-                'post'=>getPost($id),
-                'comments'=>getComments($id)
-            ));  
-        
-    }
+    
     elseif($host === '/login'){
         echo $twig->render('login.twig');
     }

@@ -1,9 +1,9 @@
 <!-- Post preview-->
 <article class="post_{{post.id}}">
     <div class="post-preview">
-	<a href="/actualite/{{post.id}}">
+	<a href="index.php?action=getPost&id={{post.id|url_encode}}">
 		<h2 class="post-title">{{post.title}}</h2>
-		<h3 class="post-subtitle">{{post.chapo}}</h3>
+		<h3 class="post-subtitle">{{post.lead}}</h3>
 	</a>
 	<p class="post-meta">
 
