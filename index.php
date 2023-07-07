@@ -11,6 +11,7 @@ require_once('src/model/post.php');
 /* controllers */
 require_once 'src/controllers/back/form.php';
 require_once 'src/controllers/front/post.php';
+require_once 'src/controllers/user.php';
 
 require_once 'twig.php';
 
@@ -72,8 +73,17 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             echo "error2";
         }
         
+    }
+    if ($_GET['action'] === 'createAccount') {
+        if(confirmationCreateAccount() == 1){
 
-        
+
+        }
+        else{
+            echo $twig->render('register.twig',array(
+                'errors'=>confirmationCreateAccount()
+            ));
+        }
     }
 }else{
     
@@ -94,6 +104,12 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
                 'post'=>getPost($id)
             ));  
         
+    }
+    elseif($host === '/login'){
+        echo $twig->render('login.twig');
+    }
+    elseif($host === '/register'){
+        echo $twig->render('register.twig');
     }
     elseif($host === '/admin/dashboard'){
         echo $twig->render('admin/dashboard.twig');
