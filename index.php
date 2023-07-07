@@ -12,8 +12,11 @@ require_once('src/model/post.php');
 require_once 'src/controllers/back/form.php';
 require_once 'src/controllers/front/post.php';
 require_once 'src/controllers/user.php';
+require_once 'src/controllers/comment.php';
 
 require_once 'twig.php';
+
+
 
 
 
@@ -85,6 +88,14 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             ));
         }
     }
+    if($_GET['action'] === 'addComment'){
+        if(confirmationComment() == 1){
+            addComment($_POST['comment']);
+        }
+        else{
+
+        }
+    }
 }else{
     
     
@@ -101,7 +112,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         $id = end($id);
 
             echo $twig->render('post.twig',array(
-                'post'=>getPost($id)
+                'post'=>getPost($id),
+                'comments'=>getComments($id)
             ));  
         
     }

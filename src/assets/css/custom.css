@@ -71,6 +71,15 @@ html{
     max-width: 15rem;
 }
 
+.separator-small{
+    margin: 1rem 0;
+    height: 0.1rem;
+    background-color: white;
+    width: 100%;
+    max-width: 7rem;
+
+}
+
 .form-errors{
     color: brown;
     font-weight: bold;
@@ -82,4 +91,17 @@ html{
         flex-direction: row;
         
     }
+}
+
+/* comments custom css */
+
+.comment{
+    padding: 2rem;
+    background-color: var(--bs-body-color);
+    color: white;
+}
+.comments{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
