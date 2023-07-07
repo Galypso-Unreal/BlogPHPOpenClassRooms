@@ -96,6 +96,17 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
         }
     }
+    if($_GET['action'] === 'validComment'){
+        if(isset($_GET['id']) && $_GET['id'] > 0){
+            validComment($_GET['id']);
+        }
+    }
+
+    if($_GET['action'] === 'deleteComment'){
+        if(isset($_GET['id']) && $_GET['id'] > 0){
+            deleteComment($_GET['id']);
+        }
+    }
 }else{
     
     
@@ -149,6 +160,13 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             ));
         }
         
+    }
+    elseif(strpos($host, "admin/comments")){
+
+         echo $twig->render('admin/comment/comments.twig',array(
+            'comments'=>getAllComments()
+         ));
+
     }
     else{
         echo $twig->render('index.twig');
