@@ -47,6 +47,62 @@ class PostController{
         
     }
 
+    function addPost($title, $lead, $content, int $fk_user_id){
+
+        $connection = new DatabaseConnection();
+        $postRepository = new PostRepository();
+        $postRepository->connection = $connection;
+
+        if($title != '' && $lead != '' && $content != '' && isset($fk_user_id)){
+            
+            return $postRepository->addPost($title,$lead,$content,$fk_user_id);
+        }
+        else{
+            throw new Exception('Le formulaire est incomplet');
+        }
+    }
+
+    function modifyPost($id,$title,$lead,$content,$id_user){
+
+        $connection = new DatabaseConnection();
+        $postRepository = new PostRepository();
+        $postRepository->connection = $connection;
+
+        if(isset($id) && $title != '' && $lead != '' && $content != '' && isset($id_user)){
+            return $postRepository->modifyPost($id,$title,$lead,$content,$id_user);
+        }
+        else{
+            throw new Exception('La modification ne peut pas être effectuée');
+        }
+    }
+
+    function deletePost($id){
+        $connection = new DatabaseConnection();
+        $postRepository = new PostRepository();
+        $postRepository->connection = $connection;
+
+        if(isset($id) && $id > 0){
+            return $postRepository->deletePost($id);
+        }
+        else{
+            throw new Exception("L'id n'est pas correcte");
+        }
+    }
+
+    function getAdmins(){
+
+        $connection = new DatabaseConnection();
+        $postRepository = new PostRepository();
+        $postRepository->connection = $connection;
+
+        try {
+            return $postRepository->getAdmins();
+        } catch (\Throwable $th) {
+            throw new Exception('Une erreur est survenue avec la base de données');  
+        }
+        
+    }
+
 
 
 }

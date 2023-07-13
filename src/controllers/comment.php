@@ -1,4 +1,26 @@
 <?php
+
+namespace Application\Controllers\Comment;
+
+
+
+require_once('./src/lib/database.php');
+require_once('./src/model/comment.php');
+
+use Application\Lib\Database\DatabaseConnection;
+use Application\Model\Comment\CommentRepository;
+
+class CommentController{
+    function getAllComments(){
+
+        $connection = new DatabaseConnection();
+        $commentRepository = new commentRepository();
+        $commentRepository->connection = $connection;
+    
+        return $commentRepository->getAllComments();
+    
+    }
+}
 function confirmationComment(){
     if(isset($_GET['id']) && isset($_POST['comment'])){
         return 1;
@@ -56,32 +78,7 @@ function getComments($id){
 
 }
 
-function getAllComments(){
 
-    $database = new DatabaseConnection();
-    $db = $database->getConnection();
-
-    $sql = "SELECT * FROM b_commentaire WHERE deleted_at IS NULL ORDER BY est_valide";
-    
-
-    $data = $db->prepare($sql);
-
-    $data->execute();
-
-    $comments = [];
-
-    while(($row = $data->fetch(PDO::FETCH_ASSOC))){
-        $comment = [
-            'id'=>$row['id'],
-            'content' => $row['content'],
-            'valid'=> $row['est_valide'],
-            'user' => getAuthor($row['fk_utilisateur_id']),
-        ];
-        $comments[] = $comment;
-    }
-    return $comments;
-
-}
 
 function deleteComment($id){
 
