@@ -12,7 +12,7 @@ class Post{
 
     public int $id;
     public string $title;
-    public string $lead;
+    public string $lead_content;
     public string $content;
     public string $created_at;
     public string $modified_at;
@@ -41,7 +41,7 @@ class PostRepository{
 
             $post->id =     $row['id'];
             $post->title =     $row['title'];
-            $post->lead =     $row['lead'];
+            $post->lead_content =     $row['lead_content'];
             $post->content =    $row['content'];
             $post->created_at =    $row['created_at'];
             $post->modified_at =     $row['modified_at'];
@@ -70,7 +70,7 @@ class PostRepository{
 
             $post->id = $row['id'];
             $post->title = $row['title'];
-            $post->lead = $row['lead'];
+            $post->lead_content = $row['lead_content'];
             $post->content = $row['content'];
             $post->fk_user_id = $row['fk_user_id'];
             $post->modified_at = $row['modified_at'];
@@ -80,19 +80,12 @@ class PostRepository{
         return $post;
     }
     
-    // function getIdPost(){
-    //     $host = $_SERVER['REQUEST_URI'];
-    //     $id = explode('/',$host);
-    //     $id = end($id);
-    
-    //     return $id;
-    // }
     
     function getAuthor(int $id): Array{
 
         $db = $this->connection->getConnection();
     
-        $sql = "SELECT id,prenom,nom,email FROM b_utilisateur WHERE id=:id";
+        $sql = "SELECT id,firstname,lastname,email FROM b_user WHERE id=:id";
     
         $data = $db->prepare($sql);
     
@@ -100,8 +93,8 @@ class PostRepository{
         while(($row = $data->fetch(PDO::FETCH_ASSOC))){
             $author = [
                 'id'=>$row['id'],
-                'firstname'=>$row['prenom'],
-                'lastname'=>$row['nom'],
+                'firstname'=>$row['firstname'],
+                'lastname'=>$row['lastname'],
                 'email'=>$row['email']
             ];
         }
@@ -111,46 +104,49 @@ class PostRepository{
     
     
     
-    function addPost($title,$lead,$content, int $fk_user_id){
+    function addPost($title,$lead_content,$content, int $fk_user_id){
 
         $db = $this->connection->getConnection();
-    
-    
-        $sql = "INSERT INTO b_post (title,lead,content,fk_user_id) VALUES (:title,:lead,:content,:fk_user_id)";
+        
+        $sql = "INSERT INTO b_post (title,lead_content,content,fk_user_id) VALUES (:title,:lead_content,:content,:fk_user_id)";
 
         $insert = $db->prepare($sql);
-        $lead = 's';
+        $lead_content = 's';
         $title='s';
         $content='s';
         $fk_user_id = '1';
         $insert->bindParam(':title', $title);
-        $insert->bindParam(':lead', $lead);
+        $insert->bindParam(':lead_content', $lead_content);
         $insert->bindParam(':content', $content);
         $insert->bindParam(':fk_user_id', $fk_user_id,PDO::PARAM_INT);
 
         $insert->execute();
 
+        header('Location: http://blog.local/admin/posts');
+
     
     }
     
-    function modifyPost($id,$title,$lead,$content,$id_user){
+    function modifyPost($id,$title,$lead_content,$content,$id_user){
 
         $db = $this->connection->getConnection();
     
     
-        $sql = "UPDATE b_post SET title=:title,lead=:lead,content=:content,fk_user_id=:fk_user_id,modified_at=:modified_at WHERE id=:id";
+        $sql = "UPDATE b_post SET title=:title,lead_content=:lead_content,content=:content,fk_user_id=:fk_user_id,modified_at=:modified_at WHERE id=:id";
         $insert = $db->prepare($sql);
         $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
         $datef = $date->format('Y-m-d H:i:s');
     
         $insert->bindParam(':title', $title);
-        $insert->bindParam(':lead', $lead);
+        $insert->bindParam(':lead_content', $lead_content);
         $insert->bindParam(':content', $content);
         $insert->bindParam(':fk_user_id', $id_user);
         $insert->bindParam(':modified_at', $datef);
         $insert->bindParam(':id', $id);
     
         $insert->execute();
+
+        header('Location: http://blog.local/admin/posts');
     
     }
     

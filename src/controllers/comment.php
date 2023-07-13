@@ -9,6 +9,7 @@ require_once('./src/model/comment.php');
 
 use Application\Lib\Database\DatabaseConnection;
 use Application\Model\Comment\CommentRepository;
+use Exception;
 
 class CommentController{
     function getAllComments(){
@@ -20,108 +21,73 @@ class CommentController{
         return $commentRepository->getAllComments();
     
     }
-}
-function confirmationComment(){
-    if(isset($_GET['id']) && isset($_POST['comment'])){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
-function addComment(string $message){
-    $database = new DatabaseConnection();
-    $db = $database->getConnection();
-    
-    $user = 1;
-    $post = $_GET['id'];
 
+    function addComment($comment){
 
-    $sql = "INSERT INTO b_commentaire (content,fk_utilisateur_id,fk_post_id) VALUES (:content,:fk_utilisateur_id,:fk_post_id)";
-    $insert = $db->prepare($sql);
+        $connection = new DatabaseConnection();
+        $commentRepository = new commentRepository();
+        $commentRepository->connection = $connection;
 
-    $insert->bindParam(':content', $message);
-    $insert->bindParam(':fk_utilisateur_id', $user);
-    $insert->bindParam(':fk_post_id', $post);
+        $id = $_GET['id'];
 
-    $insert->execute();
-
-    header('Location: http://blog.local/actualite/'.$post);
-    
-}
-
-function getComments($id){
-
-    $database = new DatabaseConnection();
-    $db = $database->getConnection();
-
-    $sql = "SELECT id,content,fk_utilisateur_id FROM b_commentaire WHERE fk_post_id = :id AND est_valide = '1' AND deleted_at IS NULL";
-    
-
-    $data = $db->prepare($sql);
-
-    $data->bindParam(':id',$id);
-
-    $data->execute();
-
-    $comments = [];
-
-    while(($row = $data->fetch(PDO::FETCH_ASSOC))){
-        $comment = [
-            'id'=>$row['id'],
-            'content' => $row['content'],
-            'user' => getAuthor($row['fk_utilisateur_id']),
-        ];
-        $comments[] = $comment;
-    }
-    return $comments;
-
-}
-
-
-
-function deleteComment($id){
-
-
-    if(isset($id) && $id >=0){
-        $database = new DatabaseConnection();
-        $db = $database->getConnection();
-
-        $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
-        $datef = $date->format('Y-m-d H:i:s');
-
-        $sql = "UPDATE b_commentaire SET deleted_at=:deleted_at WHERE id=:id";
-
+        if(isset($comment) && $comment != '' && isset($id) && $id > 0){
+          $commentRepository->addComment($comment);
+          return header('Location: http://blog.local/actualites/index;php?action=getPost&id='.$id);
+        }
         
-        $delete = $db->prepare($sql);
+        else{
+            throw new Exception('Vous ne pouvez pas ajouter de commentaire');
+        }
+    
+    }
 
-        $delete->bindParam('deleted_at',$datef);
-        $delete->bindParam('id',$id);
+    function deleteComment(int $id){
+        if(isset($id) && is_int($id) && $id > 0){
+
+            $connection = new DatabaseConnection();
+            $commentRepository = new commentRepository();
+            $commentRepository->connection = $connection;
+
+            $commentRepository->deleteComment($id);
+
+            return header('Location: http://blog.local/admin/comments');
+        }
+        else{
+            throw new Exception("L'id n'est pas correct");
+        }
+    }
+
+    function validComment(int $id){
+        $connection = new DatabaseConnection();
+            $commentRepository = new commentRepository();
+            $commentRepository->connection = $connection;
+
+        if(isset($id) && is_int($id) && $id > 0){
+            $commentRepository->validComment($id);
+            return header('Location: http://blog.local/admin/comments');
+        }
+        else
+        {
+            throw new Exception("L'id du commentaire n'est pas bon");
+        }
         
-
-        $delete->execute();
-
-        header('Location: http://blog.local/admin/comments');
-    }
-    
-
-}
-function validComment($id){
-    
-    if(isset($id)){
-        $database = new DatabaseConnection();
-        $db = $database->getConnection();
-    
-        $sql = "UPDATE b_commentaire SET est_valide='1' WHERE id=:id";
-    
-        $data = $db->prepare($sql);
-    
-        $data->bindParam(':id',$id);
-    
-        $data->execute();
-
-        header('Location: http://blog.local/admin/comments');
     }
 
+    function getComments(int $id){
+        $connection = new DatabaseConnection();
+            $commentRepository = new commentRepository();
+            $commentRepository->connection = $connection;
+
+        if(isset($id) && is_int($id) && $id > 0){
+            return $commentRepository->getComments($id);
+        }
+        else{
+            throw new Exception("Les commentaires ne peuvent pas être récupérés");
+        }
+    }
 
 }
+
+
+
+

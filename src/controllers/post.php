@@ -12,16 +12,6 @@ use Application\Model\Post\PostRepository;
 use Exception;
 
 class PostController{
-    
-    function confirmationPostAdd(){
-        if(isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['content']) && isset($_POST['id_user'])){
-            if(strlen($_POST['title']) > 80){
-                return 0;
-            }
-            return 1;
-        }
-        return 0;
-    }
 
     function getPosts(){
 
@@ -47,29 +37,30 @@ class PostController{
         
     }
 
-    function addPost($title, $lead, $content, int $fk_user_id){
+    function addPost($title, $lead_content, $content, int $fk_user_id){
 
         $connection = new DatabaseConnection();
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        if($title != '' && $lead != '' && $content != '' && isset($fk_user_id)){
+        if($title != '' && $lead_content != '' && $content != '' && isset($fk_user_id)){
             
-            return $postRepository->addPost($title,$lead,$content,$fk_user_id);
+            return $postRepository->addPost($title,$lead_content,$content,$fk_user_id);
+            
         }
         else{
             throw new Exception('Le formulaire est incomplet');
         }
     }
 
-    function modifyPost($id,$title,$lead,$content,$id_user){
+    function modifyPost($id,$title,$lead_content,$content,$id_user){
 
         $connection = new DatabaseConnection();
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        if(isset($id) && $title != '' && $lead != '' && $content != '' && isset($id_user)){
-            return $postRepository->modifyPost($id,$title,$lead,$content,$id_user);
+        if(isset($id) && $title != '' && $lead_content != '' && $content != '' && isset($id_user)){
+            return $postRepository->modifyPost($id,$title,$lead_content,$content,$id_user);
         }
         else{
             throw new Exception('La modification ne peut pas être effectuée');
@@ -101,6 +92,18 @@ class PostController{
             throw new Exception('Une erreur est survenue avec la base de données');  
         }
         
+    }
+
+    function getAuthor(int $id){
+
+        $connection = new DatabaseConnection();
+        $postRepository = new PostRepository();
+        $postRepository->connection = $connection;
+
+        if(isset($id) && $id > 0 && is_int($id)){
+            return $postRepository->getAuthor($id);
+        }
+
     }
 
 

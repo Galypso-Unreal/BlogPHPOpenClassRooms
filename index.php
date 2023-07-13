@@ -26,10 +26,10 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
         $id = $_GET['id'];
         $post = (new PostController())->getPost($id);
-        
+        $comments = (new CommentController())->getComments($id);
         echo $twig->render('post.twig',array(
             'post'=>$post,
-            // 'comments'=>getComments($id)
+            'comments'=>$comments
         ));
 
         die();
@@ -56,22 +56,21 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     if ($_GET['action'] === 'addPost') {
 
         $title = $_POST['title'];
-        $lead = $_POST['lead'];
+        $lead_content = $_POST['lead_content'];
         $content = $_POST['content'];
         $fk_user_id = $_POST['id_user'];
 
-        (new PostController())->addPost($title,$lead,$content,$fk_user_id);
-        
+        (new PostController())->addPost($title,$lead_content,$content,$fk_user_id);
 
         
     }
     if ($_GET['action'] === 'modifyPost') {
 
                 $title = $_POST['title'];
-                $lead = $_POST['lead'];
+                $lead_content = $_POST['lead_content'];
                 $content = $_POST['content'];
                 $id_user = $_POST['id_user'];
-                (new PostController())->modifyPost($_GET['id'],$title,$lead,$content,$id_user);
+                (new PostController())->modifyPost($_GET['id'],$title,$lead_content,$content,$id_user);
     }
     if ($_GET['action'] === 'createAccount') {
         if(confirmationCreateAccount() == 1){
@@ -85,23 +84,20 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         }
     }
     if($_GET['action'] === 'addComment'){
-        if(confirmationComment() == 1){
-            addComment($_POST['comment']);
-        }
-        else{
+        $comment = $_POST['comment'];
+        (new CommentController())->addComment($comment);
 
-        }
     }
     if($_GET['action'] === 'validComment'){
-        if(isset($_GET['id']) && $_GET['id'] > 0){
-            validComment($_GET['id']);
-        }
+        
+        (new CommentController())->validComment($_GET['id']);
+        
     }
 
     if($_GET['action'] === 'deleteComment'){
-        if(isset($_GET['id']) && $_GET['id'] > 0){
-            deleteComment($_GET['id']);
-        }
+
+        (new CommentController())->deleteComment($_GET['id']);
+        
     }
 }else{
     
