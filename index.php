@@ -76,16 +76,16 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     }
     if ($_GET['action'] === 'createAccount') {
 
-        $create = new UserController();
+        $user = new UserController();
+        $create = $user->createAccount();
 
-        if(is_array($create->createAccount()) == 1){
+        if(is_array($create) == 1){
             echo $twig->render('register.twig',array(
-                'errors'=>$create->createAccount(),
+                'errors'=>$create,
                 'before'=>$_POST
             )); 
         }
         else{
-            $create->createAccount();
             echo $twig->render('register-send.twig',array(
                    
             ));
