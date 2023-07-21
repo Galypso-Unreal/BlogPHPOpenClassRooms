@@ -91,5 +91,44 @@ class UserController{
         }
     }
 
+    function getAllUsers(){
+
+        $connection = new DatabaseConnection();
+        $userRepository = new UserRepository();
+        $userRepository->connection = $connection;
+
+        return $userRepository->getAllUsers();
+    }
+
+    function validateUser($id){
+
+        $connection = new DatabaseConnection();
+        $userRepository = new UserRepository();
+        $userRepository->connection = $connection;
+
+        if(isset($id) && $id > 0 && is_int($id)){
+           return $userRepository->validateUser($id); 
+        }
+        else{
+            throw new Exception("L'ID n'est pas correcte");
+        }
+        
+    }
+
+    function deleteUser($id){
+
+        $connection = new DatabaseConnection();
+        $userRepository = new UserRepository();
+        $userRepository->connection = $connection;
+
+        if(isset($id) && $id > 0 && is_int($id)){
+           return $userRepository->deleteUser($id); 
+        }
+        else{
+            throw new Exception("L'ID n'est pas correcte");
+        }
+        
+    }
+
 }
 
