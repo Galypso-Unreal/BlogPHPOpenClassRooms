@@ -4,10 +4,12 @@ define('ABS_PATH', __DIR__);
 
 require_once('src/controllers/post.php');
 require_once('src/controllers/comment.php');
+require_once('src/controllers/user.php');
 
 use Application\Controllers\Post\PostController;
 use Application\Controllers\Comment;
 use Application\Controllers\Comment\CommentController;
+use Application\Controllers\User\UserController;
 use Application\Model\Comment\CommentRepository;
 
 require_once 'twig.php';
@@ -73,15 +75,27 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
                 (new PostController())->modifyPost($_GET['id'],$title,$lead_content,$content,$id_user);
     }
     if ($_GET['action'] === 'createAccount') {
-        if(confirmationCreateAccount() == 1){
 
+        $create = new UserController();
 
+        if(is_array($create->createAccount()) == 1){
+            echo $twig->render('register.twig',array(
+                'errors'=>$create->createAccount(),
+                'before'=>$_POST
+            )); 
         }
         else{
-            echo $twig->render('register.twig',array(
-                'errors'=>confirmationCreateAccount()
+            $create->createAccount();
+            echo $twig->render('register-send.twig',array(
+                   
             ));
         }
+
+            
+        
+
+            
+        
     }
     if($_GET['action'] === 'addComment'){
         $comment = $_POST['comment'];
