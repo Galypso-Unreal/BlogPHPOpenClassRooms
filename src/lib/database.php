@@ -1,4 +1,7 @@
 <?php
+
+namespace Application\Lib\Database;
+use PDO;
 /* create database connection */
     
     class DatabaseConnection

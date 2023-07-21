@@ -1,18 +1,14 @@
 <?php
 
-use function PHPSTORM_META\elementType;
-
 define('ABS_PATH', __DIR__);
-require_once 'src/lib/database.php';
-/* models */
 
-require_once('src/model/post.php');
+require_once('src/controllers/post.php');
+require_once('src/controllers/comment.php');
 
-/* controllers */
-require_once 'src/controllers/back/form.php';
-require_once 'src/controllers/front/post.php';
-require_once 'src/controllers/user.php';
-require_once 'src/controllers/comment.php';
+use Application\Controllers\Post\PostController;
+use Application\Controllers\Comment;
+use Application\Controllers\Comment\CommentController;
+use Application\Model\Comment\CommentRepository;
 
 require_once 'twig.php';
 
@@ -26,6 +22,19 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     // if send contact at form homepage
 
+    if($_GET['action'] === 'getPost'){
+
+        $id = $_GET['id'];
+        $post = (new PostController())->getPost($id);
+        $comments = (new CommentController())->getComments($id);
+        echo $twig->render('post.twig',array(
+            'post'=>$post,
+            'comments'=>$comments
+        ));
+
+        die();
+        
+    }
 
 	if ($_GET['action'] === 'confirmationForm') {
 
@@ -46,36 +55,22 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     }
     if ($_GET['action'] === 'addPost') {
 
-        if(confirmationPostAdd()){
-            $title = $_POST['title'];
-            $chapo = $_POST['chapo'];
-            $content = $_POST['content'];
-            $id_user = $_POST['id_user'];
-            addPost($title,$chapo,$content,$id_user);
-        }
-        else{
-            echo "error";
-        }
+        $title = $_POST['title'];
+        $lead_content = $_POST['lead_content'];
+        $content = $_POST['content'];
+        $fk_user_id = $_POST['id_user'];
+
+        (new PostController())->addPost($title,$lead_content,$content,$fk_user_id);
 
         
     }
     if ($_GET['action'] === 'modifyPost') {
-        if(isset($_GET['id']) && $_GET['id']>0){
-            if(confirmationPostAdd()){
+
                 $title = $_POST['title'];
-                $chapo = $_POST['chapo'];
+                $lead_content = $_POST['lead_content'];
                 $content = $_POST['content'];
                 $id_user = $_POST['id_user'];
-                modifyPost($_GET['id'],$title,$chapo,$content,$id_user);
-            }
-            else{
-                echo "error";
-            }
-        }
-        else{
-            echo "error2";
-        }
-        
+                (new PostController())->modifyPost($_GET['id'],$title,$lead_content,$content,$id_user);
     }
     if ($_GET['action'] === 'createAccount') {
         if(confirmationCreateAccount() == 1){
@@ -89,23 +84,20 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         }
     }
     if($_GET['action'] === 'addComment'){
-        if(confirmationComment() == 1){
-            addComment($_POST['comment']);
-        }
-        else{
+        $comment = $_POST['comment'];
+        (new CommentController())->addComment($comment);
 
-        }
     }
     if($_GET['action'] === 'validComment'){
-        if(isset($_GET['id']) && $_GET['id'] > 0){
-            validComment($_GET['id']);
-        }
+        
+        (new CommentController())->validComment($_GET['id']);
+        
     }
 
     if($_GET['action'] === 'deleteComment'){
-        if(isset($_GET['id']) && $_GET['id'] > 0){
-            deleteComment($_GET['id']);
-        }
+
+        (new CommentController())->deleteComment($_GET['id']);
+        
     }
 }else{
     
@@ -114,20 +106,10 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     
     if($host === "/actualites/"){
         echo $twig->render('posts.twig',array(
-            'posts'=> getPosts(),
+            'posts'=> (new PostController())->getPosts(),
         ));
     }
-    elseif(strpos($host, "actualite/")){
-        
-        $id = explode('/',$host);
-        $id = end($id);
-
-            echo $twig->render('post.twig',array(
-                'post'=>getPost($id),
-                'comments'=>getComments($id)
-            ));  
-        
-    }
+    
     elseif($host === '/login'){
         echo $twig->render('login.twig');
     }
@@ -139,24 +121,22 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     }
     elseif($host === '/admin/post/add'){
         echo $twig->render('admin/post/add.twig',array(
-            'admins'=>getAdmins(),
+            'admins'=>(new PostController())->getAdmins(),
         ));
     }
     elseif($host === '/admin/posts'){
         echo $twig->render('admin/post/posts.twig',array(
-            'posts'=>getPosts(),
+            'posts'=>(new PostController())->getPosts(),
         ));
     }
     elseif(strpos($host, "admin/post/delete")){
-        if(isset($_GET['id'])){
-            deletePost($_GET['id']);
-        }
+        (new PostController())->deletePost($_GET['id']);
     }
     elseif(strpos($host, "admin/post/modify")){
         if(isset($_GET['id'])){
             echo $twig->render('admin/post/modify.twig',array(
-                'post'=>getPost($_GET['id']),
-                'admins'=>getAdmins()
+                'post'=>(new PostController())->getPost($_GET['id']),
+                'admins'=>(new PostController())->getAdmins()
             ));
         }
         
@@ -164,7 +144,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     elseif(strpos($host, "admin/comments")){
 
          echo $twig->render('admin/comment/comments.twig',array(
-            'comments'=>getAllComments()
+            'comments'=>(new CommentController())->getAllComments()
          ));
 
     }
