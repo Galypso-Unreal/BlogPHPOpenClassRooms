@@ -89,12 +89,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             echo $twig->render('register-send.twig',array(
                    
             ));
-        }
-
-            
-        
-
-            
+        } 
         
     }
     if($_GET['action'] === 'addComment'){
@@ -111,6 +106,18 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     if($_GET['action'] === 'deleteComment'){
 
         (new CommentController())->deleteComment($_GET['id']);
+        
+    }
+    if($_GET['action'] === 'validateUser'){
+
+        (new UserController())->validateUser((int)$_GET['id']);
+        header("Location: /admin/users/");
+        
+    }
+    if($_GET['action'] === 'deleteUser'){
+
+        (new UserController())->deleteUser((int)$_GET['id']);
+        header("Location: /admin/users/");
         
     }
 }else{
@@ -162,6 +169,13 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
          ));
 
     }
+    elseif(strpos($host, "admin/users")){
+
+        echo $twig->render('admin/user/users.twig',array(
+           'users'=>(new UserController())->getAllUsers()
+        ));
+
+   }
     else{
         echo $twig->render('index.twig');
     }

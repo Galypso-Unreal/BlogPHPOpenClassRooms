@@ -5,6 +5,8 @@ require_once('./src/lib/database.php');
 
 use Application\Lib\Database\DatabaseConnection;
 use PDO;
+use DateTime;
+use DateTimeZone;
 
 
 class User{
@@ -37,7 +39,7 @@ class UserRepository{
         $email = $_POST['email'];
         $password = $_POST['password'];
         $is_valid = 0;
-        $fk_id_role = 1;
+        $fk_id_role = 2;
 
 
         $insert->bindParam(':lastname',$lastname);
@@ -68,5 +70,65 @@ class UserRepository{
         $data->execute();
 
     }
+
+    function getAllUsers(){
+
+        $db = $this->connection->getConnection();
+
+        $sql = "SELECT * FROM b_user WHERE NOT fk_id_role = 1 AND deleted_at IS NULL";
+
+        $data = $db->prepare($sql);
+
+        $data->execute();
+
+        $users = [];
+    
+        while(($row = $data->fetch(PDO::FETCH_ASSOC))){
+            $user = new User();
+
+            $user->id =     $row['id'];
+            $user->lastname =     $row['lastname'];
+            $user->firstname =     $row['firstname'];
+            $user->email =    $row['email'];
+            $user->is_valid =    $row['is_valid'];
+            $user->fk_id_role =    $row['fk_id_role'];
+            
+            
+            $users[] = $user;
+        }
+        return $users;
+
+    }
+    function validateUser($id){
+
+        $db = $this->connection->getConnection();
+
+        $sql = "UPDATE b_user SET is_valid = 1 WHERE id=:id";
+
+        $data = $db->prepare($sql);
+
+        $data->bindParam(':id',$id);
+
+        $data->execute();
+
+    }
+
+    function deleteUser($id){
+
+        $db = $this->connection->getConnection();
+
+        $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
+        $datef = $date->format('Y-m-d H:i:s');
+
+        $sql = "UPDATE b_user SET deleted_at=:deleted_at WHERE id=:id";
+
+        $delete = $db->prepare($sql);
+
+        $delete->bindParam('deleted_at',$datef);
+        $delete->bindParam('id',$id);
+
+        $delete->execute();
+    
+}
 
 }
