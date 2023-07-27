@@ -7,6 +7,9 @@ html{
     font-size: 10px;
 
 }
+.relative{
+    position: relative;
+}
 .informations_homepage{
     padding: 12rem 0 0rem;
 }
@@ -104,4 +107,26 @@ html{
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+.header_account{
+    font-size: 1.5rem;
+    font-weight: 200;
+    color: white;
+}
+.header_account:active,.header_account:focus,.header_account:hover{
+    color: white;
+}
+.floating_window_user{
+    position: absolute;
+    width: 100%;
+    padding: 2rem;
+    background-color: white;
+    top: 100%;
+}
+.floating_window_user.close{
+    display: none;
+}
+.floating_window_user.open{
+    display: block;
 }

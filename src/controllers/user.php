@@ -25,7 +25,7 @@ class UserController{
         $password = $_POST['password'];
         $confirmepassword = $_POST['confirmepassword'];
     
-        if((isset($firstname) &&  strlen($firstname) > 0 && strlen($firstname) <=60) && (isset($lastname) && strlen($lastname) > 0 && strlen($lastname) <= 60) && (isset($email) && strlen($email) > 0 && strlen($email) <= 100) && (isset($password) && strlen($password > 0)) && (isset($confirmepassword) && strlen($confirmepassword) > 0) && $password === $confirmepassword){
+        if((isset($firstname) &&  strlen($firstname) > 0 && strlen($firstname) <=60) && (isset($lastname) && strlen($lastname) > 0 && strlen($lastname) <= 60) && (isset($email) && strlen($email) > 0 && strlen($email) <= 100) && (isset($password) && strlen($password > 0)) && (isset($confirmepassword) && strlen($confirmepassword) > 0) && $password === $confirmepassword && $this->checkUniqueEmail() == 1){
 
             return $userRepository->createAccount();
             
@@ -56,10 +56,32 @@ class UserController{
             if($confirmepassword != $password){
                 $errors['confirmepassword'] = "Le mot de passe de confirmation n'est pas correcte";
             }
+
+            if($this->checkUniqueEmail() == 0){
+                $errors['email'] = 'Cet email est déjà existant';
+            }
     
             return $errors;
         }
         
+    }
+
+    function checkUniqueEmail(){
+        $connection = new DatabaseConnection();
+        $userRepository = new UserRepository();
+        $userRepository->connection = $connection;
+
+        return $userRepository->checkUniqueEmail();
+    }
+
+    function checkUserExist(){
+
+        $connection = new DatabaseConnection();
+        $userRepository = new UserRepository();
+        $userRepository->connection = $connection;
+
+        return $userRepository->checkUserExist();
+
     }
 
     function login(){
@@ -70,21 +92,25 @@ class UserController{
 
         $email = $_POST['email'];
         $password = $_POST['password'];
-
-    
-        if((isset($email) && $email != '') || (isset($password) && $password != '')){
-            return $userRepository->createAccount();
+        $check = $this->checkUserExist();
+        $errors = [];
+        
+        if((isset($email) && $email != '') && (isset($password) && strlen($password) > 0 &&  $check == 1)){
+            return $userRepository->login();
         }
         else{
-    
-            $errors = [];
-    
+
             if(!isset($email) || $email == ''){
                 $errors['email'] = 'Veuillez enregister votre email';
             }
-    
             if(!isset($password) || $password == ''){
                 $errors['password'] = 'Veuillez enregister votre mot de passe';
+            }
+            if($check == 0 && isset($password) && $password !== '' && isset($email) && $email !== ''){
+                $errors['check'] = "L'adresse email ou le mot de passe est incorrecte";
+            }
+            if($check == 2 && isset($password) && $password !== '' && isset($email) && $email !== ''){
+                $errors['check'] = "Votre compte n'est pas encore validé";
             }
     
             return $errors;
