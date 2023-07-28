@@ -112,7 +112,7 @@ class UserRepository{
         
         $db = $this->connection->getConnection();
 
-        $sql = "SELECT email,firstname,lastname FROM b_user WHERE email=:email AND password=:password";
+        $sql = "SELECT id,email,firstname,lastname FROM b_user WHERE email=:email AND password=:password";
 
         $data = $db->prepare($sql);
 
@@ -131,6 +131,7 @@ class UserRepository{
         if($row){
 
             $_SESSION["user"] = array(
+                'id'=>$row['id'],
                 'email'=>$row['email'],
                 'firstname'=>$row['firstname'],
                 'lastname'=>$row['lastname']

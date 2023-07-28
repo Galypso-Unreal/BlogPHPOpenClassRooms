@@ -31,7 +31,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         $user = (new UserController())->login();
 
         if($user == 1){
-            echo $twig->render('index.twig');
+            header('Location: http://blog.local');
         }
         else{
             echo $twig->render('login.twig',array(

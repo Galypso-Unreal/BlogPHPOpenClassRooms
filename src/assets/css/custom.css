@@ -113,9 +113,11 @@ html{
     font-size: 1.5rem;
     font-weight: 200;
     color: white;
+
 }
 .header_account:active,.header_account:focus,.header_account:hover{
     color: white;
+    cursor: pointer;
 }
 .floating_window_user{
     position: absolute;
