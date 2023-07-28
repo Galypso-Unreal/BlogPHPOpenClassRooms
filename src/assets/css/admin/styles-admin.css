@@ -11269,3 +11269,7 @@ button[type="submit"]{
     border: none;
     color: unset;
 }
+
+.floating_window_user.admin a{
+    color: white;
+}

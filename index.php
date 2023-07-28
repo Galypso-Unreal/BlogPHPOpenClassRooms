@@ -33,6 +33,9 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         if($user == 1){
             header('Location: http://blog.local');
         }
+        else if($user == 2){
+            header('Location: http://blog.local/admin/posts');
+        }
         else{
             echo $twig->render('login.twig',array(
                 'errors'=>$user,
@@ -40,7 +43,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
                 
             ));
         }
-        
     }
 
     //LOGOUT
@@ -148,10 +150,13 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     }
 }else{
     
-    
+    // FRONT OFFICE LINKS 
+
     $host = $_SERVER['REQUEST_URI'];
-    
-    if($host === "/actualites/"){
+    if($host === "/"){
+        echo $twig->render('index.twig');
+    }
+    elseif($host === "/actualites/"){
         echo $twig->render('posts.twig',array(
             'posts'=> (new PostController())->getPosts(),
         ));
@@ -168,49 +173,60 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     elseif($host === '/register'){
         echo $twig->render('register.twig');
     }
-    
-    elseif($host === '/admin/dashboard'){
-        echo $twig->render('admin/dashboard.twig');
-    }
-    elseif($host === '/admin/post/add'){
-        echo $twig->render('admin/post/add.twig',array(
-            'admins'=>(new PostController())->getAdmins(),
-        ));
-    }
-    elseif($host === '/admin/posts'){
-        echo $twig->render('admin/post/posts.twig',array(
-            'posts'=>(new PostController())->getPosts(),
-        ));
-    }
-    elseif(strpos($host, "admin/post/delete")){
-        (new PostController())->deletePost($_GET['id']);
-    }
-    elseif(strpos($host, "admin/post/modify")){
-        if(isset($_GET['id'])){
-            echo $twig->render('admin/post/modify.twig',array(
-                'post'=>(new PostController())->getPost($_GET['id']),
-                'admins'=>(new PostController())->getAdmins()
-            ));
+    elseif($host === '/admin/login'){
+        if(isset($_SESSION['admin'])){
+            header('Location: /admin/posts');
+        }
+        else{
+            echo $twig->render('admin/login.twig');
         }
         
     }
-    elseif(strpos($host, "admin/comments")){
 
-         echo $twig->render('admin/comment/comments.twig',array(
-            'comments'=>(new CommentController())->getAllComments()
-         ));
+    // BACK-OFFICE LINKS
+    
+    if(isset($_SESSION['admin'])){
+
+
+        if($host === '/admin/post/add'){
+            echo $twig->render('admin/post/add.twig',array(
+                'admins'=>(new PostController())->getAdmins(),
+            ));
+        }
+        elseif($host === '/admin/posts'){
+            echo $twig->render('admin/post/posts.twig',array(
+                'posts'=>(new PostController())->getPosts(),
+            ));
+        }
+        elseif(strpos($host, "admin/post/delete")){
+            (new PostController())->deletePost($_GET['id']);
+        }
+        elseif(strpos($host, "admin/post/modify")){
+            if(isset($_GET['id'])){
+                echo $twig->render('admin/post/modify.twig',array(
+                    'post'=>(new PostController())->getPost($_GET['id']),
+                    'admins'=>(new PostController())->getAdmins()
+                ));
+            }
+            
+        }
+        elseif(strpos($host, "admin/comments")){
+
+            echo $twig->render('admin/comment/comments.twig',array(
+                'comments'=>(new CommentController())->getAllComments()
+            ));
+
+        }
+        elseif(strpos($host, "admin/users")){
+
+            echo $twig->render('admin/user/users.twig',array(
+            'users'=>(new UserController())->getAllUsers()
+            ));
+        }
 
     }
-    elseif(strpos($host, "admin/users")){
-
-        echo $twig->render('admin/user/users.twig',array(
-           'users'=>(new UserController())->getAllUsers()
-        ));
-
-   }
-    else{
-        echo $twig->render('index.twig');
-    }
+    
+    
 
 }
 

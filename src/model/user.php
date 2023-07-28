@@ -112,7 +112,7 @@ class UserRepository{
         
         $db = $this->connection->getConnection();
 
-        $sql = "SELECT id,email,firstname,lastname FROM b_user WHERE email=:email AND password=:password";
+        $sql = "SELECT id,email,firstname,lastname,fk_id_role FROM b_user WHERE email=:email AND password=:password";
 
         $data = $db->prepare($sql);
 
@@ -129,15 +129,27 @@ class UserRepository{
         $row = $data->fetch(PDO::FETCH_ASSOC);
 
         if($row){
-
-            $_SESSION["user"] = array(
+            if($row['fk_id_role'] == 1){
+                
+            $_SESSION["admin"] = array(
                 'id'=>$row['id'],
                 'email'=>$row['email'],
                 'firstname'=>$row['firstname'],
                 'lastname'=>$row['lastname']
             );
-
-            return 1;
+            return 2;
+            
+            }
+            else{
+                $_SESSION["user"] = array(
+                    'id'=>$row['id'],
+                    'email'=>$row['email'],
+                    'firstname'=>$row['firstname'],
+                    'lastname'=>$row['lastname']
+                );
+                return 1;
+            }
+            
         }
         else{
             throw new Exception('Une erreur est survenue lors de la récupération des données');
