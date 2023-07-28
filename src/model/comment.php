@@ -8,6 +8,7 @@ use Application\Lib\Database\DatabaseConnection;
 use PDO;
 use DateTime;
 use DateTimeZone;
+use Exception;
 
 class Comment{
     public int $id;
@@ -52,18 +53,20 @@ class CommentRepository{
 
         $db = $this->connection->getConnection();
         
-        $user = 1;
+        $user = $_SESSION['user']['id'];
         $post = $_GET['id'];
     
     
-        $sql = "INSERT INTO b_comment (comment,fk_user_id,fk_post_id) VALUES (:comment,:fk_user_id,:fk_post_id)";
-        $insert = $db->prepare($sql);
-    
-        $insert->bindParam(':comment', $comment);
-        $insert->bindParam(':fk_user_id', $user);
-        $insert->bindParam(':fk_post_id', $post);
-    
-        $insert->execute();
+            $sql = "INSERT INTO b_comment (comment,fk_user_id,fk_post_id) VALUES (:comment,:fk_user_id,:fk_post_id)";
+            $insert = $db->prepare($sql);
+        
+            $insert->bindParam(':comment', $comment);
+            $insert->bindParam(':fk_user_id', $user);
+            $insert->bindParam(':fk_post_id', $post);
+        
+            $insert->execute();
+        
+        
         
     }
 

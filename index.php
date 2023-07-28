@@ -1,6 +1,6 @@
 <?php
-
-define('ABS_PATH', __DIR__);
+session_start();
+// define('ABS_PATH', $_SERVER['DOCUMENT_ROOT']);
 
 require_once('src/controllers/post.php');
 require_once('src/controllers/comment.php');
@@ -22,6 +22,34 @@ require_once 'twig.php';
 //routeur
 if (isset($_GET['action']) && $_GET['action'] !== '') {
 
+    // USER
+
+    //login
+
+    if($_GET['action'] === 'loginUser'){
+
+        $user = (new UserController())->login();
+
+        if($user == 1){
+            header('Location: http://blog.local');
+        }
+        else{
+            echo $twig->render('login.twig',array(
+                'errors'=>$user,
+                'email'=>$_POST['email'],
+                
+            ));
+        }
+        
+    }
+
+    //LOGOUT
+
+    if($_GET['action'] === 'logoutUser'){
+        session_destroy();
+        header('Location: http://blog.local');
+    }
+
     // if send contact at form homepage
 
     if($_GET['action'] === 'getPost'){
@@ -33,8 +61,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             'post'=>$post,
             'comments'=>$comments
         ));
-
-        die();
         
     }
 
@@ -130,13 +156,19 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             'posts'=> (new PostController())->getPosts(),
         ));
     }
-    
+    elseif($host === '/login' && isset($_SESSION['user'])){
+        header('Location: http://blog.local');
+    }
     elseif($host === '/login'){
         echo $twig->render('login.twig');
+    }
+    elseif($host === '/register' && isset($_SESSION['user'])){
+        header('Location: http://blog.local');
     }
     elseif($host === '/register'){
         echo $twig->render('register.twig');
     }
+    
     elseif($host === '/admin/dashboard'){
         echo $twig->render('admin/dashboard.twig');
     }

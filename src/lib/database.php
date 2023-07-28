@@ -1,4 +1,6 @@
 <?php
+namespace Application\Lib\Database;
+use PDO;
 /* create database connection */
 class DatabaseConnection
   {
@@ -8,7 +10,7 @@ class DatabaseConnection
       
     {
         if ($this->database === null) {
-        $this->database = new PDO('mysql:host=YOUR_HOST:YOUR_PORT;dbname=YOUR_DATABASE_NAME;charset=utf8', 'YOUR_USERNAME', 'YOUR_PASSWORD');
+        $this->database = new PDO('mysql:host=localhost:10070;dbname=blog;charset=utf8', 'root', 'root');
     }
     
       return $this->database;

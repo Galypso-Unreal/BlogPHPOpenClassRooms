@@ -28,9 +28,10 @@ class CommentController{
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
 
+        $user = $_SESSION['user'];
         $id = $_GET['id'];
 
-        if(isset($comment) && $comment != '' && isset($id) && $id > 0){
+        if(isset($comment) && $comment != '' && isset($id) && $id > 0 && $user){
           $commentRepository->addComment($comment);
           return header('Location: http://blog.local/actualites/index;php?action=getPost&id='.$id);
         }

@@ -37,5 +37,6 @@ $getID = new TwigFunction('get_ID', function () {
  $twig->addFunction($displayAuthor);
 
 
-$twig->addGlobal('img_assets', 'src/assets/img/');
-$twig->addGlobal('controllers', 'src/controllers/');
+$twig->addGlobal('img_assets', 'http://blog.local/src/assets/img/');
+// $twig->addGlobal('js_folder', ABS_PATH.'/assets/js/');
+$twig->addGlobal('session', $_SESSION);
