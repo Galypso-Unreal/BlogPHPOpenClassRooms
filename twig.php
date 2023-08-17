@@ -4,6 +4,7 @@ use Twig\TwigFunction;
 use Twig\Extra\String\StringExtension;
 use Application\Model\Post\PostRepository;
 use Application\Lib\Database\DatabaseConnection;
+use Symfony\Component\DependencyInjection\Dumper\Dumper;
 
 require_once __DIR__.'/vendor/autoload.php';
 
@@ -39,4 +40,10 @@ $getID = new TwigFunction('get_ID', function () {
 
 $twig->addGlobal('img_assets', 'http://blog.local/src/assets/img/');
 // $twig->addGlobal('js_folder', ABS_PATH.'/assets/js/');
-$twig->addGlobal('session', $_SESSION);
+if(isset($_COOKIE['LOGGED_ADMIN']) && !empty($_COOKIE['LOGGED_ADMIN'])){
+   $twig->addGlobal('admin_cookie', json_decode($_COOKIE['LOGGED_ADMIN']));
+}
+
+if(isset($_COOKIE['LOGGED_USER']) && !empty($_COOKIE['LOGGED_USER'])){
+   $twig->addGlobal('user_cookie', json_decode($_COOKIE['LOGGED_USER']));
+}

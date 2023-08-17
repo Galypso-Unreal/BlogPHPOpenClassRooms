@@ -1,7 +1,5 @@
 <?php
-session_start();
 // define('ABS_PATH', $_SERVER['DOCUMENT_ROOT']);
-
 require_once('src/controllers/post.php');
 require_once('src/controllers/comment.php');
 require_once('src/controllers/user.php');
@@ -48,8 +46,19 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     //LOGOUT
 
     if($_GET['action'] === 'logoutUser'){
-        session_destroy();
-        header('Location: http://blog.local');
+
+        if(isset($_COOKIE['LOGGED_ADMIN'])){
+            unset($_COOKIE['LOGGED_ADMIN']); 
+            setcookie('LOGGED_ADMIN', null, -1,'/');
+            var_dump($_COOKIE['LOGGED_ADMIN']);
+        }
+
+        if(isset($_COOKIE['LOGGED_USER'])){
+            setcookie('LOGGED_USER', null, -1,'/');
+            var_dump($_COOKIE['LOGGED_USER']);
+        }
+        
+        header('Location: http://blog.local/');
     }
 
     // if send contact at form homepage
@@ -161,20 +170,20 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             'posts'=> (new PostController())->getPosts(),
         ));
     }
-    elseif($host === '/login' && isset($_SESSION['user'])){
+    elseif($host === '/login' && isset($_COOKIE['LOGGED_USER'])){
         header('Location: http://blog.local');
     }
     elseif($host === '/login'){
         echo $twig->render('login.twig');
     }
-    elseif($host === '/register' && isset($_SESSION['user'])){
+    elseif($host === '/register' && isset($_COOKIE['LOGGED_USER'])){
         header('Location: http://blog.local');
     }
     elseif($host === '/register'){
         echo $twig->render('register.twig');
     }
     elseif($host === '/admin/login'){
-        if(isset($_SESSION['admin'])){
+        if(isset($_COOKIE['LOGGED_ADMIN'])){
             header('Location: /admin/posts');
         }
         else{
@@ -185,7 +194,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     // BACK-OFFICE LINKS
     
-    if(isset($_SESSION['admin'])){
+    if(isset($_COOKIE['LOGGED_ADMIN'])){
 
 
         if($host === '/admin/post/add'){
