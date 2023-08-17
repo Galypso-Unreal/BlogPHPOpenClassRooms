@@ -7,8 +7,8 @@
     <!-- Navbar-->
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
-
-            {% if session.admin %}
+            
+            {% if admin_cookie %}
             <li class="nav-item header_account nav-link px-lg-3 py-3 py-lg-4 relative">
                 <div class="floating_window_user admin close">
                     <a href="index.php?action=logoutUser">Se déconnecter</a>
@@ -79,14 +79,14 @@
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Connecté en tant que:</div>
-                {% if session.admin %}
-
-                    {% if session.admin.firstname %}
-                        {{session.admin.firstname}}
+                {% if admin_cookie %}
+                    
+                    {% if admin_cookie.firstname %}
+                        {{admin_cookie.firstname}}
                     {% endif %}
 
-                    {% if session.admin.lastname %}
-                        {{session.admin.lastname}}
+                    {% if admin_cookie.lastname %}
+                        {{admin_cookie.lastname}}
                     {% endif %}
 
                 {% endif %}

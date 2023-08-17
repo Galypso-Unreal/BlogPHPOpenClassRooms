@@ -90,8 +90,13 @@ class UserController{
         $userRepository = new UserRepository();
         $userRepository->connection = $connection;
 
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        if(isset($_POST['email']) && isset($_POST['password'])){
+            $email = $_POST['email'];
+            $password = $_POST['password'];  
+        }
+
+
+
         $check = $this->checkUserExist();
         $errors = [];
         

@@ -82,10 +82,14 @@ class UserRepository{
 
         $data = $db->prepare($sql);
 
-        $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
+        if(isset($_POST['email']) && $_POST['password']){
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
+            $chiff = md5($password);
+        }
         
-        $chiff = md5($password);
+        
+        
 
         $data->bindParam(':email',$email);
         $data->bindParam(':password',$chiff);
@@ -129,26 +133,38 @@ class UserRepository{
         $row = $data->fetch(PDO::FETCH_ASSOC);
 
         if($row){
+            
             if($row['fk_id_role'] == 1){
-                
-            $_SESSION["admin"] = array(
-                'id'=>$row['id'],
-                'email'=>$row['email'],
-                'firstname'=>$row['firstname'],
-                'lastname'=>$row['lastname']
+
+            
+            setcookie(
+                'LOGGED_ADMIN',
+                json_encode(array(
+                    "id"=>$row['id'],
+                    "email"=>$row['email'],
+                    "firstname"=>$row['firstname'],
+                    "lastname"=>$row['lastname'] 
+                )),
+                time()+3600*2,'/'
             );
+            
             return 2;
             
             }
             else{
-                $_SESSION["user"] = array(
-                    'id'=>$row['id'],
-                    'email'=>$row['email'],
-                    'firstname'=>$row['firstname'],
-                    'lastname'=>$row['lastname']
+                setcookie(
+                    'LOGGED_USER',
+                    json_encode(array(
+                        "id"=>$row['id'],
+                        "email"=>$row['email'],
+                        "firstname"=>$row['firstname'],
+                        "lastname"=>$row['lastname'] 
+                    )),
+                    time()+3600*2,'/'
                 );
                 return 1;
             }
+            
             
         }
         else{
@@ -186,6 +202,33 @@ class UserRepository{
         return $users;
 
     }
+
+    function getUser(){
+
+        $db = $this->connection->getConnection();
+
+        $sql = "SELECT * FROM b_user WHERE fk_id_role = 1 AND id = :id";
+
+        $data = $db->prepare($sql);
+
+        $data->execute();
+
+        $row = $data->fetch(PDO::FETCH_ASSOC);
+
+        if($row){
+            $user = new User();
+
+            $user->id = $row['id'];
+            $user->firstname = $row['firstname'];
+            $user->lastname = $row['lastname'];
+            return $user;
+        }
+        return 0;
+        
+        
+
+    }
+
     function validateUser($id){
 
         $db = $this->connection->getConnection();

@@ -53,7 +53,8 @@ class CommentRepository{
 
         $db = $this->connection->getConnection();
         
-        $user = $_SESSION['user']['id'];
+        $user =   json_decode($_COOKIE['LOGGED_USER']);
+
         $post = $_GET['id'];
     
     
@@ -61,7 +62,7 @@ class CommentRepository{
             $insert = $db->prepare($sql);
         
             $insert->bindParam(':comment', $comment);
-            $insert->bindParam(':fk_user_id', $user);
+            $insert->bindParam(':fk_user_id', $user->id);
             $insert->bindParam(':fk_post_id', $post);
         
             $insert->execute();
