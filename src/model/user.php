@@ -34,10 +34,10 @@ class UserRepository{
 
         $insert = $db->prepare($sql);
 
-        $lastname = htmlspecialchars($_POST['lastname']);
-        $firstname = htmlspecialchars($_POST['firstname']);
-        $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
+        $lastname = htmlspecialchars($_POST['lastname'],ENT_NOQUOTES);
+        $firstname = htmlspecialchars($_POST['firstname'],ENT_NOQUOTES);
+        $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
+        $password = htmlspecialchars($_POST['password'],ENT_NOQUOTES);
         $fk_id_role = 2;
 
         $chiff = md5($password);
@@ -59,7 +59,7 @@ class UserRepository{
 
         $data = $db->prepare($sql);
 
-        $email = htmlspecialchars($_POST['email']);
+        $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
 
         $data->bindParam(':email',$email);
 
@@ -83,8 +83,8 @@ class UserRepository{
         $data = $db->prepare($sql);
 
         if(isset($_POST['email']) && $_POST['password']){
-            $email = htmlspecialchars($_POST['email']);
-            $password = htmlspecialchars($_POST['password']);
+            $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
+            $password = htmlspecialchars($_POST['password'],ENT_NOQUOTES);
             $chiff = md5($password);
         }
         
@@ -120,8 +120,8 @@ class UserRepository{
 
         $data = $db->prepare($sql);
 
-        $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
+        $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
+        $password = htmlspecialchars($_POST['password'],ENT_NOQUOTES);
         
         $chiff = md5($password);
 

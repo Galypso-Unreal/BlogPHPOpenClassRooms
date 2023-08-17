@@ -111,13 +111,13 @@ class PostRepository{
         $sql = "INSERT INTO b_post (title,lead_content,content,fk_user_id) VALUES (:title,:lead_content,:content,:fk_user_id)";
 
         $insert = $db->prepare($sql);
-        $lead_content = 's';
-        $title='s';
-        $content='s';
+        $lead_content_sec = htmlspecialchars($lead_content,ENT_NOQUOTES);
+        $title_sec =htmlspecialchars($title,ENT_NOQUOTES);
+        $content_sec =htmlspecialchars($content,ENT_NOQUOTES);
         $fk_user_id = '1';
-        $insert->bindParam(':title', $title);
-        $insert->bindParam(':lead_content', $lead_content);
-        $insert->bindParam(':content', $content);
+        $insert->bindParam(':title', $title_sec);
+        $insert->bindParam(':lead_content', $lead_content_sec);
+        $insert->bindParam(':content', $content_sec);
         $insert->bindParam(':fk_user_id', $fk_user_id,PDO::PARAM_INT);
 
         $insert->execute();
@@ -135,14 +135,21 @@ class PostRepository{
         $sql = "UPDATE b_post SET title=:title,lead_content=:lead_content,content=:content,fk_user_id=:fk_user_id,modified_at=:modified_at WHERE id=:id";
         $insert = $db->prepare($sql);
         $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
-        $datef = $date->format('Y-m-d H:i:s');
+        $datef = htmlspecialchars($date->format('Y-m-d H:i:s'),ENT_NOQUOTES);
+
+            $title_sec = htmlspecialchars($title,ENT_NOQUOTES);
+            $lead_content_sec = htmlspecialchars($lead_content,ENT_NOQUOTES);
+            $content_sec = htmlspecialchars($content,ENT_NOQUOTES);
+            $id_sec = htmlspecialchars($id,ENT_NOQUOTES);
+            $id_user_sec = htmlspecialchars($id_user,ENT_NOQUOTES);
+
     
-        $insert->bindParam(':title', $title);
-        $insert->bindParam(':lead_content', $lead_content);
-        $insert->bindParam(':content', $content);
-        $insert->bindParam(':fk_user_id', $id_user);
+        $insert->bindParam(':title', $title_sec);
+        $insert->bindParam(':lead_content', $lead_content_sec);
+        $insert->bindParam(':content', $content_sec);
+        $insert->bindParam(':fk_user_id', $id_user_sec);
         $insert->bindParam(':modified_at', $datef);
-        $insert->bindParam(':id', $id);
+        $insert->bindParam(':id', $id_sec);
     
         $insert->execute();
 

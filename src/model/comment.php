@@ -55,13 +55,14 @@ class CommentRepository{
         
         $user =   json_decode($_COOKIE['LOGGED_USER']);
 
+        $comment_sec = htmlspecialchars($comment,ENT_NOQUOTES);
         $post = $_GET['id'];
     
     
             $sql = "INSERT INTO b_comment (comment,fk_user_id,fk_post_id) VALUES (:comment,:fk_user_id,:fk_post_id)";
             $insert = $db->prepare($sql);
         
-            $insert->bindParam(':comment', $comment);
+            $insert->bindParam(':comment', $comment_sec);
             $insert->bindParam(':fk_user_id', $user->id);
             $insert->bindParam(':fk_post_id', $post);
         

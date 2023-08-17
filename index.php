@@ -3,12 +3,15 @@
 require_once('src/controllers/post.php');
 require_once('src/controllers/comment.php');
 require_once('src/controllers/user.php');
+require_once('src/controllers/form.php');
 
 use Application\Controllers\Post\PostController;
 use Application\Controllers\Comment;
 use Application\Controllers\Comment\CommentController;
 use Application\Controllers\User\UserController;
 use Application\Model\Comment\CommentRepository;
+use Application\Controllers\Form;
+use Application\Controllers\Form\FormController;
 
 require_once 'twig.php';
 
@@ -77,17 +80,10 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
 	if ($_GET['action'] === 'confirmationForm') {
 
-        if(confirmationForm()){
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $email = $_POST['email'];
-            $message = $_POST['message'];
-            sendMailContact($firstname,$lastname,$email,$message);
+        if((new FormController())->confirmationForm()){
+            $informations = (new FormController())->sendMailContact();
             echo $twig->render('elements/confirm.twig',array(
-                'firstname'=>$firstname,
-                'lastname'=>$lastname,
-                'email'=>$email,
-                'message'=>$message
+                'informations' => $informations
             ));
         }
         
