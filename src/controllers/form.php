@@ -4,12 +4,22 @@ namespace Application\Controllers\Form;
 
 use Exception;
 
+/* The `class FormController` is a PHP class that contains two functions: `confirmationForm()` and
+`sendMailContact()`. */
+
 class FormController
 {
 
+    /**
+     * The function checks if a form is valid by verifying if all required fields are set and if the
+     * length of each field is within the specified limits.
+     * 
+     * @return int 0 or 1.
+     */
+
     function confirmationForm()
     {
-        //if 
+
         if (!isset($_POST['firstname']) || !isset($_POST['lastname']) || !isset($_POST['email']) || !isset($_POST['message']) || $_POST['message'] == '') {
             echo "Le formulaire n'est pas valide il vous faut : un nom, un prénom, un email et un message";
             return 0;
@@ -30,6 +40,14 @@ class FormController
             return 1;
         }
     }
+
+    /**
+     * The function `sendMailContact` sends an email with contact information and a message if all
+     * required fields are filled out.
+     * 
+     * @return an array called , which contains the values of the variables firstname,
+     * lastname, email, and message.
+     */
 
     function sendMailContact()
     {

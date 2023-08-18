@@ -9,6 +9,9 @@ use PDO;
 use DateTime;
 use DateTimeZone;
 
+/* The class "Post" represents a post with various properties such as id, title, content, created_at,
+modified_at, deleted_at, and fk_user_id. */
+
 class Post
 {
 
@@ -22,10 +25,27 @@ class Post
     public int $fk_user_id;
 }
 
+/* The `PostRepository` class is responsible for interacting with the database to perform CRUD
+operations on the `Post` objects. It contains methods for retrieving posts, retrieving a single post
+by its ID, retrieving the author of a post, adding a new post, modifying an existing post, deleting
+a post, and retrieving a list of administrators. */
+
 class PostRepository
 {
 
+    /* `public DatabaseConnection ;` is declaring a public property `` of type
+    `DatabaseConnection` in the `PostRepository` class. This property is used to store an instance
+    of the `DatabaseConnection` class, which is responsible for establishing a connection to the
+    database. */
+
     public DatabaseConnection $connection;
+
+    /**
+     * The function `getPosts` retrieves all posts from the database and returns them as an array of
+     * Post objects.
+     * 
+     * @return array an array of Post objects.
+     */
 
     function getPosts(): array
     {
@@ -58,6 +78,16 @@ class PostRepository
         return $posts;
     }
 
+    /**
+     * The function `getPost` retrieves a post from the database based on the given ID and returns it
+     * as a `Post` object.
+     * 
+     * @param int id The parameter "id" is an integer that represents the ID of the post that we want
+     * to retrieve from the database.
+     * 
+     * @return Post an instance of the Post class.
+     */
+
     function getPost(int $id): Post
     {
 
@@ -86,6 +116,16 @@ class PostRepository
     }
 
 
+    /**
+     * The function `getAuthor` retrieves author information from a database based on the provided ID.
+     * 
+     * @param int id The parameter "id" is an integer that represents the ID of the author you want to
+     * retrieve from the database.
+     * 
+     * @return array containing the details of the author with the specified ID. The array includes
+     * the author's ID, firstname, lastname, and email.
+     */
+
     function getAuthor(int $id)
     {
 
@@ -113,6 +153,20 @@ class PostRepository
 
 
 
+    /**
+     * The function `addPost` inserts a new post into the database with the provided title, lead
+     * content, content, and user ID.
+     * 
+     * @param string title The title of the post.
+     * @param string lead_content The lead_content parameter is a string that represents the
+     * introductory or summary content of the post.
+     * @param string content The "content" parameter is a string that represents the main content of
+     * the post. It can contain any text or HTML content that you want to display in the post.
+     * @param int fk_user_id The parameter "fk_user_id" is the foreign key that represents the user ID
+     * of the user who is creating the post. It is used to associate the post with the user in the
+     * database.
+     */
+
     function addPost(string $title, string $lead_content, string $content, int $fk_user_id): Void
     {
 
@@ -133,6 +187,20 @@ class PostRepository
 
         $insert->execute();
     }
+
+    /**
+     * The function `modifyPost` updates a post in the database with the provided title, lead content,
+     * content, user ID, and modified date.
+     * 
+     * @param int id The ID of the post that needs to be modified.
+     * @param string title The title of the post that you want to modify.
+     * @param string lead_content The parameter "lead_content" is a string that represents the
+     * introductory content of a post. It is typically a shorter version of the main content and is
+     * used to provide a summary or preview of the post.
+     * @param string content The "content" parameter is a string that represents the updated content of
+     * a post.
+     * @param int id_user The id of the user who is modifying the post.
+     */
 
     function modifyPost(int $id, string $title, string $lead_content, string $content, int $id_user): Void
     {
@@ -165,6 +233,14 @@ class PostRepository
         
     }
 
+    /**
+     * The function `deletePost` updates the `deleted_at` column of a post in the `b_post` table with
+     * the current date and time.
+     * 
+     * @param int id The parameter "id" is an integer that represents the ID of the post that needs to
+     * be deleted.
+     */
+
     function deletePost(int $id)
     {
 
@@ -187,6 +263,13 @@ class PostRepository
         
     }
 
+    /**
+     * The function `getAdmins()` retrieves a list of administrators from a database table.
+     * 
+     * @return array an array of admins. Each admin is represented by an associative array with keys
+     * 'id', 'lastname', 'firstname', and 'email'.
+     */
+    
     function getAdmins(): array
     {
 
