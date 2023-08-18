@@ -4,43 +4,47 @@
 {% endblock %}
 
 {% block content %}
-	<div class="container confirmation-form">
+<div class="container confirmation-form">
 
-		<div class="informations">
+	<div class="informations">
 
-			<div class="h1_style">
-				Merci pour votre prise de contact !
-			</div>
-
-			<div class="h3_style">
-				Voici le résumé de vos informations
-			</div>
-
-			<p>Votre prénom :
-				<strong>{{informations.firstname}}</strong>
-			</p>
-			<p>Votre nom :
-				<strong>{{informations.lastname}}</strong>
-			</p>
-			<p>Votre e-mail :
-				<strong>{{informations.email}}</strong>
-			</p>
-			<p>Votre message :
-				<strong>{{informations.message}}</strong>
-			</p>
-
-                        <a class="return-home" href="http://blog.local/">
-            Retourner à la page d'accueil
-            </a>
-
+		<div class="h1_style">
+			Merci pour votre prise de contact !
 		</div>
 
-		<div class="conf-svg">
-			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="m16 0c8.836556 0 16 7.163444 16 16s-7.163444 16-16 16-16-7.163444-16-16 7.163444-16 16-16zm5.7279221 11-7.0710679 7.0710678-4.2426406-4.2426407-1.4142136 1.4142136 5.6568542 5.6568542 8.4852814-8.4852813z" fill="#202327" fill-rule="evenodd"/></svg>
+		<div class="h3_style">
+			Voici le résumé de vos informations
 		</div>
 
+		<p>Votre prénom :
+			<strong>{{informations.firstname}}</strong>
+		</p>
+		<p>Votre nom :
+			<strong>{{informations.lastname}}</strong>
+		</p>
+		<p>Votre e-mail :
+			<strong>{{informations.email}}</strong>
+		</p>
+		<p>Votre message :
+			<strong>{{informations.message}}</strong>
+		</p>
+
+		<a class="return-home" href="http://blog.local/">
+			Retourner à la page d'accueil
+		</a>
 
 	</div>
+
+	<div class="conf-svg">
+		<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32">
+			<path
+				d="m16 0c8.836556 0 16 7.163444 16 16s-7.163444 16-16 16-16-7.163444-16-16 7.163444-16 16-16zm5.7279221 11-7.0710679 7.0710678-4.2426406-4.2426407-1.4142136 1.4142136 5.6568542 5.6568542 8.4852814-8.4852813z"
+				fill="#202327" fill-rule="evenodd" />
+		</svg>
+	</div>
+
+
+</div>
 
 
 {% endblock %}

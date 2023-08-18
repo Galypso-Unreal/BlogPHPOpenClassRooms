@@ -1,4 +1,5 @@
 <?php
+
 namespace Application\Model\User;
 
 require_once('./src/lib/database.php');
@@ -9,7 +10,8 @@ use DateTime;
 use DateTimeZone;
 use Exception;
 
-class User{
+class User
+{
 
     public int $id;
     public string $lastname;
@@ -19,14 +21,15 @@ class User{
     public int $is_valid;
     public ?string $deleted_at;
     public int $fk_id_role;
-
 }
 
-class UserRepository{
+class UserRepository
+{
 
     public DatabaseConnection $connection;
 
-    function createAccount(){
+    function createAccount(): Void
+    {
 
         $db = $this->connection->getConnection();
 
@@ -34,147 +37,141 @@ class UserRepository{
 
         $insert = $db->prepare($sql);
 
-        $lastname = htmlspecialchars($_POST['lastname'],ENT_NOQUOTES);
-        $firstname = htmlspecialchars($_POST['firstname'],ENT_NOQUOTES);
-        $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
-        $password = htmlspecialchars($_POST['password'],ENT_NOQUOTES);
+        $lastname = htmlspecialchars($_POST['lastname'], ENT_NOQUOTES);
+        $firstname = htmlspecialchars($_POST['firstname'], ENT_NOQUOTES);
+        $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
+        $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
         $fk_id_role = 2;
 
         $chiff = md5($password);
 
-        $insert->bindParam(':lastname',$lastname);
-        $insert->bindParam(':firstname',$firstname);
-        $insert->bindParam(':email',$email);
-        $insert->bindParam(':password',$chiff);
-        $insert->bindParam(':fk_id_role',$fk_id_role);
+        $insert->bindParam(':lastname', $lastname);
+        $insert->bindParam(':firstname', $firstname);
+        $insert->bindParam(':email', $email);
+        $insert->bindParam(':password', $chiff);
+        $insert->bindParam(':fk_id_role', $fk_id_role, PDO::PARAM_INT);
 
         $insert->execute();
-
     }
 
-    function checkUniqueEmail(){
+    function checkUniqueEmail(): Int
+    {
         $db = $this->connection->getConnection();
 
         $sql = "SELECT * FROM b_user WHERE email = :email";
 
         $data = $db->prepare($sql);
 
-        $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
+        $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
 
-        $data->bindParam(':email',$email);
+        $data->bindParam(':email', $email);
 
         $data->execute();
 
         $row = $data->fetch(PDO::FETCH_ASSOC);
-    
-        if($row >= 1){
+
+        if ($row >= 1) {
             return 0;
-        }
-        else{
+        } else {
             return 1;
         }
     }
 
-    function checkUserExist(){
+    function checkUserExist(): Int
+    {
         $db = $this->connection->getConnection();
 
         $sql = "SELECT email,password,is_valid FROM b_user WHERE email=:email AND password=:password";
 
         $data = $db->prepare($sql);
 
-        if(isset($_POST['email']) && $_POST['password']){
-            $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
-            $password = htmlspecialchars($_POST['password'],ENT_NOQUOTES);
+        if (isset($_POST['email']) && $_POST['password']) {
+            $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
+            $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
             $chiff = md5($password);
         }
-        
-        
-        
 
-        $data->bindParam(':email',$email);
-        $data->bindParam(':password',$chiff);
+
+
+
+        $data->bindParam(':email', $email);
+        $data->bindParam(':password', $chiff);
 
         $data->execute();
 
         $row = $data->fetch(PDO::FETCH_ASSOC);
 
-        if($row){
-            if($row['is_valid'] == 1){
+        if ($row) {
+            if ($row['is_valid'] == 1) {
                 return 1;
-            }
-            else{
+            } else {
                 return 2;
             }
-            
-        }
-        else{
+        } else {
             return 0;
         }
     }
 
-    function login(){
-        
+    function login(): Int
+    {
+
         $db = $this->connection->getConnection();
 
         $sql = "SELECT id,email,firstname,lastname,fk_id_role FROM b_user WHERE email=:email AND password=:password";
 
         $data = $db->prepare($sql);
 
-        $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
-        $password = htmlspecialchars($_POST['password'],ENT_NOQUOTES);
-        
+        $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
+        $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
+
         $chiff = md5($password);
 
-        $data->bindParam(':email',$email);
-        $data->bindParam(':password',$chiff);
+        $data->bindParam(':email', $email);
+        $data->bindParam(':password', $chiff);
 
         $data->execute();
 
         $row = $data->fetch(PDO::FETCH_ASSOC);
 
-        if($row){
-            
-            if($row['fk_id_role'] == 1){
+        if ($row) {
 
-            
-            setcookie(
-                'LOGGED_ADMIN',
-                json_encode(array(
-                    "id"=>$row['id'],
-                    "email"=>$row['email'],
-                    "firstname"=>$row['firstname'],
-                    "lastname"=>$row['lastname'] 
-                )),
-                time()+3600*2,'/'
-            );
-            
-            return 2;
-            
-            }
-            else{
+            if ($row['fk_id_role'] == 1) {
+
+
+                setcookie(
+                    'LOGGED_ADMIN',
+                    json_encode(array(
+                        "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
+                        "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
+                        "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
+                        "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
+                    )),
+                    time() + 3600 * 2,
+                    '/'
+                );
+
+                return 2;
+            } else {
                 setcookie(
                     'LOGGED_USER',
                     json_encode(array(
-                        "id"=>$row['id'],
-                        "email"=>$row['email'],
-                        "firstname"=>$row['firstname'],
-                        "lastname"=>$row['lastname'] 
+                        "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
+                        "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
+                        "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
+                        "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
                     )),
-                    time()+3600*2,'/'
+                    time() + 3600 * 2,
+                    '/'
                 );
                 return 1;
             }
-            
-            
-        }
-        else{
+        } else {
             throw new Exception('Une erreur est survenue lors de la récupération des données');
         }
-        
-
     }
 
-    function getAllUsers(){
+    function getAllUsers(): array
+    {
 
         $db = $this->connection->getConnection();
 
@@ -185,25 +182,25 @@ class UserRepository{
         $data->execute();
 
         $users = [];
-    
-        while(($row = $data->fetch(PDO::FETCH_ASSOC))){
+
+        while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
             $user = new User();
 
-            $user->id =     $row['id'];
-            $user->lastname =     $row['lastname'];
-            $user->firstname =     $row['firstname'];
-            $user->email =    $row['email'];
-            $user->is_valid =    $row['is_valid'];
-            $user->fk_id_role =    $row['fk_id_role'];
-            
-            
+            $user->id =     htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $user->lastname =     htmlspecialchars($row['lastname'], ENT_NOQUOTES);
+            $user->firstname =     htmlspecialchars($row['firstname'], ENT_NOQUOTES);
+            $user->email =    htmlspecialchars($row['email'], ENT_NOQUOTES);
+            $user->is_valid =    htmlspecialchars($row['is_valid'], ENT_NOQUOTES);
+            $user->fk_id_role =    htmlspecialchars($row['fk_id_role'], ENT_NOQUOTES);
+
+
             $users[] = $user;
         }
         return $users;
-
     }
 
-    function getUser(){
+    function getUser(): User
+    {
 
         $db = $this->connection->getConnection();
 
@@ -215,21 +212,20 @@ class UserRepository{
 
         $row = $data->fetch(PDO::FETCH_ASSOC);
 
-        if($row){
+        if ($row) {
             $user = new User();
 
-            $user->id = $row['id'];
-            $user->firstname = $row['firstname'];
-            $user->lastname = $row['lastname'];
+            $user->id = htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $user->firstname = htmlspecialchars($row['firstname'], ENT_NOQUOTES);
+            $user->lastname = htmlspecialchars($row['lastname'], ENT_NOQUOTES);
+
             return $user;
         }
         return 0;
-        
-        
-
     }
 
-    function validateUser($id){
+    function validateUser(int $id)
+    {
 
         $db = $this->connection->getConnection();
 
@@ -237,28 +233,26 @@ class UserRepository{
 
         $data = $db->prepare($sql);
 
-        $data->bindParam(':id',$id);
+        $data->bindParam(':id', $id, PDO::PARAM_INT);
 
         $data->execute();
-
     }
 
-    function deleteUser($id){
+    function deleteUser(int $id)
+    {
 
         $db = $this->connection->getConnection();
 
         $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
-        $datef = $date->format('Y-m-d H:i:s');
+        $datef = htmlspecialchars($date->format('Y-m-d H:i:s'), ENT_NOQUOTES);
 
         $sql = "UPDATE b_user SET deleted_at=:deleted_at WHERE id=:id";
 
         $delete = $db->prepare($sql);
 
-        $delete->bindParam('deleted_at',$datef);
-        $delete->bindParam('id',$id);
+        $delete->bindParam('deleted_at', $datef);
+        $delete->bindParam('id', $id, PDO::PARAM_INT);
 
         $delete->execute();
-    
-}
-
+    }
 }

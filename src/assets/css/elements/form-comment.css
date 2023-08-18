@@ -1,13 +1,15 @@
-.comment-form{
+.comment-form {
     width: 100%;
     flex-direction: column !important;
     align-items: self-start !important;
 }
-.comment-form .form-floating{
+
+.comment-form .form-floating {
     width: 50%;
 
 }
-.comment-form textarea{
+
+.comment-form textarea {
     width: 100%;
     min-height: 200px;
     font-size: 2rem;

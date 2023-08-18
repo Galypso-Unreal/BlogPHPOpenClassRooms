@@ -13,6 +13,7 @@ use Twig\Source;
 use Twig\Template;
 
 /* start.twig */
+
 class __TwigTemplate_85d1810629f909866e16940fb90cd8b2 extends Template
 {
     private $source;
@@ -26,8 +27,7 @@ class __TwigTemplate_85d1810629f909866e16940fb90cd8b2 extends Template
 
         $this->parent = false;
 
-        $this->blocks = [
-        ];
+        $this->blocks = [];
     }
 
     protected function doDisplay(array $context, array $blocks = [])
@@ -84,7 +84,7 @@ class __TwigTemplate_85d1810629f909866e16940fb90cd8b2 extends Template
 
     public function getDebugInfo()
     {
-        return array (  69 => 15,  64 => 12,  53 => 10,  48 => 9,  46 => 8,  37 => 1,);
+        return array(69 => 15,  64 => 12,  53 => 10,  48 => 9,  46 => 8,  37 => 1,);
     }
 
     public function getSourceContext()
