@@ -3,132 +3,128 @@
 /* homepage */
 
 /* informations */
-html{
-    font-size: 10px;
-
+html {
+  font-size: 10px;
 }
-.relative{
-    position: relative;
+.relative {
+  position: relative;
 }
-.informations_homepage{
-    padding: 12rem 0 0rem;
-}
-
-.informations_homepage .presentation{
-    
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 3rem;
-    
+.informations_homepage {
+  padding: 12rem 0 0rem;
 }
 
-.informations_homepage .name .inner_name{
-    font-size: 7rem;
-}
-.informations_homepage .name{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-.informations_homepage .name, .informations_homepage .picture{
-    flex: 0 50%;
-}
-.informations_homepage .picture{
-    position: relative;
-}
-.informations_homepage .picture .social_links{
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    right: 0;
-    position: absolute;
-    width: auto;
-    top: calc(100% + 2rem);
+.informations_homepage .presentation {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-.informations_homepage .picture::after{
-    top: 0;
-    z-index: -1;
-    left: 0;
-    background-color: brown;
-    width: 150%;
-    transform: rotate(45deg);
-    height: 25%;
-    content: "";
-    position: absolute;
+.informations_homepage .name .inner_name {
+  font-size: 7rem;
 }
-.informations_homepage .picture img{
-    max-width: 100%;
-    width: 100%;
+.informations_homepage .name {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
-.slogan{
-    font-size: 2rem;
+.informations_homepage .name,
+.informations_homepage .picture {
+  flex: 0 50%;
 }
-
-.separator{
-    margin: 2rem 0;
-    height: 0.2rem;
-    background-color: var(--bs-body-color);
-    width: 100%;
-    max-width: 15rem;
+.informations_homepage .picture {
+  position: relative;
+}
+.informations_homepage .picture .social_links {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  right: 0;
+  position: absolute;
+  width: auto;
+  top: calc(100% + 2rem);
 }
 
-.separator-small{
-    margin: 1rem 0;
-    height: 0.1rem;
-    background-color: white;
-    width: 100%;
-    max-width: 7rem;
-
+.informations_homepage .picture::after {
+  top: 0;
+  z-index: -1;
+  left: 0;
+  background-color: brown;
+  width: 150%;
+  transform: rotate(45deg);
+  height: 25%;
+  content: "";
+  position: absolute;
+}
+.informations_homepage .picture img {
+  max-width: 100%;
+  width: 100%;
+}
+.slogan {
+  font-size: 2rem;
 }
 
-.form-errors{
-    color: brown;
-    font-weight: bold;
+.separator {
+  margin: 2rem 0;
+  height: 0.2rem;
+  background-color: var(--bs-body-color);
+  width: 100%;
+  max-width: 15rem;
+}
+
+.separator-small {
+  margin: 1rem 0;
+  height: 0.1rem;
+  background-color: white;
+  width: 100%;
+  max-width: 7rem;
+}
+
+.form-errors {
+  color: brown;
+  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {
-    .informations_homepage .presentation{
-    
-        flex-direction: row;
-        
-    }
+  .informations_homepage .presentation {
+    flex-direction: row;
+  }
 }
 
 /* comments custom css */
 
-.comment{
-    padding: 2rem;
-    background-color: var(--bs-body-color);
-    color: white;
+.comment {
+  padding: 2rem;
+  background-color: var(--bs-body-color);
+  color: white;
 }
-.comments{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.header_account{
-    font-size: 1.5rem;
-    font-weight: 200;
-    color: white;
-
+.header_account {
+  font-size: 1.5rem;
+  font-weight: 200;
+  color: white;
 }
-.header_account:active,.header_account:focus,.header_account:hover{
-    color: white;
-    cursor: pointer;
+.header_account:active,
+.header_account:focus,
+.header_account:hover {
+  color: white;
+  cursor: pointer;
 }
-.floating_window_user{
-    position: absolute;
-    width: 100%;
-    padding: 2rem;
-    background-color: white;
-    top: 100%;
+.floating_window_user {
+  position: absolute;
+  width: 100%;
+  padding: 2rem;
+  background-color: white;
+  top: 100%;
 }
-.floating_window_user.close{
-    display: none;
+.floating_window_user.close {
+  display: none;
 }
-.floating_window_user.open{
-    display: block;
+.floating_window_user.open {
+  display: block;
 }

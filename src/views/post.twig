@@ -4,74 +4,74 @@
 
 {% block content %}
 
-    <!-- Page Header-->
+<!-- Page Header-->
 <div class="padding-container container">
-<div class="masthead">
-	<div class="container position-relative px-4 px-lg-5">
-		<div class="row gx-4 gx-lg-5 justify-content-center">
-			<div class="col-md-10 col-lg-8 col-xl-7">
-				<div class="post-heading">
-					<h1>{{post.title}}</h1>
-					<h2 class="subheading">{{post.chapo}}</h2>
-					<span class="meta">
-                        {% set author = displayAuthor(post.fk_user_id) %}
+    <div class="masthead">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="post-heading">
+                        <h1>{{post.title}}</h1>
+                        
+                        <h2 class="subheading">{{post.lead_content}}</h2>
+                        <span class="meta">
+                            {% set author = displayAuthor(post.fk_user_id) %}
 
-						Posté par {{author.firstname}} {{author.lastname}}
-						le {{post.modified_at|date("m/d/Y")}}
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Post Content-->
-<article class="mb-4">
-	<div class="container px-4 px-lg-5">
-		<div class="row gx-4 gx-lg-5 justify-content-center">
-			<div class="col-md-10 col-lg-8 col-xl-7">
-				<p>
-                    {{post.content}}
-                </p>
-			</div>
-		</div>
-	</div>
+                            Posté par {{author.firstname}} {{author.lastname}}
+                            le {{post.modified_at|date("m/d/Y")}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Post Content-->
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <p>
+                        {{post.content}}
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    <div class="comments-container">
-        {% include "elements/form-comment.twig" %}
+        <div class="comments-container">
+            {% include "elements/form-comment.twig" %}
 
-        <h2>Commentaires</h2>
-        <div class="separator"></div>
-        {% if comments %}
-        <div class="comments">
-           
-            {% for comment in comments %}
-            {% set authorCom = displayAuthor(comment.fk_user_id) %}
+            <h2>Commentaires</h2>
+            <div class="separator"></div>
+            {% if comments %}
+            <div class="comments">
+
+                {% for comment in comments %}
+                {% set authorCom = displayAuthor(comment.fk_user_id) %}
                 <div class="comment">
-                        {% if authorCom.firstname and authorCom.lastname %}
+                    {% if authorCom.firstname and authorCom.lastname %}
                     <div>
                         {{authorCom.firstname}} {{authorCom.lastname}}
                     </div>
                     <div class="separator-small"></div>
-                        
+
                     {% endif %}
 
                     {% if comment.comment %}
 
-                        {{comment.comment}}
+                    {{comment.comment}}
 
                     {% endif %}
                 </div>
-                
-            {% endfor %}
+
+                {% endfor %}
+            </div>
+            {% endif %}
+
         </div>
-        {% endif %}
-
-    </div>
 
 
 
-</article>
+    </article>
 </div>
 
 {% endblock %}
-
