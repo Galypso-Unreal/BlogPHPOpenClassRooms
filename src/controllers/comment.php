@@ -11,10 +11,32 @@ use Application\Lib\Database\DatabaseConnection;
 use Application\Model\Comment\CommentRepository;
 use Exception;
 
+
+/* The `class CommentController` is a PHP class that serves as a controller for handling comments in an
+application. It contains several methods for managing comments, such as retrieving all comments,
+adding a new comment, deleting a comment, validating a comment, and retrieving comments for a
+specific post. The class uses a `DatabaseConnection` object and a `CommentRepository` object to
+interact with the database and perform the necessary operations on comments. */
+
 class CommentController
 {
+
+    /**
+     * The code contains several functions related to managing comments in a blog, including retrieving
+     * all comments, adding a comment, deleting a comment, validating a comment, and retrieving
+     * comments for a specific post.
+     * 
+     * @return The functions `getAllComments()`, `addComment()`, `deleteComment()`, `validComment()`,
+     * and `getComments()` are all returning different values.
+     */
+
     function getAllComments()
     {
+
+        /* The code is creating a new instance of the `DatabaseConnection` class and a new instance of
+        the `CommentRepository` class. It then assigns the `DatabaseConnection` object to the
+        `connection` property of the `CommentRepository` object. This allows the `CommentRepository`
+        object to have access to the database connection and perform operations on the database. */
 
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
@@ -32,10 +54,21 @@ class CommentController
 
         $user = json_decode($_COOKIE['LOGGED_USER']);
 
+        /* The code `if(isset(['id'])){  = ['id']; }` is checking if the `id` parameter is
+        present in the URL query string. If it is, the value of the `id` parameter is assigned to
+        the variable `$id`. */
+
         if(isset($_GET['id'])){
             $id = $_GET['id'];
         }
         
+        /* The code is checking if the `$comment` variable is set and not empty, if the `$id` variable
+        is set and greater than 0, if the `$user` variable is set and if the `$user->id` property is
+        set. If all these conditions are true, it means that the comment and user information are
+        valid, and the code proceeds to add the comment using the `addComment()` method of the
+        `CommentRepository` object. After adding the comment, it redirects the user to the
+        specified current post using the `header()` function. */
+
         if (isset($comment) && $comment != '' && isset($id) && $id > 0 && $user && isset($user->id)) {
             $commentRepository->addComment($comment);
             return header('Location: http://blog.local/actualites/index;php?action=getPost&id=' . $id);
@@ -46,6 +79,9 @@ class CommentController
 
     function deleteComment(int $id)
     {
+        /* The code is checking if the `$id` variable is set, is an integer, and is greater than 0. If
+        all these conditions are true, it means that the comment can be deleted. */
+
         if (isset($id) && is_int($id) && $id > 0) {
 
             $connection = new DatabaseConnection();
@@ -66,6 +102,9 @@ class CommentController
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
 
+        /* The code is checking if the `$id` variable is set, is an integer, and is greater than 0. If
+        all these conditions are true, it means that the comment can be considered valid. */
+
         if (isset($id) && is_int($id) && $id > 0) {
             $commentRepository->validComment($id);
             return header('Location: http://blog.local/admin/comments');
@@ -79,6 +118,9 @@ class CommentController
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
+
+        /* The code is checking if the `$id` variable is set, is an integer, and is greater than 0. If
+        all these conditions are true, it means that the comment can be retrieved. */
 
         if (isset($id) && is_int($id) && $id > 0) {
             return $commentRepository->getComments($id);
