@@ -52,7 +52,7 @@ class CommentController
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
 
-        $user = json_decode($_COOKIE['LOGGED_USER']);
+        $user = $_SESSION['LOGGED_USER'];
 
         /* The code `if(isset(['id'])){  = ['id']; }` is checking if the `id` parameter is
         present in the URL query string. If it is, the value of the `id` parameter is assigned to
@@ -69,7 +69,7 @@ class CommentController
         `CommentRepository` object. After adding the comment, it redirects the user to the
         specified current post using the `header()` function. */
 
-        if (isset($comment) && $comment != '' && isset($id) && $id > 0 && $user && isset($user->id)) {
+        if (isset($comment) && $comment != '' && isset($id) && $id > 0 && $user && isset($user['id'])) {
             $commentRepository->addComment($comment);
             return header('Location: http://blog.local/actualites/index;php?action=getPost&id=' . $id);
         } else {

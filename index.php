@@ -1,4 +1,5 @@
 <?php
+session_start();
 // define('ABS_PATH', $_SERVER['DOCUMENT_ROOT']);
 require_once('src/controllers/post.php');
 require_once('src/controllers/comment.php');
@@ -48,8 +49,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     if ($_GET['action'] === 'logoutUser') {
 
-        if (isset($_COOKIE['LOGGED_USER'])) {
-            setcookie('LOGGED_USER', null, -1, '/');
+        if (isset($_SESSION['LOGGED_USER'])) {
+            unset($_SESSION['LOGGED_USER']);
         }
 
         header('Location: http://blog.local/');
@@ -57,9 +58,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     if($_GET['action'] === 'logoutAdmin'){
 
-        if (isset($_COOKIE['LOGGED_ADMIN'])) {
-            unset($_COOKIE['LOGGED_ADMIN']);
-            setcookie('LOGGED_ADMIN', null, -1, '/');
+        if (isset($_SESSION['LOGGED_ADMIN'])) {
+            unset($_SESSION['LOGGED_ADMIN']);
         }
         header('Location: http://blog.local/');
     }
@@ -151,16 +151,16 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         echo $twig->render('posts.twig', array(
             'posts' => (new PostController())->getPosts(),
         ));
-    } elseif ($host === '/login' && isset($_COOKIE['LOGGED_USER'])) {
+    } elseif ($host === '/login' && isset($_SESSION['LOGGED_USER'])) {
         header('Location: http://blog.local');
     } elseif ($host === '/login') {
         echo $twig->render('login.twig');
-    } elseif ($host === '/register' && isset($_COOKIE['LOGGED_USER'])) {
+    } elseif ($host === '/register' && isset($_SESSION['LOGGED_USER'])) {
         header('Location: http://blog.local');
     } elseif ($host === '/register') {
         echo $twig->render('register.twig');
     } elseif ($host === '/admin/login') {
-        if (isset($_COOKIE['LOGGED_ADMIN'])) {
+        if (isset($_SESSION['LOGGED_ADMIN'])) {
             header('Location: /admin/posts');
         } else {
             echo $twig->render('admin/login.twig');
@@ -169,7 +169,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     // BACK-OFFICE LINKS
 
-    if (isset($_COOKIE['LOGGED_ADMIN'])) {
+    if (isset($_SESSION['LOGGED_ADMIN'])) {
 
 
         if ($host === '/admin/post/add') {
