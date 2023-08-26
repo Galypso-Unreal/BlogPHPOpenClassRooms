@@ -188,25 +188,6 @@ class UserRepository
                         "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
                         "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
                 );
-
-
-                // if(isset($_POST['remember_admin']) && $_POST['remember_admin'] == 1){
-                //     setcookie('email_rem',$row['email'],time()+60*60*24*7,'/');
-                // }
-
-                
-                // setcookie(
-                //     'LOGGED_ADMIN',
-                //     json_encode(array(
-                //         "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
-                //         "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
-                //         "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
-                //         "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
-                //     )),
-                //     time() + 3600 * 2,
-                //     '/'
-                // );
-
                 return 2;
             } else {
                 $_SESSION['LOGGED_USER'] = array(
