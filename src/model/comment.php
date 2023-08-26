@@ -88,7 +88,7 @@ class CommentRepository
 
         $db = $this->connection->getConnection();
 
-        $user =   json_decode(htmlspecialchars($_COOKIE['LOGGED_USER'], ENT_NOQUOTES));
+        $user =   htmlspecialchars($_SESSION['LOGGED_USER']['id'], ENT_NOQUOTES);
         $comment_sec = htmlspecialchars($comment, ENT_NOQUOTES);
         $post = htmlspecialchars($_GET['id'], ENT_NOQUOTES);
 
@@ -97,7 +97,7 @@ class CommentRepository
         $insert = $db->prepare($sql);
 
         $insert->bindParam(':comment', $comment_sec);
-        $insert->bindParam(':fk_user_id', $user->id, PDO::PARAM_INT);
+        $insert->bindParam(':fk_user_id', $user, PDO::PARAM_INT);
         $insert->bindParam(':fk_post_id', $post, PDO::PARAM_INT);
 
         $insert->execute();

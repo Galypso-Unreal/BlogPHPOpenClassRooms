@@ -39,10 +39,10 @@ $twig->addFunction($displayAuthor);
 
 $twig->addGlobal('img_assets', 'http://blog.local/src/assets/img/');
 // $twig->addGlobal('js_folder', ABS_PATH.'/assets/js/');
-if (isset($_COOKIE['LOGGED_ADMIN']) && !empty($_COOKIE['LOGGED_ADMIN'])) {
-   $twig->addGlobal('admin_cookie', json_decode($_COOKIE['LOGGED_ADMIN']));
+if (isset($_SESSION['LOGGED_ADMIN']) && !empty($_SESSION['LOGGED_ADMIN'])) {
+   $twig->addGlobal('admin_session', $_SESSION['LOGGED_ADMIN']);
 }
 
-if (isset($_COOKIE['LOGGED_USER']) && !empty($_COOKIE['LOGGED_USER'])) {
-   $twig->addGlobal('user_cookie', json_decode($_COOKIE['LOGGED_USER']));
+if (isset($_SESSION['LOGGED_USER']) && !empty($_SESSION['LOGGED_USER'])) {
+   $twig->addGlobal('user_session', $_SESSION['LOGGED_USER']);
 }

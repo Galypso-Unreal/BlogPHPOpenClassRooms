@@ -12,9 +12,11 @@
 				</div>
 				<div class="card-body">
 					<form action="index.php?action=loginUser" method="post">
+                    
 						<div class="form-floating mb-3">
 							<input class="form-control" id="inputEmail" type="email" name="email"
-								placeholder="name@example.com" {% if email %} value={{email}} {% endif %} />
+                            
+								placeholder="name@example.com" {% if email %} value={{email}} {% elseif email_rem %} value={{email_rem}} {% endif %} />
 							<label for="inputEmail">Email</label>
 							{% if errors.email %}<small class="form-errors">{{errors.email}}</small>{% endif %}
 						</div>

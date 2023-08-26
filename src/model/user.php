@@ -168,6 +168,7 @@ class UserRepository
         $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
         $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
 
+        
         $chiff = md5($password);
 
         $data->bindParam(':email', $email);
@@ -181,31 +182,19 @@ class UserRepository
 
             if ($row['fk_id_role'] == 1) {
 
-
-                setcookie(
-                    'LOGGED_ADMIN',
-                    json_encode(array(
-                        "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
+                $_SESSION['LOGGED_ADMIN'] = array(
+                    "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
                         "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
                         "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
                         "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
-                    )),
-                    time() + 3600 * 2,
-                    '/'
                 );
-
                 return 2;
             } else {
-                setcookie(
-                    'LOGGED_USER',
-                    json_encode(array(
-                        "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
+                $_SESSION['LOGGED_USER'] = array(
+                    "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
                         "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
                         "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
                         "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
-                    )),
-                    time() + 3600 * 2,
-                    '/'
                 );
                 return 1;
             }
