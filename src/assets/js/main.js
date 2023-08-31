@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {7
+document.addEventListener("DOMContentLoaded", () => {
   /* get DOM element of the class : .header_account and set in the variable : account */
   let account = document.querySelector(".header_account");
 
