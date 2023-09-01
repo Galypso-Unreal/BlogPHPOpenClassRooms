@@ -31,7 +31,7 @@ class FormController
         } else {
             
             if($post->getPost('firstname') !== null){
-               $firstname = htmlspecialchars($post->getPost('firstname'),ENT_NOQUOTES); 
+               $firstname = htmlspecialchars($post->getPost('firstname'),ENT_NOQUOTES);
             }
 
             if($post->getPost('lastname') !== null){
@@ -45,8 +45,7 @@ class FormController
             if($post->getPost('message') !== null){
                 $message = htmlspecialchars($post->getPost('message'),ENT_NOQUOTES); 
             }
-
-            if (strlen($firstname > 50)) {
+            if (strlen((int) $firstname > 50)) {
                 echo "Votre prénom est trop long";
                 return 0;
             } elseif (strlen($lastname) > 50) {
