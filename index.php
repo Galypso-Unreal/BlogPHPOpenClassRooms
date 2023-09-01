@@ -24,17 +24,17 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     if ($_GET['action'] === 'loginUser') {
 
-        $user = (new UserController())->login();
+        $user = (array) (new UserController())->login();
 
         if ($user == 1) {
             header('Location: http://blog.local');
         } else if ($user == 2) {
             header('Location: http://blog.local/admin/posts');
         } else {
-            $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
+            $email = (string) htmlspecialchars($_POST['email'],ENT_NOQUOTES);
             if(isset($email)){
                 echo $twig->render('login.twig', array(
-                    'errors' => htmlspecialchars($user,ENT_NOQUOTES),
+                    'errors' => $user,
                     'email' => $email,
     
                 ));
