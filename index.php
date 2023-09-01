@@ -1,22 +1,16 @@
 <?php
 session_start();
-// define('ABS_PATH', $_SERVER['DOCUMENT_ROOT']);
-require_once('src/controllers/post.php');
-require_once('src/controllers/comment.php');
-require_once('src/controllers/user.php');
-require_once('src/controllers/form.php');
+
+require 'src/controllers/post.php';
+require 'src/controllers/comment.php';
+require 'src/controllers/user.php';
+require 'src/controllers/form.php';
+require 'twig.php';
 
 use Application\Controllers\Post\PostController;
-use Application\Controllers\Comment;
 use Application\Controllers\Comment\CommentController;
 use Application\Controllers\User\UserController;
-use Application\Model\Comment\CommentRepository;
-use Application\Controllers\Form;
 use Application\Controllers\Form\FormController;
-
-require_once 'twig.php';
-
-
 
 
 
@@ -37,11 +31,15 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         } else if ($user == 2) {
             header('Location: http://blog.local/admin/posts');
         } else {
-            echo $twig->render('login.twig', array(
-                'errors' => $user,
-                'email' => $_POST['email'],
-
-            ));
+            $email = htmlspecialchars($_POST['email'],ENT_NOQUOTES);
+            if(isset($email)){
+                echo $twig->render('login.twig', array(
+                    'errors' => htmlspecialchars($user,ENT_NOQUOTES),
+                    'email' => $email,
+    
+                ));
+            }
+            
         }
     }
 

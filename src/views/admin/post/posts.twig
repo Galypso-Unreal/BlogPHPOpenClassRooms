@@ -25,7 +25,8 @@
                 <td>{{post.title}}</td>
                 <td>{{post.created_at}}</td>
                 <td>{{post.modified_at}}</td>
-                <td>{{post.author.firstname}} {{post.author.lastname}}</td>
+                {% set author = displayAuthor(post.fk_user_id) %}
+                <td>{{author.firstname}} {{author.lastname}}</td>
                 <td class="modify-control"><a href="admin/post/modify/?id={{post.id}}"><i class="fa fa-pencil"
                             aria-hidden="true"></i></a> <a href="'admin/post/delete/?id={{post.id}}"><i
                             class="fa fa-trash" aria-hidden="true"></i></a></td>

@@ -61,7 +61,7 @@ class UserRepository
         $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
         $fk_id_role = 2;
 
-        $chiff = md5($password);
+        $chiff = sha1($password);
 
         $insert->bindParam(':lastname', $lastname);
         $insert->bindParam(':firstname', $firstname);
@@ -122,7 +122,7 @@ class UserRepository
         if (isset($_POST['email']) && $_POST['password']) {
             $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
             $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
-            $chiff = md5($password);
+            $chiff = sha1($password);
         }
 
 
@@ -169,7 +169,7 @@ class UserRepository
         $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
 
         
-        $chiff = md5($password);
+        $chiff = sha1($password);
 
         $data->bindParam(':email', $email);
         $data->bindParam(':password', $chiff);
