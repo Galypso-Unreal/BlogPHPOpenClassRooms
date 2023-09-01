@@ -59,15 +59,15 @@ class UserRepository
             $lastname = htmlspecialchars($_POST['lastname'], ENT_NOQUOTES);
         }
 
-        if(isset($_POST['lastname'])){
+        if(isset($_POST['firstname'])){
             $firstname = htmlspecialchars($_POST['firstname'], ENT_NOQUOTES);
         }
 
-        if(isset($_POST['lastname'])){
+        if(isset($_POST['email'])){
             $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
         }
 
-        if(isset($_POST['lastname'])){
+        if(isset($_POST['password'])){
             $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
         }
         

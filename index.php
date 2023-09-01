@@ -32,10 +32,10 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             header('Location: http://blog.local/admin/posts');
         } else {
             if(isset($_POST['email'])){
-                $email = (string) htmlspecialchars($_POST['email'],ENT_NOQUOTES);
+
                 echo $twig->render('login.twig', array(
                     'errors' => $user,
-                    'email' => $email,
+                    'email' => htmlspecialchars($_POST['email'],ENT_NOQUOTES),
     
                 ));
             }

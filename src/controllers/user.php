@@ -46,11 +46,25 @@ class UserController
         `lastname`, `email`, `password`, and `confirmepassword` fields from the form submission and
         assigning them to the respective variables. */
 
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $confirmepassword = $_POST['confirmepassword'];
+        if(isset($_POST['firstname'])){
+            $firstname = $_POST['firstname'];
+        }
+
+        if(isset($_POST['lastname'])){
+            $lastname = $_POST['lastname'];
+        }
+
+        if(isset($_POST['email'])){
+            $email = $_POST['email'];
+        }
+
+        if(isset($_POST['password'])){
+            $password = $_POST['password'];
+        }
+
+        if(isset($_POST['confirmepassword'])){
+            $confirmepassword = $_POST['confirmepassword'];
+        }
 
         /* This code block is checking the validity of the input data for creating a new user account.
         It checks if all the required fields (`firstname`, `lastname`, `email`, `password`,
