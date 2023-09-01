@@ -52,15 +52,10 @@ class CommentController
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
 
-        $user = $_SESSION['LOGGED_USER'];
+        $user = $_SESSION['LOGGED_USER'];       
 
-        /* The code `if(isset(['id'])){  = ['id']; }` is checking if the `id` parameter is
-        present in the URL query string. If it is, the value of the `id` parameter is assigned to
-        the variable `$id`. */
-
-        if(isset($_GET['id'])){
-            $id = $_GET['id'];
-        }
+        $id = htmlspecialchars($_GET['id'],ENT_NOQUOTES);
+        
         
         /* The code is checking if the `$comment` variable is set and not empty, if the `$id` variable
         is set and greater than 0, if the `$user` variable is set and if the `$user->id` property is

@@ -24,16 +24,20 @@ class FormController
             echo "Le formulaire n'est pas valide il vous faut : un nom, un prénom, un email et un message";
             return 0;
         } else {
-            if (strlen($_POST['firstname']) > 50) {
+            $firstname = filter_input(INPUT_POST,$_POST['firstname']);
+            $lastname = filter_input(INPUT_POST,$_POST['lastname']);
+            $email = filter_input(INPUT_POST,$_POST['email']);
+            $message = filter_input(INPUT_POST,$_POST['message']);
+            if (strlen($firstname > 50)) {
                 echo "Votre prénom est trop long";
                 return 0;
-            } elseif (strlen($_POST['lastname']) > 50) {
+            } elseif (strlen($lastname) > 50) {
                 echo "Votre nom est trop long";
                 return 0;
-            } elseif (strlen($_POST['email']) > 100) {
+            } elseif (strlen($email) > 100) {
                 echo "Votre email est trop long";
                 return 0;
-            } elseif (strlen($_POST['message']) > 500) {
+            } elseif (strlen($message) > 500) {
                 echo "Votre message est trop long";
                 return 0;
             }
