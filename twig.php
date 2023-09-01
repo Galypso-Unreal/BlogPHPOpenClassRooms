@@ -13,11 +13,13 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 // define all globals variable usable in twig
 
 $getID = new TwigFunction('get_ID', function () {
+    if(isset($_SERVER['REQUEST_URI'])){
+        $host = $_SERVER['REQUEST_URI'];
+        $id = explode('id=', $host);
+        $id = end($id);
+        return $id;
+    }
 
-   $host = $_SERVER['REQUEST_URI'];
-   $id = explode('id=', $host);
-   $id = end($id);
-   return $id;
 });
 
 $twig->addFunction($getID);

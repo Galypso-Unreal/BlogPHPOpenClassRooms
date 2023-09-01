@@ -31,8 +31,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         } else if ($user == 2) {
             header('Location: http://blog.local/admin/posts');
         } else {
-            $email = (string) htmlspecialchars($_POST['email'],ENT_NOQUOTES);
-            if(isset($email)){
+            if(isset($_POST['email'])){
+                $email = (string) htmlspecialchars($_POST['email'],ENT_NOQUOTES);
                 echo $twig->render('login.twig', array(
                     'errors' => $user,
                     'email' => $email,

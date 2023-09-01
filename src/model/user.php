@@ -55,21 +55,36 @@ class UserRepository
 
         $insert = $db->prepare($sql);
 
-        $lastname = htmlspecialchars($_POST['lastname'], ENT_NOQUOTES);
-        $firstname = htmlspecialchars($_POST['firstname'], ENT_NOQUOTES);
-        $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
-        $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
-        $fk_id_role = 2;
+        if(isset($_POST['lastname'])){
+            $lastname = htmlspecialchars($_POST['lastname'], ENT_NOQUOTES);
+        }
 
-        $chiff = sha1($password);
+        if(isset($_POST['lastname'])){
+            $firstname = htmlspecialchars($_POST['firstname'], ENT_NOQUOTES);
+        }
 
-        $insert->bindParam(':lastname', $lastname);
-        $insert->bindParam(':firstname', $firstname);
-        $insert->bindParam(':email', $email);
-        $insert->bindParam(':password', $chiff);
-        $insert->bindParam(':fk_id_role', $fk_id_role, PDO::PARAM_INT);
+        if(isset($_POST['lastname'])){
+            $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
+        }
 
-        $insert->execute();
+        if(isset($_POST['lastname'])){
+            $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
+        }
+        
+        if(isset($lastname) && isset($firstname) && isset($email) && isset($password)){
+            $fk_id_role = 2;
+
+            $chiff = sha1($password);
+
+            $insert->bindParam(':lastname', $lastname);
+            $insert->bindParam(':firstname', $firstname);
+            $insert->bindParam(':email', $email);
+            $insert->bindParam(':password', $chiff);
+            $insert->bindParam(':fk_id_role', $fk_id_role, PDO::PARAM_INT);
+
+            $insert->execute();
+        }
+        
     }
 
     /**
@@ -119,7 +134,7 @@ class UserRepository
 
         $data = $db->prepare($sql);
 
-        if (isset($_POST['email']) && $_POST['password']) {
+        if (isset($_POST['email']) && isset($_POST['password'])) {
             $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
             $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
             $chiff = sha1($password);

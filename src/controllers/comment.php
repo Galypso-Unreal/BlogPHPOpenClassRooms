@@ -54,8 +54,10 @@ class CommentController
 
         $user = $_SESSION['LOGGED_USER'];       
 
-
-        $id = filter_input(INPUT_GET,$_GET['id']);
+        if(isset($_GET['id'])){
+            $id = filter_input(INPUT_GET,$_GET['id']);
+        }
+        
 
         
         

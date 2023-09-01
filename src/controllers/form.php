@@ -3,8 +3,6 @@
 namespace Application\Controllers\Form;
 
 use Exception;
-require './src/lib/globals.php';
-use Application\Lib\Globals\GlobalPost;
 
 /* The `class FormController` is a PHP class that contains two functions: `confirmationForm()` and
 `sendMailContact()`. */
@@ -27,11 +25,21 @@ class FormController
             return 0;
         } else {
 
-            $post = new GlobalPost();
-            $firstname = $post->getPost($_POST['firstname']);
-            $lastname = $post->getPost($_POST['lastname']);
-            $email = $post->getPost($_POST['email']);
-            $message = $post->getPost($_POST['message']);
+            if(isset($_POST['firstname'])){
+               $firstname = htmlspecialchars(filter_input(INPUT_POST,$_POST['firstname']),ENT_NOQUOTES); 
+            }
+
+            if(isset($_POST['lastname'])){
+                $lastname = htmlspecialchars(filter_input(INPUT_POST,$_POST['lastname']),ENT_NOQUOTES);
+            }
+
+            if(isset($_POST['email'])){
+                $email = htmlspecialchars(filter_input(INPUT_POST,$_POST['email']),ENT_NOQUOTES);
+            }
+
+            if(isset($_POST['message'])){
+                $message = htmlspecialchars(filter_input(INPUT_POST,$_POST['message']),ENT_NOQUOTES); 
+            }
 
             if (strlen($firstname > 50)) {
                 echo "Votre prénom est trop long";

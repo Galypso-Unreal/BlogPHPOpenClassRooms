@@ -88,9 +88,17 @@ class CommentRepository
 
         $db = $this->connection->getConnection();
 
-        $user =   htmlspecialchars($_SESSION['LOGGED_USER']['id'], ENT_NOQUOTES);
-        $comment_sec = htmlspecialchars($comment, ENT_NOQUOTES);
-        $post = htmlspecialchars($_GET['id'], ENT_NOQUOTES);
+        if(isset($_SESSION['LOGGED_USER']['id'])){
+            $user =   htmlspecialchars($_SESSION['LOGGED_USER']['id'], ENT_NOQUOTES);
+        }
+
+        if(isset($comment)){
+            $comment_sec = htmlspecialchars($comment, ENT_NOQUOTES);
+        }
+
+        if(isset($_GET['id'])){
+            $post = htmlspecialchars($_GET['id'], ENT_NOQUOTES); 
+        }
 
 
         $sql = "INSERT INTO b_comment (comment,fk_user_id,fk_post_id) VALUES (:comment,:fk_user_id,:fk_post_id)";
