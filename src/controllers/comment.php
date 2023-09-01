@@ -54,7 +54,9 @@ class CommentController
 
         $user = $_SESSION['LOGGED_USER'];       
 
-        $id = htmlspecialchars($_GET['id'],ENT_NOQUOTES);
+
+        $id = filter_input(INPUT_GET,$_GET['id']);
+
         
         
         /* The code is checking if the `$comment` variable is set and not empty, if the `$id` variable

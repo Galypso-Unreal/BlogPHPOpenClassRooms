@@ -3,6 +3,8 @@
 namespace Application\Controllers\Form;
 
 use Exception;
+require './src/lib/globals.php';
+use Application\Lib\Globals\GlobalPost;
 
 /* The `class FormController` is a PHP class that contains two functions: `confirmationForm()` and
 `sendMailContact()`. */
@@ -24,10 +26,13 @@ class FormController
             echo "Le formulaire n'est pas valide il vous faut : un nom, un prénom, un email et un message";
             return 0;
         } else {
-            $firstname = filter_input(INPUT_POST,$_POST['firstname']);
-            $lastname = filter_input(INPUT_POST,$_POST['lastname']);
-            $email = filter_input(INPUT_POST,$_POST['email']);
-            $message = filter_input(INPUT_POST,$_POST['message']);
+
+            $post = new GlobalPost();
+            $firstname = $post->getPost($_POST['firstname']);
+            $lastname = $post->getPost($_POST['lastname']);
+            $email = $post->getPost($_POST['email']);
+            $message = $post->getPost($_POST['message']);
+
             if (strlen($firstname > 50)) {
                 echo "Votre prénom est trop long";
                 return 0;
