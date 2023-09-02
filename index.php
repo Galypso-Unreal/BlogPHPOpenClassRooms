@@ -12,6 +12,7 @@ use Application\Controllers\Post\PostController;
 use Application\Controllers\Comment\CommentController;
 use Application\Controllers\User\UserController;
 use Application\Controllers\Form\FormController;
+use Application\Lib\Globals\GlobalGet;
 use Application\Lib\Globals\GlobalPost;
 use Application\Lib\Globals\GlobalServer;
 use Application\Lib\Globals\GlobalSession;
@@ -20,15 +21,16 @@ use Application\Lib\Globals\GlobalSession;
 $post = new GlobalPost();
 $session = new GlobalSession();
 $server = new GlobalServer();
+$get = new GlobalGet();
 
 //routeur
-if (isset($_GET['action']) && $_GET['action'] !== '') {
+if ($get->getKey('action') == true && $get->getKey('action') !== '') {
 
     // USER
 
     //login
 
-    if ($_GET['action'] === 'loginUser') {
+    if ($get->getKey('action') === 'loginUser') {
 
         $user = (new UserController())->login();
 
@@ -51,7 +53,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     //LOGOUT
 
-    if ($_GET['action'] === 'logoutUser') {
+    if ($get->getKey('action') === 'logoutUser') {
 
         if ($session->getSession('LOGGED_USER') == true) {
             $session->forgetSession('LOGGED_USER');
@@ -60,7 +62,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         header('Location: http://blog.local/');
     }
 
-    if($_GET['action'] === 'logoutAdmin'){
+    if($get->getKey('action') === 'logoutAdmin'){
 
         if ($session->getSession('LOGGED_ADMIN') == true) {
             $session->forgetSession('LOGGED_ADMIN');
@@ -70,9 +72,9 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     // if send contact at form homepage
 
-    if ($_GET['action'] === 'getPost') {
+    if ($get->getKey('action') === 'getPost') {
 
-        $id = $_GET['id'];
+        $id = $get->getKey('id');
         $post = (new PostController())->getPost($id);
         $comments = (new CommentController())->getComments($id);
         echo $twig->render('post.twig', array(
@@ -81,7 +83,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         ));
     }
 
-    if ($_GET['action'] === 'confirmationForm') {
+    if ($get->getKey('action') === 'confirmationForm') {
 
         if ((new FormController())->confirmationForm()) {
             $informations = (new FormController())->sendMailContact();
@@ -90,7 +92,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             ));
         }
     }
-    if ($_GET['action'] === 'addPost') {
+    if ($get->getKey('action') === 'addPost') {
 
         $title = $post->getPost('title');
         $lead_content = $post->getPost('lead_content');
@@ -99,15 +101,15 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
         (new PostController())->addPost($title, $lead_content, $content, $fk_user_id);
     }
-    if ($_GET['action'] === 'modifyPost') {
+    if ($get->getKey('action') === 'modifyPost') {
 
         $title = $post->getPost('title');
         $lead_content = $post->getPost('lead_content');
         $content = $post->getPost('content');
         $id_user = $post->getPost('id_user');
-        (new PostController())->modifyPost($_GET['id'], $title, $lead_content, $content, $id_user);
+        (new PostController())->modifyPost($get->getKey('id'), $title, $lead_content, $content, $id_user);
     }
-    if ($_GET['action'] === 'createAccount') {
+    if ($get->getKey('action') === 'createAccount') {
 
         $user = new UserController();
         $create = $user->createAccount();
@@ -121,27 +123,27 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             echo $twig->render('register-send.twig', array());
         }
     }
-    if ($_GET['action'] === 'addComment') {
+    if ($get->getKey('action') === 'addComment') {
         $comment = $post->getPost('comment');
         (new CommentController())->addComment($comment);
     }
-    if ($_GET['action'] === 'validComment') {
+    if ($get->getKey('action') === 'validComment') {
 
-        (new CommentController())->validComment($_GET['id']);
+        (new CommentController())->validComment($get->getKey('id'));
     }
 
-    if ($_GET['action'] === 'deleteComment') {
+    if ($get->getKey('action') === 'deleteComment') {
 
-        (new CommentController())->deleteComment($_GET['id']);
+        (new CommentController())->deleteComment($get->getKey('id'));
     }
-    if ($_GET['action'] === 'validateUser') {
+    if ($get->getKey('action') === 'validateUser') {
 
-        (new UserController())->validateUser((int)$_GET['id']);
+        (new UserController())->validateUser((int)$get->getKey('id'));
         header("Location: /admin/users/");
     }
-    if ($_GET['action'] === 'deleteUser') {
+    if ($get->getKey('action') === 'deleteUser') {
 
-        (new UserController())->deleteUser((int)$_GET['id']);
+        (new UserController())->deleteUser((int)$get->getKey('id'));
         header("Location: /admin/users/");
     }
 } else {
@@ -185,11 +187,11 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
                 'posts' => (new PostController())->getPosts(),
             ));
         } elseif (strpos($host, "admin/post/delete")) {
-            (new PostController())->deletePost($_GET['id']);
+            (new PostController())->deletePost($get->getKey('id'));
         } elseif (strpos($host, "admin/post/modify")) {
-            if (isset($_GET['id'])) {
+            if ($get->getKey('id') == true) {
                 echo $twig->render('admin/post/modify.twig', array(
-                    'post' => (new PostController())->getPost($_GET['id']),
+                    'post' => (new PostController())->getPost($get->getKey('id')),
                     'admins' => (new PostController())->getAdmins()
                 ));
             }

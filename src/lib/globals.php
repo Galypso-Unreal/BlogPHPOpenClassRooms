@@ -1,6 +1,14 @@
 <?php 
 namespace Application\Lib\Globals;
 
+class GlobalGet{
+
+    public static function getKey($key){
+        return (isset($_GET[$key]) ? filter_input(INPUT_GET,$key) : null);
+    }
+
+}
+
 class GlobalPost{
 
     public static function setPost($key, $value){
