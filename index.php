@@ -6,14 +6,20 @@ require 'src/controllers/comment.php';
 require 'src/controllers/user.php';
 require 'src/controllers/form.php';
 require 'twig.php';
+require 'src/lib/globals.php';
 
 use Application\Controllers\Post\PostController;
 use Application\Controllers\Comment\CommentController;
 use Application\Controllers\User\UserController;
 use Application\Controllers\Form\FormController;
+use Application\Lib\Globals\GlobalPost;
+use Application\Lib\Globals\GlobalServer;
+use Application\Lib\Globals\GlobalSession;
 
 
-
+$post = new GlobalPost();
+$session = new GlobalSession();
+$server = new GlobalServer();
 
 //routeur
 if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -24,18 +30,18 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     if ($_GET['action'] === 'loginUser') {
 
-        $user = (array) (new UserController())->login();
+        $user = (new UserController())->login();
 
         if ($user == 1) {
             header('Location: http://blog.local');
         } else if ($user == 2) {
             header('Location: http://blog.local/admin/posts');
         } else {
-            if(isset($_POST['email'])){
+            if($post->getPost('email') == true){
 
                 echo $twig->render('login.twig', array(
                     'errors' => $user,
-                    'email' => htmlspecialchars($_POST['email'],ENT_NOQUOTES),
+                    'email' => htmlspecialchars($post->getPost('email'),ENT_NOQUOTES),
     
                 ));
             }
@@ -47,8 +53,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     if ($_GET['action'] === 'logoutUser') {
 
-        if (isset($_SESSION['LOGGED_USER'])) {
-            unset($_SESSION['LOGGED_USER']);
+        if ($session->getSession('LOGGED_USER') == true) {
+            $session->forgetSession('LOGGED_USER');
         }
 
         header('Location: http://blog.local/');
@@ -56,8 +62,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     if($_GET['action'] === 'logoutAdmin'){
 
-        if (isset($_SESSION['LOGGED_ADMIN'])) {
-            unset($_SESSION['LOGGED_ADMIN']);
+        if ($session->getSession('LOGGED_ADMIN') == true) {
+            $session->forgetSession('LOGGED_ADMIN');
         }
         header('Location: http://blog.local/');
     }
@@ -86,19 +92,19 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
     }
     if ($_GET['action'] === 'addPost') {
 
-        $title = $_POST['title'];
-        $lead_content = $_POST['lead_content'];
-        $content = $_POST['content'];
-        $fk_user_id = $_POST['id_user'];
+        $title = $post->getPost('title');
+        $lead_content = $post->getPost('lead_content');
+        $content = $post->getPost('content');
+        $fk_user_id = $post->getPost('id_user');
 
         (new PostController())->addPost($title, $lead_content, $content, $fk_user_id);
     }
     if ($_GET['action'] === 'modifyPost') {
 
-        $title = $_POST['title'];
-        $lead_content = $_POST['lead_content'];
-        $content = $_POST['content'];
-        $id_user = $_POST['id_user'];
+        $title = $post->getPost('title');
+        $lead_content = $post->getPost('lead_content');
+        $content = $post->getPost('content');
+        $id_user = $post->getPost('id_user');
         (new PostController())->modifyPost($_GET['id'], $title, $lead_content, $content, $id_user);
     }
     if ($_GET['action'] === 'createAccount') {
@@ -109,14 +115,14 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         if (is_array($create) == 1) {
             echo $twig->render('register.twig', array(
                 'errors' => $create,
-                'before' => $_POST
+                'before' => $post->getAllPost()
             ));
         } else {
             echo $twig->render('register-send.twig', array());
         }
     }
     if ($_GET['action'] === 'addComment') {
-        $comment = $_POST['comment'];
+        $comment = $post->getPost('comment');
         (new CommentController())->addComment($comment);
     }
     if ($_GET['action'] === 'validComment') {
@@ -142,23 +148,24 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     // FRONT OFFICE LINKS 
 
-    $host = $_SERVER['REQUEST_URI'];
+    $host = $server->getServer('REQUEST_URI');
+
     if ($host === "/") {
         echo $twig->render('index.twig');
     } elseif ($host === "/actualites/") {
         echo $twig->render('posts.twig', array(
             'posts' => (new PostController())->getPosts(),
         ));
-    } elseif ($host === '/login' && isset($_SESSION['LOGGED_USER'])) {
+    } elseif ($host === '/login' && $session->getSession('LOGGED_USER') == true) {
         header('Location: http://blog.local');
     } elseif ($host === '/login') {
         echo $twig->render('login.twig');
-    } elseif ($host === '/register' && isset($_SESSION['LOGGED_USER'])) {
+    } elseif ($host === '/register' && $session->getSession('LOGGED_USER') == true) {
         header('Location: http://blog.local');
     } elseif ($host === '/register') {
         echo $twig->render('register.twig');
     } elseif ($host === '/admin/login') {
-        if (isset($_SESSION['LOGGED_ADMIN'])) {
+        if ($session->getSession('LOGGED_ADMIN') == true) {
             header('Location: /admin/posts');
         } else {
             echo $twig->render('admin/login.twig');
@@ -167,8 +174,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 
     // BACK-OFFICE LINKS
 
-    if (isset($_SESSION['LOGGED_ADMIN'])) {
-
+    if ($session->getSession('LOGGED_ADMIN') == true) {
 
         if ($host === '/admin/post/add') {
             echo $twig->render('admin/post/add.twig', array(

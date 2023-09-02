@@ -5,7 +5,7 @@ namespace Application\Controllers\Form;
 use Exception;
 use Application\Lib\Globals\GlobalPost;
 
-require './src/lib/globals.php';
+
 
 /* The `class FormController` is a PHP class that contains two functions: `confirmationForm()` and
 `sendMailContact()`. */
