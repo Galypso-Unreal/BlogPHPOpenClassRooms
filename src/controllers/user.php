@@ -8,6 +8,7 @@ require_once('./src/lib/database.php');
 require_once('./src/model/user.php');
 
 use Application\Lib\Database\DatabaseConnection;
+use Application\Lib\Globals\GlobalPost;
 use Application\Model\User\UserRepository;
 use Exception;
 
@@ -38,6 +39,7 @@ class UserController
         $connection = new DatabaseConnection();
         $userRepository = new UserRepository();
         $userRepository->connection = $connection;
+        $post = new GlobalPost();
 
         /* The code is assigning the values of the `` superglobal variables to the corresponding
         variables. These variables are used to store the user input data for creating a new user
@@ -46,24 +48,24 @@ class UserController
         `lastname`, `email`, `password`, and `confirmepassword` fields from the form submission and
         assigning them to the respective variables. */
 
-        if(isset($_POST['firstname'])){
-            $firstname = $_POST['firstname'];
+        if($post->getPost('firstname') == true){
+            $firstname = $post->getPost('firstname');
         }
 
-        if(isset($_POST['lastname'])){
-            $lastname = $_POST['lastname'];
+        if($post->getPost('lastname') == true){
+            $lastname = $post->getPost('lastname');
         }
 
-        if(isset($_POST['email'])){
-            $email = $_POST['email'];
+        if($post->getPost('email') == true){
+            $email = $post->getPost('email');
         }
 
-        if(isset($_POST['password'])){
-            $password = $_POST['password'];
+        if($post->getPost('password') == true){
+            $password = $post->getPost('password');
         }
 
-        if(isset($_POST['confirmepassword'])){
-            $confirmepassword = $_POST['confirmepassword'];
+        if($post->getPost('confirmepassword') == true){
+            $confirmepassword = $post->getPost('confirmepassword');
         }
 
         /* This code block is checking the validity of the input data for creating a new user account.
@@ -136,15 +138,16 @@ class UserController
         $connection = new DatabaseConnection();
         $userRepository = new UserRepository();
         $userRepository->connection = $connection;
+        $post = new GlobalPost();
 
         /* This code block is handling the login functionality. It checks if the `email` and `password`
         fields are set in the `$_POST` superglobal array, which contains data submitted via an HTTP
         POST request. If both fields are set, the code assigns their values to the `$email` and
         `$password` variables. */
 
-        if (isset($_POST['email']) && isset($_POST['password'])) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
+        if ($post->getPost('email') == true && $post->getPost('password') == true) {
+            $email = $post->getPost('email');
+            $password = $post->getPost('password');
         }
 
         $check = $this->checkUserExist();

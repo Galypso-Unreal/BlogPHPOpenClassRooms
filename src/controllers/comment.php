@@ -8,6 +8,8 @@ require_once('./src/lib/database.php');
 require_once('./src/model/comment.php');
 
 use Application\Lib\Database\DatabaseConnection;
+use Application\Lib\Globals\GlobalGet;
+use Application\Lib\Globals\GlobalSession;
 use Application\Model\Comment\CommentRepository;
 use Exception;
 
@@ -51,11 +53,13 @@ class CommentController
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
+        $get = new GlobalGet();
+        $session = new GlobalSession();
 
-        $user = $_SESSION['LOGGED_USER'];       
+        $user = $session->getSession('LOGGED_USER');       
 
-        if(isset($_GET['id'])){
-            $id = filter_input(INPUT_GET,$_GET['id']);
+        if($get->getKey('id') == true){
+            $id = $get->getKey('id');
         }
         
 

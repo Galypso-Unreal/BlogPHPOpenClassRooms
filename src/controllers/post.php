@@ -8,6 +8,7 @@ require_once('./src/lib/database.php');
 require_once('./src/model/post.php');
 
 use Application\Lib\Database\DatabaseConnection;
+use Application\Lib\Globals\GlobalGet;
 use Application\Model\Post\PostRepository;
 
 
@@ -49,11 +50,12 @@ class PostController
         $connection = new DatabaseConnection();
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
+        $get = new GlobalGet();
 
                 /* The code is checking if the `$id` variable is set and is greater than 0. If
         all these conditions are true, it means that the post can be get and displayed to the user. */
 
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
+        if ($get->getKey('id') && $get->getKey('id') > 0) {
             return $postRepository->getPost($id);
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');

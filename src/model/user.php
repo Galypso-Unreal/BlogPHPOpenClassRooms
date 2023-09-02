@@ -5,6 +5,8 @@ namespace Application\Model\User;
 require_once('./src/lib/database.php');
 
 use Application\Lib\Database\DatabaseConnection;
+use Application\Lib\Globals\GlobalPost;
+use Application\Lib\Globals\GlobalSession;
 use PDO;
 use DateTime;
 use DateTimeZone;
@@ -48,6 +50,7 @@ class UserRepository
 
     function createAccount(): Void
     {
+        $post = new GlobalPost();
 
         $db = $this->connection->getConnection();
 
@@ -55,20 +58,20 @@ class UserRepository
 
         $insert = $db->prepare($sql);
 
-        if(isset($_POST['lastname'])){
-            $lastname = htmlspecialchars($_POST['lastname'], ENT_NOQUOTES);
+        if($post->getPost('lastname') == true ){
+            $lastname = htmlspecialchars($post->getPost('lastname'), ENT_NOQUOTES);
         }
 
-        if(isset($_POST['firstname'])){
-            $firstname = htmlspecialchars($_POST['firstname'], ENT_NOQUOTES);
+        if($post->getPost('firstname') == true){
+            $firstname = htmlspecialchars($post->getPost('firstname'), ENT_NOQUOTES);
         }
 
-        if(isset($_POST['email'])){
-            $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
+        if($post->getPost('email') == true){
+            $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
         }
 
-        if(isset($_POST['password'])){
-            $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
+        if($post->getPost('password')== true){
+            $password = htmlspecialchars($post->getPost('password'), ENT_NOQUOTES);
         }
         
         if(isset($lastname) && isset($firstname) && isset($email) && isset($password)){
@@ -97,13 +100,15 @@ class UserRepository
 
     function checkUniqueEmail(): Int
     {
+        $post = new GlobalPost();
+
         $db = $this->connection->getConnection();
 
         $sql = "SELECT * FROM b_user WHERE email = :email";
 
         $data = $db->prepare($sql);
 
-        $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
+        $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
 
         $data->bindParam(':email', $email);
 
@@ -128,15 +133,17 @@ class UserRepository
 
     function checkUserExist(): Int
     {
+        $post = new GlobalPost();
+
         $db = $this->connection->getConnection();
 
         $sql = "SELECT email,password,is_valid FROM b_user WHERE email=:email AND password=:password";
 
         $data = $db->prepare($sql);
 
-        if (isset($_POST['email']) && isset($_POST['password'])) {
-            $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
-            $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
+        if ($post->getPost('email') == true && $post->getPost('password') == true) {
+            $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
+            $password = htmlspecialchars($post->getPost('password'), ENT_NOQUOTES);
             $chiff = sha1($password);
         }
 
@@ -173,6 +180,8 @@ class UserRepository
 
     function login(): Int
     {
+        $post = new GlobalPost();
+        $session = new GlobalSession();
 
         $db = $this->connection->getConnection();
 
@@ -180,8 +189,8 @@ class UserRepository
 
         $data = $db->prepare($sql);
 
-        $email = htmlspecialchars($_POST['email'], ENT_NOQUOTES);
-        $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
+        $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
+        $password = htmlspecialchars($post->getPost('password'), ENT_NOQUOTES);
 
         
         $chiff = sha1($password);
@@ -197,20 +206,21 @@ class UserRepository
 
             if ($row['fk_id_role'] == 1) {
 
-                $_SESSION['LOGGED_ADMIN'] = array(
+                $session->setSession('LOGGED_ADMIN',
+                array(
                     "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
                         "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
                         "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
                         "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
-                );
+                ));
                 return 2;
             } else {
-                $_SESSION['LOGGED_USER'] = array(
+                $session->setSession('LOGGED_USER',array(
                     "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
                         "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
                         "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
                         "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
-                );
+                ));
                 return 1;
             }
         } else {

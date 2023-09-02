@@ -5,6 +5,8 @@ namespace Application\Model\Comment;
 require_once('./src/lib/database.php');
 
 use Application\Lib\Database\DatabaseConnection;
+use Application\Lib\Globals\GlobalGet;
+use Application\Lib\Globals\GlobalSession;
 use PDO;
 use DateTime;
 use DateTimeZone;
@@ -87,17 +89,19 @@ class CommentRepository
     {
 
         $db = $this->connection->getConnection();
+        $session = new GlobalSession();
+        $get = new GlobalGet();
 
-        if(isset($_SESSION['LOGGED_USER']['id'])){
-            $user =   htmlspecialchars($_SESSION['LOGGED_USER']['id'], ENT_NOQUOTES);
+        if($session->getSession('LOGGED_USER')['id'] == true){
+            $user =   htmlspecialchars($session->getSession('LOGGED_USER')['id'], ENT_NOQUOTES);
         }
 
         if(isset($comment)){
             $comment_sec = htmlspecialchars($comment, ENT_NOQUOTES);
         }
 
-        if(isset($_GET['id'])){
-            $post = htmlspecialchars($_GET['id'], ENT_NOQUOTES); 
+        if($get->getKey('id')){
+            $post = htmlspecialchars($get->getKey('id'), ENT_NOQUOTES); 
         }
 
 
