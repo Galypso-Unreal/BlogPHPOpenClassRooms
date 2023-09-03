@@ -40,15 +40,14 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
         } else if ($user == 2) {
             header('Location: http://blog.local/admin/posts');
         } else {
-            if ($post->getPost('email') == true){
+            if ($post->getPost('email') == true) {
 
                 echo $twig->render('login.twig', array(
                     'errors' => $user,
-                    'email' => htmlspecialchars($post->getPost('email'),ENT_NOQUOTES),
-    
+                    'email' => htmlspecialchars($post->getPost('email'), ENT_NOQUOTES),
+
                 ));
             }
-            
         }
     }
 
@@ -63,7 +62,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
         header('Location: http://blog.local/');
     }
 
-    if ($get->getKey('action') === 'logoutAdmin'){
+    if ($get->getKey('action') === 'logoutAdmin') {
 
         if ($session->getSession('LOGGED_ADMIN') == true) {
             $session->forgetSession('LOGGED_ADMIN');

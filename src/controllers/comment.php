@@ -56,15 +56,15 @@ class CommentController
         $get = new GlobalGet();
         $session = new GlobalSession();
 
-        $user = $session->getSession('LOGGED_USER');       
+        $user = $session->getSession('LOGGED_USER');
 
-        if ($get->getKey('id') == true){
+        if ($get->getKey('id') == true) {
             $id = $get->getKey('id');
         }
-        
 
-        
-        
+
+
+
         /* The code is checking if the `$comment` variable is set and not empty, if the `$id` variable
         is set and greater than 0, if the `$user` variable is set and if the `$user->id` property is
         set. If all these conditions are true, it means that the comment and user information are

@@ -229,8 +229,6 @@ class PostRepository
         $insert->bindParam(':id', $id_sec, PDO::PARAM_INT);
 
         $insert->execute();
-
-        
     }
 
     /**
@@ -259,8 +257,6 @@ class PostRepository
         $delete->bindParam('id', $id, PDO::PARAM_INT);
 
         $delete->execute();
-
-        
     }
 
     /**
@@ -269,7 +265,7 @@ class PostRepository
      * @return array an array of admins. Each admin is represented by an associative array with keys
      * 'id', 'lastname', 'firstname', and 'email'.
      */
-    
+
     public function getAdmins(): array
     {
 

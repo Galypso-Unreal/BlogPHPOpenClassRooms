@@ -70,11 +70,11 @@ class UserRepository
             $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
         }
 
-        if ($post->getPost('password')== true) {
+        if ($post->getPost('password') == true) {
             $password = htmlspecialchars($post->getPost('password'), ENT_NOQUOTES);
         }
-        
-        if (isset($lastname) && isset($firstname) && isset($email) && isset($password)){
+
+        if (isset($lastname) && isset($firstname) && isset($email) && isset($password)) {
             $fk_id_role = 2;
 
             $chiff = sha1($password);
@@ -87,7 +87,6 @@ class UserRepository
 
             $insert->execute();
         }
-        
     }
 
     /**
@@ -191,7 +190,7 @@ class UserRepository
         $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
         $password = htmlspecialchars($post->getPost('password'), ENT_NOQUOTES);
 
-        
+
         $chiff = sha1($password);
 
         $data->bindParam(':email', $email);
@@ -205,20 +204,22 @@ class UserRepository
 
             if ($row['fk_id_role'] == 1) {
 
-                $session->setSession('LOGGED_ADMIN',
-                array(
-                    "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
+                $session->setSession(
+                    'LOGGED_ADMIN',
+                    array(
+                        "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
                         "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
                         "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
                         "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
-                ));
+                    )
+                );
                 return 2;
             } else {
-                $session->setSession('LOGGED_USER',array(
+                $session->setSession('LOGGED_USER', array(
                     "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
-                        "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
-                        "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
-                        "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
+                    "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
+                    "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
+                    "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
                 ));
                 return 1;
             }
@@ -324,7 +325,7 @@ class UserRepository
      * @param int id The parameter "id" is an integer that represents the ID of the user that needs to
      * be deleted from the database.
      */
-    
+
     public function deleteUser(int $id)
     {
 

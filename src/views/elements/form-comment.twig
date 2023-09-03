@@ -1,18 +1,18 @@
 {% if user_session %}
 <div class="container_form">
-  <h2>Ajouter un commentaire</h2>
-  <div class="separator"></div>
-  <form action='index.php?action=addComment&id={{get_ID()}}' method="POST" class="comment-form">
+    <h2>Ajouter un commentaire</h2>
+    <div class="separator"></div>
+    <form action='index.php?action=addComment&id={{get_ID()}}' method="POST" class="comment-form">
 
 
-    <div class="form-floating">
-      <textarea type="text" placeholder="comment" name="comment" class="form-control"></textarea>
-      <label for="comment">Commentaire</label>
-    </div>
+        <div class="form-floating">
+            <textarea type="text" placeholder="comment" name="comment" class="form-control"></textarea>
+            <label for="comment">Commentaire</label>
+        </div>
 
 
-    <input type="submit" value="Envoyer">
+        <input type="submit" value="Envoyer">
 
-  </form>
+    </form>
 </div>
 {% endif %}

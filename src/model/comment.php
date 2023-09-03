@@ -92,16 +92,16 @@ class CommentRepository
         $session = new GlobalSession();
         $get = new GlobalGet();
 
-        if ($session->getSession('LOGGED_USER')['id'] == true){
+        if ($session->getSession('LOGGED_USER')['id'] == true) {
             $user =   htmlspecialchars($session->getSession('LOGGED_USER')['id'], ENT_NOQUOTES);
         }
 
-        if (isset($comment) === true){
+        if (isset($comment) === true) {
             $comment_sec = htmlspecialchars($comment, ENT_NOQUOTES);
         }
 
-        if ($get->getKey('id')){
-            $post = htmlspecialchars($get->getKey('id'), ENT_NOQUOTES); 
+        if ($get->getKey('id')) {
+            $post = htmlspecialchars($get->getKey('id'), ENT_NOQUOTES);
         }
 
 
@@ -173,7 +173,7 @@ class CommentRepository
      * 
      * @return array an array of Comment objects.
      */
-    
+
     public function getComments(int $id): array
     {
 

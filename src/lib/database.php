@@ -12,22 +12,20 @@ returns the database connection. */
 class DatabaseConnection
 {
 
-  public ?PDO $database = null;
-  
-  /**
-   * The function returns a PDO connection to a MySQL database.
-   * 
-   * @return PDO a PDO object, which represents a connection to a database.
-   */
+    public ?PDO $database = null;
+    /**
+     * The function returns a PDO connection to a MySQL database.
+     * 
+     * @return PDO a PDO object, which represents a connection to a database.
+     */
 
-  public function getConnection(): PDO
+    public function getConnection(): PDO
 
-  {
-    if ($this->database === null) {
-      $this->database = new PDO('mysql:host=localhost:10022;dbname=blog;charset=utf8', 'root', 'root');
+    {
+        if ($this->database === null) {
+            $this->database = new PDO('mysql:host=localhost:10022;dbname=blog;charset=utf8', 'root', 'root');
+        }
+
+        return $this->database;
     }
-
-    return $this->database;
-  }
 }
-

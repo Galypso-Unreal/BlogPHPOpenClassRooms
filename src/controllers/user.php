@@ -49,23 +49,23 @@ class UserController
         `lastname`, `email`, `password`, and `confirmepassword` fields from the form submission and
         assigning them to the respective variables. */
 
-        if ($post->getPost('firstname') == true){
+        if ($post->getPost('firstname') == true) {
             $firstname = $post->getPost('firstname');
         }
 
-        if ($post->getPost('lastname') == true){
+        if ($post->getPost('lastname') == true) {
             $lastname = $post->getPost('lastname');
         }
 
-        if ($post->getPost('email') == true){
+        if ($post->getPost('email') == true) {
             $email = $post->getPost('email');
         }
 
-        if ($post->getPost('password') == true){
+        if ($post->getPost('password') == true) {
             $password = $post->getPost('password');
         }
 
-        if ($post->getPost('confirmepassword') == true){
+        if ($post->getPost('confirmepassword') == true) {
             $confirmepassword = $post->getPost('confirmepassword');
         }
 
@@ -78,7 +78,6 @@ class UserController
         if ((isset($firstname) === true &&  strlen($firstname) > 0 && strlen($firstname) <= 60) && (isset($lastname) === true && strlen($lastname) > 0 && strlen($lastname) <= 60) && (isset($email) === true && strlen($email) > 0 && strlen($email) <= 100) && (isset($password) === true && strlen($password > 0)) && (isset($confirmepassword) === true && strlen($confirmepassword) > 0) && $password === $confirmepassword && $this->checkUniqueEmail() == 1) {
 
             return $userRepository->createAccount();
-            
         } else {
 
             $errors = [];
@@ -111,7 +110,6 @@ class UserController
             }
 
             return $errors;
-            
         }
     }
 

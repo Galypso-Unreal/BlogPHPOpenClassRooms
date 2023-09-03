@@ -51,7 +51,7 @@ class PostController
         $postRepository->connection = $connection;
         $get = new GlobalGet();
 
-                /* The code is checking if the `$id` variable is set and is greater than 0. If
+        /* The code is checking if the `$id` variable is set and is greater than 0. If
         all these conditions are true, it means that the post can be get and displayed to the user. */
 
         if ($get->getKey('id') && $get->getKey('id') > 0) {
@@ -73,13 +73,11 @@ class PostController
 
         if (isset($title) && $title != '' && isset($lead_content) && $lead_content != '' && isset($content) && $content != '' && isset($fk_user_id) && $fk_user_id > 0) {
 
-             $postRepository->addPost($title, $lead_content, $content, $fk_user_id);
-             return header('Location: http://blog.local/admin/posts');
-
+            $postRepository->addPost($title, $lead_content, $content, $fk_user_id);
+            return header('Location: http://blog.local/admin/posts');
         } else {
 
             throw new Exception('Le formulaire est incomplet');
-
         }
     }
 
@@ -99,7 +97,6 @@ class PostController
         } else {
             throw new Exception('La modification ne peut pas être effectuée');
         }
-
     }
 
     public function deletePost(int $id)
@@ -131,7 +128,6 @@ class PostController
         } catch (\Throwable $th) {
             throw new Exception('Une erreur est survenue avec la base de données');
         }
-
     }
 
     public function getAuthor(int $id)
@@ -143,7 +139,7 @@ class PostController
 
         /* check if $id is valid, is an int and is more than 0.
         Return the author of the post */
-        
+
         if (isset($id) && $id > 0 && is_int($id)) {
             return $postRepository->getAuthor($id);
         }
