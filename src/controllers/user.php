@@ -4,15 +4,16 @@ namespace Application\Controllers\User;
 
 
 
-require_once('./src/lib/database.php');
-require_once('./src/model/user.php');
+require_once './src/lib/database.php';
+require_once './src/model/user.php';
 
 use Application\Lib\Database\DatabaseConnection;
 use Application\Lib\Globals\GlobalPost;
 use Application\Model\User\UserRepository;
 use Exception;
 
-/* The `class UserController` is a PHP class that contains functions for handling user-related
+/* 
+The `class UserController` is a PHP class that contains functions for handling user-related
 operations such as creating an account, checking unique email, checking if a user exists, logging
 in, getting all users, validating a user, and deleting a user. It uses a `DatabaseConnection` class
 and a `UserRepository` class to interact with the database and perform the necessary operations. The
@@ -26,14 +27,13 @@ class UserController
     /**
      * The code contains PHP functions for creating an account, checking unique email, checking if a
      * user exists, logging in, getting all users, validating a user, and deleting a user.
-     * 
      * @return The function `createAccount()` returns either the result of the `createAccount()` method
      * from the `` object if all the conditions are met, or an array of errors if any of
      * the conditions fail.
      */
 
 
-    function createAccount()
+    public function createAccount()
     {
 
         $connection = new DatabaseConnection();
@@ -41,30 +41,31 @@ class UserController
         $userRepository->connection = $connection;
         $post = new GlobalPost();
 
-        /* The code is assigning the values of the `` superglobal variables to the corresponding
+        /* 
+        The code is assigning the values of the `` superglobal variables to the corresponding
         variables. These variables are used to store the user input data for creating a new user
         account. The `` superglobal is an associative array that contains data submitted via
         an HTTP POST request. In this case, the code is retrieving the values of the `firstname`,
         `lastname`, `email`, `password`, and `confirmepassword` fields from the form submission and
         assigning them to the respective variables. */
 
-        if($post->getPost('firstname') == true){
+        if ($post->getPost('firstname') == true){
             $firstname = $post->getPost('firstname');
         }
 
-        if($post->getPost('lastname') == true){
+        if ($post->getPost('lastname') == true){
             $lastname = $post->getPost('lastname');
         }
 
-        if($post->getPost('email') == true){
+        if ($post->getPost('email') == true){
             $email = $post->getPost('email');
         }
 
-        if($post->getPost('password') == true){
+        if ($post->getPost('password') == true){
             $password = $post->getPost('password');
         }
 
-        if($post->getPost('confirmepassword') == true){
+        if ($post->getPost('confirmepassword') == true){
             $confirmepassword = $post->getPost('confirmepassword');
         }
 
@@ -74,7 +75,7 @@ class UserController
         (up to 60 characters), `` (up to 60 characters), and `` (up to 100
         characters) to ensure they are within the allowed limits. */
 
-        if ((isset($firstname) &&  strlen($firstname) > 0 && strlen($firstname) <= 60) && (isset($lastname) && strlen($lastname) > 0 && strlen($lastname) <= 60) && (isset($email) && strlen($email) > 0 && strlen($email) <= 100) && (isset($password) && strlen($password > 0)) && (isset($confirmepassword) && strlen($confirmepassword) > 0) && $password === $confirmepassword && $this->checkUniqueEmail() == 1) {
+        if ((isset($firstname) === true &&  strlen($firstname) > 0 && strlen($firstname) <= 60) && (isset($lastname) === true && strlen($lastname) > 0 && strlen($lastname) <= 60) && (isset($email) === true && strlen($email) > 0 && strlen($email) <= 100) && (isset($password) === true && strlen($password > 0)) && (isset($confirmepassword) === true && strlen($confirmepassword) > 0) && $password === $confirmepassword && $this->checkUniqueEmail() == 1) {
 
             return $userRepository->createAccount();
             
@@ -82,23 +83,23 @@ class UserController
 
             $errors = [];
 
-            if (!isset($firstname) || $firstname == '') {
+            if (isset($firstname) === false || $firstname == '') {
                 $errors['firstname'] = 'Veuillez enregister votre prénom';
             }
 
-            if (!isset($lastname) || $lastname == '') {
+            if (isset($lastname) === false || $lastname == '') {
                 $errors['lastname'] = 'Veuillez enregister votre nom';
             }
 
-            if (!isset($email) || $email == '') {
+            if (isset($email) === false || $email == '') {
                 $errors['email'] = 'Veuillez enregister votre email';
             }
 
-            if (!isset($password) || $password == '') {
+            if (isset($password) === false || $password == '') {
                 $errors['password'] = 'Veuillez enregister votre mot de passe';
             }
 
-            if (!isset($confirmepassword) || $confirmepassword == '') {
+            if (isset($confirmepassword) === false || $confirmepassword == '') {
                 $errors['confirmepassword'] = 'Veuillez confirmer votre mot de passe';
             }
             if ($confirmepassword != $password) {
@@ -110,10 +111,11 @@ class UserController
             }
 
             return $errors;
+            
         }
     }
 
-    function checkUniqueEmail()
+    public function checkUniqueEmail()
     {
         $connection = new DatabaseConnection();
         $userRepository = new UserRepository();
@@ -122,7 +124,7 @@ class UserController
         return $userRepository->checkUniqueEmail();
     }
 
-    function checkUserExist()
+    public function checkUserExist()
     {
 
         $connection = new DatabaseConnection();
@@ -132,7 +134,7 @@ class UserController
         return $userRepository->checkUserExist();
     }
 
-    function login()
+    public function login()
     {
 
         $connection = new DatabaseConnection();
@@ -157,10 +159,10 @@ class UserController
             return $userRepository->login();
         } else {
 
-            if (!isset($email) || $email == '') {
+            if (isset($email) === false || $email == '') {
                 $errors['email'] = 'Veuillez enregister votre email';
             }
-            if (!isset($password) || $password == '') {
+            if (isset($password) === false || $password == '') {
                 $errors['password'] = 'Veuillez enregister votre mot de passe';
             }
             if ($check == 0 && isset($password) && $password !== '' && isset($email) && $email !== '') {
@@ -174,7 +176,7 @@ class UserController
         }
     }
 
-    function getAllUsers()
+    public function getAllUsers()
     {
 
         $connection = new DatabaseConnection();
@@ -184,7 +186,7 @@ class UserController
         return $userRepository->getAllUsers();
     }
 
-    function validateUser($id)
+    public function validateUser($id)
     {
 
         $connection = new DatabaseConnection();
@@ -203,7 +205,7 @@ class UserController
         }
     }
 
-    function deleteUser($id)
+    public function deleteUser($id)
     {
 
         $connection = new DatabaseConnection();

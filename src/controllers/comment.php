@@ -4,8 +4,8 @@ namespace Application\Controllers\Comment;
 
 
 
-require_once('./src/lib/database.php');
-require_once('./src/model/comment.php');
+require_once './src/lib/database.php';
+require_once './src/model/comment.php';
 
 use Application\Lib\Database\DatabaseConnection;
 use Application\Lib\Globals\GlobalGet;
@@ -32,7 +32,7 @@ class CommentController
      * and `getComments()` are all returning different values.
      */
 
-    function getAllComments()
+    public function getAllComments()
     {
 
         /* The code is creating a new instance of the `DatabaseConnection` class and a new instance of
@@ -47,7 +47,7 @@ class CommentController
         return $commentRepository->getAllComments();
     }
 
-    function addComment(string $comment)
+    public function addComment(string $comment)
     {
 
         $connection = new DatabaseConnection();
@@ -58,7 +58,7 @@ class CommentController
 
         $user = $session->getSession('LOGGED_USER');       
 
-        if($get->getKey('id') == true){
+        if ($get->getKey('id') == true){
             $id = $get->getKey('id');
         }
         
@@ -72,7 +72,7 @@ class CommentController
         `CommentRepository` object. After adding the comment, it redirects the user to the
         specified current post using the `header()` function. */
 
-        if (isset($comment) && $comment != '' && isset($id) && $id > 0 && $user && isset($user['id'])) {
+        if (isset($comment) === true && $comment != '' && isset($id) === true && $id > 0 && $user && isset($user['id']) === true) {
             $commentRepository->addComment($comment);
             return header('Location: http://blog.local/actualites/index;php?action=getPost&id=' . $id);
         } else {
@@ -80,12 +80,12 @@ class CommentController
         }
     }
 
-    function deleteComment(int $id)
+    public function deleteComment(int $id)
     {
         /* The code is checking if the `$id` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be deleted. */
 
-        if (isset($id) && is_int($id) && $id > 0) {
+        if (isset($id) === true && is_int($id) === true && $id > 0) {
 
             $connection = new DatabaseConnection();
             $commentRepository = new commentRepository();
@@ -99,7 +99,7 @@ class CommentController
         }
     }
 
-    function validComment(int $id)
+    public function validComment(int $id)
     {
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
@@ -108,7 +108,7 @@ class CommentController
         /* The code is checking if the `$id` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be considered valid. */
 
-        if (isset($id) && is_int($id) && $id > 0) {
+        if (isset($id) === true && is_int($id) && $id > 0) {
             $commentRepository->validComment($id);
             return header('Location: http://blog.local/admin/comments');
         } else {
@@ -116,7 +116,7 @@ class CommentController
         }
     }
 
-    function getComments(int $id)
+    public function getComments(int $id)
     {
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
@@ -125,7 +125,7 @@ class CommentController
         /* The code is checking if the `$id` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be retrieved. */
 
-        if (isset($id) && is_int($id) && $id > 0) {
+        if (isset($id) === true && is_int($id) && $id > 0) {
             return $commentRepository->getComments($id);
         } else {
             throw new Exception("Les commentaires ne peuvent pas être récupérés");

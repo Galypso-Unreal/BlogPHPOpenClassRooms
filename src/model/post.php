@@ -2,7 +2,7 @@
 
 namespace Application\Model\Post;
 
-require_once('./src/lib/database.php');
+require_once './src/lib/database.php';
 
 use Application\Lib\Database\DatabaseConnection;
 use PDO;
@@ -47,7 +47,7 @@ class PostRepository
      * @return array an array of Post objects.
      */
 
-    function getPosts(): array
+    public function getPosts(): array
     {
 
         $db = $this->connection->getConnection();
@@ -88,7 +88,7 @@ class PostRepository
      * @return Post an instance of the Post class.
      */
 
-    function getPost(int $id): Post
+    public function getPost(int $id): Post
     {
 
         $db = $this->connection->getConnection();
@@ -126,7 +126,7 @@ class PostRepository
      * the author's ID, firstname, lastname, and email.
      */
 
-    function getAuthor(int $id)
+    public function getAuthor(int $id)
     {
 
         $db = $this->connection->getConnection();
@@ -167,7 +167,7 @@ class PostRepository
      * database.
      */
 
-    function addPost(string $title, string $lead_content, string $content, int $fk_user_id): Void
+    public function addPost(string $title, string $lead_content, string $content, int $fk_user_id): Void
     {
 
         $db = $this->connection->getConnection();
@@ -202,7 +202,7 @@ class PostRepository
      * @param int id_user The id of the user who is modifying the post.
      */
 
-    function modifyPost(int $id, string $title, string $lead_content, string $content, int $id_user): Void
+    public function modifyPost(int $id, string $title, string $lead_content, string $content, int $id_user): Void
     {
 
         $db = $this->connection->getConnection();
@@ -241,7 +241,7 @@ class PostRepository
      * be deleted.
      */
 
-    function deletePost(int $id)
+    public function deletePost(int $id)
     {
 
         $db = $this->connection->getConnection();
@@ -270,7 +270,7 @@ class PostRepository
      * 'id', 'lastname', 'firstname', and 'email'.
      */
     
-    function getAdmins(): array
+    public function getAdmins(): array
     {
 
         $database = new DatabaseConnection();

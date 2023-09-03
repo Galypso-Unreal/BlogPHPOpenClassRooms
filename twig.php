@@ -3,7 +3,6 @@
 use Twig\TwigFunction;
 use Application\Model\Post\PostRepository;
 use Application\Lib\Database\DatabaseConnection;
-use Application\Lib\Globals\GlobalGet;
 use Application\Lib\Globals\GlobalServer;
 use Application\Lib\Globals\GlobalSession;
 
@@ -19,7 +18,7 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $getID = new TwigFunction('get_ID', function () {
    $server = new GlobalServer();
-    if($server->getServer('REQUEST_URI') == true){
+    if ($server->getServer('REQUEST_URI') == true) {
         $host = $server->getServer('REQUEST_URI');
         $id = explode('id=', $host);
         $id = end($id);

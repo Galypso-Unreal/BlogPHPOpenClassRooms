@@ -1,12 +1,13 @@
 <?php
 session_start();
 
+require 'src/lib/globals.php';
 require 'src/controllers/post.php';
 require 'src/controllers/comment.php';
 require 'src/controllers/user.php';
 require 'src/controllers/form.php';
 require 'twig.php';
-require 'src/lib/globals.php';
+
 
 use Application\Controllers\Post\PostController;
 use Application\Controllers\Comment\CommentController;
@@ -39,7 +40,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
         } else if ($user == 2) {
             header('Location: http://blog.local/admin/posts');
         } else {
-            if($post->getPost('email') == true){
+            if ($post->getPost('email') == true){
 
                 echo $twig->render('login.twig', array(
                     'errors' => $user,
@@ -62,7 +63,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
         header('Location: http://blog.local/');
     }
 
-    if($get->getKey('action') === 'logoutAdmin'){
+    if ($get->getKey('action') === 'logoutAdmin'){
 
         if ($session->getSession('LOGGED_ADMIN') == true) {
             $session->forgetSession('LOGGED_ADMIN');
@@ -85,7 +86,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
 
     if ($get->getKey('action') === 'confirmationForm') {
 
-        if ((new FormController())->confirmationForm()) {
+        if ((new FormController())->confirmationForm() == 1) {
             $informations = (new FormController())->sendMailContact();
             echo $twig->render('elements/confirm.twig', array(
                 'informations' => $informations

@@ -20,7 +20,7 @@ class FormController
      * @return int 0 or 1.
      */
 
-    function confirmationForm()
+    public function confirmationForm()
     {
         $post = new GlobalPost();
 
@@ -30,22 +30,23 @@ class FormController
             return 0;
         } else {
             
-            if($post->getPost('firstname') !== null){
+            if ($post->getPost('firstname') !== null){
                $firstname = htmlspecialchars($post->getPost('firstname'),ENT_NOQUOTES);
             }
 
-            if($post->getPost('lastname') !== null){
+            if ($post->getPost('lastname') !== null){
                 $lastname = htmlspecialchars($post->getPost('lastname'),ENT_NOQUOTES);
             }
 
-            if($post->getPost('email') !== null){
+            if ($post->getPost('email') !== null){
                 $email = htmlspecialchars($post->getPost('email'),ENT_NOQUOTES);
             }
 
-            if($post->getPost('message') !== null){
+            if ($post->getPost('message') !== null){
                 $message = htmlspecialchars($post->getPost('message'),ENT_NOQUOTES); 
             }
-            if (strlen((int) $firstname > 50)) {
+            
+            if (strlen($firstname > 50)) {
                 echo "Votre prénom est trop long";
                 return 0;
             } elseif (strlen($lastname) > 50) {
@@ -70,23 +71,23 @@ class FormController
      * lastname, email, and message.
      */
 
-    function sendMailContact()
+    public function sendMailContact()
     {
         $post = new GlobalPost();
 
-        if($post->getPost('firstname') !== null){
+        if ($post->getPost('firstname') !== null){
             $firstname = htmlspecialchars($post->getPost('firstname'), ENT_NOQUOTES);
         }
 
-        if($post->getPost('lastname') !== null){
+        if ($post->getPost('lastname') !== null){
             $lastname = htmlspecialchars($post->getPost('lastname'), ENT_NOQUOTES);
         }
 
-        if($post->getPost('email') !== null){
+        if ($post->getPost('email') !== null){
             $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
         }
 
-        if($post->getPost('message') !== null){
+        if ($post->getPost('message') !== null){
             $message = htmlspecialchars($post->getPost('message'), ENT_NOQUOTES);
         }
         

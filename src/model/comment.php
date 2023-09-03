@@ -2,7 +2,7 @@
 
 namespace Application\Model\Comment;
 
-require_once('./src/lib/database.php');
+require_once './src/lib/database.php';
 
 use Application\Lib\Database\DatabaseConnection;
 use Application\Lib\Globals\GlobalGet;
@@ -48,7 +48,7 @@ class CommentRepository
      * @return array an array of Comment objects.
      */
 
-    function getAllComments(): array
+    public function getAllComments(): array
     {
 
         $db = $this->connection->getConnection();
@@ -85,22 +85,22 @@ class CommentRepository
      * @param string comment The comment that needs to be added to the database.
      */
 
-    function addComment(string $comment): Void
+    public function addComment(string $comment): Void
     {
 
         $db = $this->connection->getConnection();
         $session = new GlobalSession();
         $get = new GlobalGet();
 
-        if($session->getSession('LOGGED_USER')['id'] == true){
+        if ($session->getSession('LOGGED_USER')['id'] == true){
             $user =   htmlspecialchars($session->getSession('LOGGED_USER')['id'], ENT_NOQUOTES);
         }
 
-        if(isset($comment)){
+        if (isset($comment) === true){
             $comment_sec = htmlspecialchars($comment, ENT_NOQUOTES);
         }
 
-        if($get->getKey('id')){
+        if ($get->getKey('id')){
             $post = htmlspecialchars($get->getKey('id'), ENT_NOQUOTES); 
         }
 
@@ -123,7 +123,7 @@ class CommentRepository
      * comment that needs to be deleted.
      */
 
-    function deleteComment(int $id): Void
+    public function deleteComment(int $id): Void
     {
 
         $db = $this->connection->getConnection();
@@ -151,7 +151,7 @@ class CommentRepository
      * to be validated.
      */
 
-    function validComment(int $id): Void
+    public function validComment(int $id): Void
     {
 
         $db = $this->connection->getConnection();
@@ -174,7 +174,7 @@ class CommentRepository
      * @return array an array of Comment objects.
      */
     
-    function getComments(int $id): array
+    public function getComments(int $id): array
     {
 
         $db = $this->connection->getConnection();

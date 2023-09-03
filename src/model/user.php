@@ -48,7 +48,7 @@ class UserRepository
      * The function creates a new user account by inserting the user's information into the database.
      */
 
-    function createAccount(): Void
+    public function createAccount(): Void
     {
         $post = new GlobalPost();
 
@@ -58,23 +58,23 @@ class UserRepository
 
         $insert = $db->prepare($sql);
 
-        if($post->getPost('lastname') == true ){
+        if ($post->getPost('lastname') == true) {
             $lastname = htmlspecialchars($post->getPost('lastname'), ENT_NOQUOTES);
         }
 
-        if($post->getPost('firstname') == true){
+        if ($post->getPost('firstname') == true) {
             $firstname = htmlspecialchars($post->getPost('firstname'), ENT_NOQUOTES);
         }
 
-        if($post->getPost('email') == true){
+        if ($post->getPost('email') == true) {
             $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
         }
 
-        if($post->getPost('password')== true){
+        if ($post->getPost('password')== true) {
             $password = htmlspecialchars($post->getPost('password'), ENT_NOQUOTES);
         }
         
-        if(isset($lastname) && isset($firstname) && isset($email) && isset($password)){
+        if (isset($lastname) && isset($firstname) && isset($email) && isset($password)){
             $fk_id_role = 2;
 
             $chiff = sha1($password);
@@ -93,12 +93,11 @@ class UserRepository
     /**
      * The function checks if an email is unique by querying the database for any existing records with
      * the same email.
-     * 
      * @return Int an integer value. If the query returns at least one row, it will return 0.
      * Otherwise, it will return 1.
      */
 
-    function checkUniqueEmail(): Int
+    public function checkUniqueEmail(): Int
     {
         $post = new GlobalPost();
 
@@ -131,7 +130,7 @@ class UserRepository
      * but is not valid, it returns 2. If the user does not exist, it returns 0.
      */
 
-    function checkUserExist(): Int
+    public function checkUserExist(): Int
     {
         $post = new GlobalPost();
 
@@ -178,7 +177,7 @@ class UserRepository
      * there is an error during the login process, it throws an exception.
      */
 
-    function login(): Int
+    public function login(): Int
     {
         $post = new GlobalPost();
         $session = new GlobalSession();
@@ -235,7 +234,7 @@ class UserRepository
      * @return array an array of User objects.
      */
 
-    function getAllUsers(): array
+    public function getAllUsers(): array
     {
 
         $db = $this->connection->getConnection();
@@ -272,7 +271,7 @@ class UserRepository
      * conditions. If no row is found, it returns 0.
      */
 
-    function getUser(): User
+    public function getUser(): User
     {
 
         $db = $this->connection->getConnection();
@@ -304,7 +303,7 @@ class UserRepository
      * @param int id The parameter "id" is an integer representing the user's ID.
      */
 
-    function validateUser(int $id)
+    public function validateUser(int $id)
     {
 
         $db = $this->connection->getConnection();
@@ -326,7 +325,7 @@ class UserRepository
      * be deleted from the database.
      */
     
-    function deleteUser(int $id)
+    public function deleteUser(int $id)
     {
 
         $db = $this->connection->getConnection();

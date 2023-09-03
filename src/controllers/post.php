@@ -4,8 +4,8 @@ namespace Application\Controllers\Post;
 
 
 
-require_once('./src/lib/database.php');
-require_once('./src/model/post.php');
+require_once './src/lib/database.php';
+require_once './src/model/post.php';
 
 use Application\Lib\Database\DatabaseConnection;
 use Application\Lib\Globals\GlobalGet;
@@ -31,10 +31,9 @@ class PostController
      * 
      * @return The functions are returning different values depending on the logic and conditions
      * within each function. Some functions return a result from the database, some return a header
-     * redirect, and some throw exceptions.
-     */
+     * redirect, and some throw exceptions.*/
 
-    function getPosts()
+    public function getPosts()
     {
 
         $connection = new DatabaseConnection();
@@ -44,7 +43,7 @@ class PostController
         return $postRepository->getPosts();
     }
 
-    function getPost(int $id)
+    public function getPost(int $id)
     {
 
         $connection = new DatabaseConnection();
@@ -62,7 +61,7 @@ class PostController
         }
     }
 
-    function addPost(string $title, string $lead_content, string $content, int $fk_user_id)
+    public function addPost(string $title, string $lead_content, string $content, int $fk_user_id)
     {
 
         $connection = new DatabaseConnection();
@@ -84,7 +83,7 @@ class PostController
         }
     }
 
-    function modifyPost(int $id, string $title, string $lead_content, string $content, int $id_user)
+    public function modifyPost(int $id, string $title, string $lead_content, string $content, int $id_user)
     {
 
         $connection = new DatabaseConnection();
@@ -103,7 +102,7 @@ class PostController
 
     }
 
-    function deletePost(int $id)
+    public function deletePost(int $id)
     {
         $connection = new DatabaseConnection();
         $postRepository = new PostRepository();
@@ -119,7 +118,7 @@ class PostController
         }
     }
 
-    function getAdmins()
+    public function getAdmins()
     {
 
         $connection = new DatabaseConnection();
@@ -135,7 +134,7 @@ class PostController
 
     }
 
-    function getAuthor(int $id)
+    public function getAuthor(int $id)
     {
 
         $connection = new DatabaseConnection();
