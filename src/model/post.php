@@ -15,7 +15,7 @@ modified_at, deleted_at, and fk_user_id. */
 class Post
 {
 
-    public int $id;
+    public int $identifier;
     public string $title;
     public string $lead_content;
     public string $content;
@@ -63,7 +63,7 @@ class PostRepository
 
             $post = new Post();
 
-            $post->id =     htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $post->identifier =     htmlspecialchars($row['id'], ENT_NOQUOTES);
             $post->title =     htmlspecialchars($row['title'], ENT_NOQUOTES);
             $post->lead_content =     htmlspecialchars($row['lead_content'], ENT_NOQUOTES);
             $post->content =    htmlspecialchars($row['content'], ENT_NOQUOTES);
@@ -88,7 +88,7 @@ class PostRepository
      * @return Post an instance of the Post class.
      */
 
-    public function getPost(int $id): Post
+    public function getPost(int $identifier): Post
     {
 
         $db = $this->connection->getConnection();
@@ -97,14 +97,14 @@ class PostRepository
 
         $data = $db->prepare($sql);
 
-        $data->bindParam('id', $id, PDO::PARAM_INT);
+        $data->bindParam(':id', $identifier, PDO::PARAM_INT);
         $data->execute();
 
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
 
             $post = new Post();
 
-            $post->id = htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $post->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
             $post->title = htmlspecialchars($row['title'], ENT_NOQUOTES);
             $post->lead_content = htmlspecialchars($row['lead_content'], ENT_NOQUOTES);
             $post->content = htmlspecialchars($row['content'], ENT_NOQUOTES);
@@ -126,7 +126,7 @@ class PostRepository
      * the author's ID, firstname, lastname, and email.
      */
 
-    public function getAuthor(int $id)
+    public function getAuthor(int $identifier)
     {
 
         $db = $this->connection->getConnection();
@@ -135,7 +135,7 @@ class PostRepository
 
         $data = $db->prepare($sql);
 
-        $data->bindParam(':id', $id, PDO::PARAM_INT);
+        $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
         $data->execute();
 
@@ -202,7 +202,7 @@ class PostRepository
      * @param int id_user The id of the user who is modifying the post.
      */
 
-    public function modifyPost(int $id, string $title, string $lead_content, string $content, int $id_user): Void
+    public function modifyPost(int $identifier, string $title, string $lead_content, string $content, int $id_user): Void
     {
 
         $db = $this->connection->getConnection();
@@ -217,7 +217,7 @@ class PostRepository
         $title_sec = htmlspecialchars($title, ENT_NOQUOTES);
         $lead_content_sec = htmlspecialchars($lead_content, ENT_NOQUOTES);
         $content_sec = htmlspecialchars($content, ENT_NOQUOTES);
-        $id_sec = htmlspecialchars($id, ENT_NOQUOTES);
+        $id_sec = htmlspecialchars($identifier, ENT_NOQUOTES);
         $id_user_sec = htmlspecialchars($id_user, ENT_NOQUOTES);
 
 
@@ -239,7 +239,7 @@ class PostRepository
      * be deleted.
      */
 
-    public function deletePost(int $id)
+    public function deletePost(int $identifier)
     {
 
         $db = $this->connection->getConnection();
@@ -254,7 +254,7 @@ class PostRepository
         $delete = $db->prepare($sql);
 
         $delete->bindParam('deleted_at', $datef);
-        $delete->bindParam('id', $id, PDO::PARAM_INT);
+        $delete->bindParam('id', $identifier, PDO::PARAM_INT);
 
         $delete->execute();
     }

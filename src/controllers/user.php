@@ -184,39 +184,39 @@ class UserController
         return $userRepository->getAllUsers();
     }
 
-    public function validateUser($id)
+    public function validateUser($identifier)
     {
 
         $connection = new DatabaseConnection();
         $userRepository = new UserRepository();
         $userRepository->connection = $connection;
 
-        /* The code block is checking if the `$id` variable is set, greater than 0, and of type
+        /* The code block is checking if the `$identifier` variable is set, greater than 0, and of type
         integer. If all these conditions are true, it calls the `validateUser()` method of the
-        `$userRepository` object and passes the `$id` as an argument. This method is responsible for
+        `$userRepository` object and passes the `$identifier` as an argument. This method is responsible for
         validating a user in the database. */
 
-        if (isset($id) && $id > 0 && is_int($id)) {
-            return $userRepository->validateUser($id);
+        if (isset($identifier) && $identifier > 0 && is_int($identifier)) {
+            return $userRepository->validateUser($identifier);
         } else {
             throw new Exception("L'ID n'est pas correcte");
         }
     }
 
-    public function deleteUser($id)
+    public function deleteUser($identifier)
     {
 
         $connection = new DatabaseConnection();
         $userRepository = new UserRepository();
         $userRepository->connection = $connection;
 
-        /* The code block is checking if the `$id` variable is set, greater than 0, and of type
+        /* The code block is checking if the `$identifier` variable is set, greater than 0, and of type
         integer. If all these conditions are true, it calls the `deleteUser()` method of the
-        `$userRepository` object and passes the `$id` as an argument. This method is responsible for
+        `$userRepository` object and passes the `$identifier` as an argument. This method is responsible for
         deleting a user from the database. */
 
-        if (isset($id) && $id > 0 && is_int($id)) {
-            return $userRepository->deleteUser($id);
+        if (isset($identifier) && $identifier > 0 && is_int($identifier)) {
+            return $userRepository->deleteUser($identifier);
         } else {
             throw new Exception("L'ID n'est pas correcte");
         }

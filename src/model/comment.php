@@ -16,7 +16,7 @@ status, deletion timestamp, and foreign keys for user and post. */
 
 class Comment
 {
-    public int $id;
+    public int $identifier;
     public string $comment;
     public bool $is_valid;
     public ?string $deleted_at;
@@ -65,7 +65,7 @@ class CommentRepository
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
             $comment = new Comment();
 
-            $comment->id = htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $comment->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
             $comment->comment = htmlspecialchars($row['comment'], ENT_NOQUOTES);
             $comment->is_valid = htmlspecialchars($row['is_valid'], ENT_NOQUOTES);
             $comment->deleted_at = htmlspecialchars($row['deleted_at'], ENT_NOQUOTES);
@@ -123,7 +123,7 @@ class CommentRepository
      * comment that needs to be deleted.
      */
 
-    public function deleteComment(int $id): Void
+    public function deleteComment(int $identifier): Void
     {
 
         $db = $this->connection->getConnection();
@@ -137,7 +137,7 @@ class CommentRepository
         $delete = $db->prepare($sql);
 
         $delete->bindParam('deleted_at', $datef);
-        $delete->bindParam('id', $id, PDO::PARAM_INT);
+        $delete->bindParam('id', $identifier, PDO::PARAM_INT);
 
 
         $delete->execute();
@@ -151,7 +151,7 @@ class CommentRepository
      * to be validated.
      */
 
-    public function validComment(int $id): Void
+    public function validComment(int $identifier): Void
     {
 
         $db = $this->connection->getConnection();
@@ -160,7 +160,7 @@ class CommentRepository
 
         $data = $db->prepare($sql);
 
-        $data->bindParam(':id', $id, PDO::PARAM_INT);
+        $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
         $data->execute();
     }
@@ -174,7 +174,7 @@ class CommentRepository
      * @return array an array of Comment objects.
      */
 
-    public function getComments(int $id): array
+    public function getComments(int $identifier): array
     {
 
         $db = $this->connection->getConnection();
@@ -184,7 +184,7 @@ class CommentRepository
 
         $data = $db->prepare($sql);
 
-        $data->bindParam(':id', $id, PDO::PARAM_INT);
+        $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
         $data->execute();
 
@@ -194,7 +194,7 @@ class CommentRepository
 
             $comment = new Comment();
 
-            $comment->id = htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $comment->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
             $comment->comment = htmlspecialchars($row['comment'], ENT_NOQUOTES);
             $comment->fk_user_id = htmlspecialchars($row['fk_user_id'], ENT_NOQUOTES);
 

@@ -74,9 +74,9 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
 
     if ($get->getKey('action') === 'getPost') {
 
-        $id = $get->getKey('id');
-        $post = (new PostController())->getPost($id);
-        $comments = (new CommentController())->getComments($id);
+        $identifier = $get->getKey('id');
+        $post = (new PostController())->getPost($identifier);
+        $comments = (new CommentController())->getComments($identifier);
         echo $twig->render('post.twig', array(
             'post' => $post,
             'comments' => $comments

@@ -21,15 +21,15 @@
             {% for comment in comments %}
             {% set author = displayAuthor(comment.fk_user_id) %}
             <tr>
-                <td>{{comment.id}}</td>
+                <td>{{comment.identifier}}</td>
                 <td>{{comment.comment}}</td>
                 <td>{{comment.is_valid}}</td>
                 <td>{{author.firstname}} {{author.lastname}}</td>
 
                 <td class="modify-control">{% if comment.is_valid != 1 %}<form
-                        action="index.php?action=validComment&id={{comment.id}}" method="post"><button type="submit"><i
+                        action="index.php?action=validComment&id={{comment.identifier}}" method="post"><button type="submit"><i
                                 class="fa fa-check" aria-hidden="true"></i></button></form>{% else %}<div class="space">
-                    </div>{% endif %}<form action="index.php?action=deleteComment&id={{comment.id}}" method="post">
+                    </div>{% endif %}<form action="index.php?action=deleteComment&id={{comment.identifier}}" method="post">
                         <button type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     </form>
                 </td>

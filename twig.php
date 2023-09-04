@@ -20,22 +20,22 @@ $getID = new TwigFunction('get_ID', function () {
     $server = new GlobalServer();
     if ($server->getServer('REQUEST_URI') == true) {
         $host = $server->getServer('REQUEST_URI');
-        $id = explode('id=', $host);
-        $id = end($id);
-        return $id;
+        $identifier = explode('id=', $host);
+        $identifier = end($identifier);
+        return $identifier;
     }
 });
 
 $twig->addFunction($getID);
 
 
-$displayAuthor = new TwigFunction('displayAuthor', function (int $id) {
+$displayAuthor = new TwigFunction('displayAuthor', function (int $identifier) {
 
     $connection = new DatabaseConnection();
     $postRepository = new PostRepository();
     $postRepository->connection = $connection;
 
-    return $postRepository->getAuthor($id);
+    return $postRepository->getAuthor($identifier);
 });
 
 $twig->addFunction($displayAuthor);

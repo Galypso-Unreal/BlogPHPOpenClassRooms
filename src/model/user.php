@@ -18,7 +18,7 @@ password, is_valid, deleted_at, and fk_id_role. */
 class User
 {
 
-    public int $id;
+    public int $identifier;
     public string $lastname;
     public string $firstname;
     public string $email;
@@ -251,7 +251,7 @@ class UserRepository
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
             $user = new User();
 
-            $user->id =     htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $user->identifier =     htmlspecialchars($row['id'], ENT_NOQUOTES);
             $user->lastname =     htmlspecialchars($row['lastname'], ENT_NOQUOTES);
             $user->firstname =     htmlspecialchars($row['firstname'], ENT_NOQUOTES);
             $user->email =    htmlspecialchars($row['email'], ENT_NOQUOTES);
@@ -288,7 +288,7 @@ class UserRepository
         if ($row) {
             $user = new User();
 
-            $user->id = htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $user->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
             $user->firstname = htmlspecialchars($row['firstname'], ENT_NOQUOTES);
             $user->lastname = htmlspecialchars($row['lastname'], ENT_NOQUOTES);
 
@@ -304,7 +304,7 @@ class UserRepository
      * @param int id The parameter "id" is an integer representing the user's ID.
      */
 
-    public function validateUser(int $id)
+    public function validateUser(int $identifier)
     {
 
         $db = $this->connection->getConnection();
@@ -313,7 +313,7 @@ class UserRepository
 
         $data = $db->prepare($sql);
 
-        $data->bindParam(':id', $id, PDO::PARAM_INT);
+        $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
         $data->execute();
     }
@@ -326,7 +326,7 @@ class UserRepository
      * be deleted from the database.
      */
 
-    public function deleteUser(int $id)
+    public function deleteUser(int $identifier)
     {
 
         $db = $this->connection->getConnection();
@@ -339,7 +339,7 @@ class UserRepository
         $delete = $db->prepare($sql);
 
         $delete->bindParam('deleted_at', $datef);
-        $delete->bindParam('id', $id, PDO::PARAM_INT);
+        $delete->bindParam('id', $identifier, PDO::PARAM_INT);
 
         $delete->execute();
     }

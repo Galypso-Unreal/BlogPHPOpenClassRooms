@@ -43,7 +43,7 @@ class PostController
         return $postRepository->getPosts();
     }
 
-    public function getPost(int $id)
+    public function getPost(int $identifier)
     {
 
         $connection = new DatabaseConnection();
@@ -51,11 +51,11 @@ class PostController
         $postRepository->connection = $connection;
         $get = new GlobalGet();
 
-        /* The code is checking if the `$id` variable is set and is greater than 0. If
+        /* The code is checking if the `$identifier` variable is set and is greater than 0. If
         all these conditions are true, it means that the post can be get and displayed to the user. */
 
         if ($get->getKey('id') && $get->getKey('id') > 0) {
-            return $postRepository->getPost($id);
+            return $postRepository->getPost($identifier);
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');
         }
@@ -81,34 +81,34 @@ class PostController
         }
     }
 
-    public function modifyPost(int $id, string $title, string $lead_content, string $content, int $id_user)
+    public function modifyPost(int $identifier, string $title, string $lead_content, string $content, int $id_user)
     {
 
         $connection = new DatabaseConnection();
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        /* The code is checking if the `$id` variable is set, and is greater than 0, if the $title is set, if the lead_content is set, if the id_user is set. If
+        /* The code is checking if the `$identifier` variable is set, and is greater than 0, if the $title is set, if the lead_content is set, if the id_user is set. If
         all these conditions are true, it means that the post can be modified and the user is redirected to the listing of posts in the back office. If ones of these conditions is not good, the user get an Exception */
 
-        if (isset($id) && $id > 0 && isset($title) && $title != '' && isset($lead_content) && $lead_content != '' && isset($content) && $content != '' && isset($id_user) && $id_user > 0) {
-            $postRepository->modifyPost($id, $title, $lead_content, $content, $id_user);
+        if (isset($identifier) && $identifier > 0 && isset($title) && $title != '' && isset($lead_content) && $lead_content != '' && isset($content) && $content != '' && isset($id_user) && $id_user > 0) {
+            $postRepository->modifyPost($identifier, $title, $lead_content, $content, $id_user);
             return header('Location: http://blog.local/admin/posts');
         } else {
             throw new Exception('La modification ne peut pas être effectuée');
         }
     }
 
-    public function deletePost(int $id)
+    public function deletePost(int $identifier)
     {
         $connection = new DatabaseConnection();
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        /* check if the variable $id is set and is greater than 0 */
+        /* check if the variable $identifier is set and is greater than 0 */
 
-        if (isset($id) && $id > 0) {
-            $postRepository->deletePost($id);
+        if (isset($identifier) && $identifier > 0) {
+            $postRepository->deletePost($identifier);
             return header('Location: http://blog.local/admin/posts');
         } else {
             throw new Exception("L'id n'est pas correcte");
@@ -130,18 +130,18 @@ class PostController
         }
     }
 
-    public function getAuthor(int $id)
+    public function getAuthor(int $identifier)
     {
 
         $connection = new DatabaseConnection();
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        /* check if $id is valid, is an int and is more than 0.
+        /* check if $identifier is valid, is an int and is more than 0.
         Return the author of the post */
 
-        if (isset($id) && $id > 0 && is_int($id)) {
-            return $postRepository->getAuthor($id);
+        if (isset($identifier) && $identifier > 0 && is_int($identifier)) {
+            return $postRepository->getAuthor($identifier);
         }
     }
 }

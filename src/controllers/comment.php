@@ -59,39 +59,39 @@ class CommentController
         $user = $session->getSession('LOGGED_USER');
 
         if ($get->getKey('id') == true) {
-            $id = $get->getKey('id');
+            $identifier = $get->getKey('id');
         }
 
 
 
 
-        /* The code is checking if the `$comment` variable is set and not empty, if the `$id` variable
+        /* The code is checking if the `$comment` variable is set and not empty, if the `$identifier` variable
         is set and greater than 0, if the `$user` variable is set and if the `$user->id` property is
         set. If all these conditions are true, it means that the comment and user information are
         valid, and the code proceeds to add the comment using the `addComment()` method of the
         `CommentRepository` object. After adding the comment, it redirects the user to the
         specified current post using the `header()` function. */
 
-        if (isset($comment) === true && $comment != '' && isset($id) === true && $id > 0 && $user && isset($user['id']) === true) {
+        if (isset($comment) === true && $comment != '' && isset($identifier) === true && $identifier > 0 && $user && isset($user['id']) === true) {
             $commentRepository->addComment($comment);
-            return header('Location: http://blog.local/actualites/index;php?action=getPost&id=' . $id);
+            return header('Location: http://blog.local/actualites/index;php?action=getPost&id=' . $identifier);
         } else {
             throw new Exception('Vous ne pouvez pas ajouter de commentaire');
         }
     }
 
-    public function deleteComment(int $id)
+    public function deleteComment(int $identifier)
     {
-        /* The code is checking if the `$id` variable is set, is an integer, and is greater than 0. If
+        /* The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be deleted. */
 
-        if (isset($id) === true && is_int($id) === true && $id > 0) {
+        if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0) {
 
             $connection = new DatabaseConnection();
             $commentRepository = new commentRepository();
             $commentRepository->connection = $connection;
 
-            $commentRepository->deleteComment($id);
+            $commentRepository->deleteComment($identifier);
 
             return header('Location: http://blog.local/admin/comments');
         } else {
@@ -99,34 +99,34 @@ class CommentController
         }
     }
 
-    public function validComment(int $id)
+    public function validComment(int $identifier)
     {
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
 
-        /* The code is checking if the `$id` variable is set, is an integer, and is greater than 0. If
+        /* The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be considered valid. */
 
-        if (isset($id) === true && is_int($id) && $id > 0) {
-            $commentRepository->validComment($id);
+        if (isset($identifier) === true && is_int($identifier) && $identifier > 0) {
+            $commentRepository->validComment($identifier);
             return header('Location: http://blog.local/admin/comments');
         } else {
             throw new Exception("L'id du commentaire n'est pas bon");
         }
     }
 
-    public function getComments(int $id)
+    public function getComments(int $identifier)
     {
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
 
-        /* The code is checking if the `$id` variable is set, is an integer, and is greater than 0. If
+        /* The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be retrieved. */
 
-        if (isset($id) === true && is_int($id) && $id > 0) {
-            return $commentRepository->getComments($id);
+        if (isset($identifier) === true && is_int($identifier) && $identifier > 0) {
+            return $commentRepository->getComments($identifier);
         } else {
             throw new Exception("Les commentaires ne peuvent pas être récupérés");
         }
