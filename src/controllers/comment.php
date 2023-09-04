@@ -14,11 +14,12 @@ use Application\Model\Comment\CommentRepository;
 use Exception;
 
 
-/* The `class CommentController` is a PHP class that serves as a controller for handling comments in an
+/* 
+The `class CommentController` is a PHP class that serves as a controller for handling comments in an
 application. It contains several methods for managing comments, such as retrieving all comments,
 adding a new comment, deleting a comment, validating a comment, and retrieving comments for a
 specific post. The class uses a `DatabaseConnection` object and a `CommentRepository` object to
-interact with the database and perform the necessary operations on comments. */
+interact with the database and perform the necessary operations on comments.*/
 
 class CommentController
 {
@@ -27,18 +28,17 @@ class CommentController
      * The code contains several functions related to managing comments in a blog, including retrieving
      * all comments, adding a comment, deleting a comment, validating a comment, and retrieving
      * comments for a specific post.
-     * 
      * @return The functions `getAllComments()`, `addComment()`, `deleteComment()`, `validComment()`,
-     * and `getComments()` are all returning different values.
-     */
+     * and `getComments()` are all returning different values.*/
 
     public function getAllComments()
     {
 
-        /* The code is creating a new instance of the `DatabaseConnection` class and a new instance of
+        /* 
+        The code is creating a new instance of the `DatabaseConnection` class and a new instance of
         the `CommentRepository` class. It then assigns the `DatabaseConnection` object to the
         `connection` property of the `CommentRepository` object. This allows the `CommentRepository`
-        object to have access to the database connection and perform operations on the database. */
+        object to have access to the database connection and perform operations on the database.*/
 
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
@@ -46,6 +46,9 @@ class CommentController
 
         return $commentRepository->getAllComments();
     }
+
+    /*
+    Add comment to the database*/
 
     public function addComment(string $comment)
     {
@@ -65,12 +68,13 @@ class CommentController
 
 
 
-        /* The code is checking if the `$comment` variable is set and not empty, if the `$identifier` variable
-        is set and greater than 0, if the `$user` variable is set and if the `$user->id` property is
+        /* 
+        The code is checking if the `$comment` variable is set and not empty, if the `$identifier` variable
+        is set and greater than 0, if the `$user` variable is set and if the `$user->identifier` property is
         set. If all these conditions are true, it means that the comment and user information are
         valid, and the code proceeds to add the comment using the `addComment()` method of the
         `CommentRepository` object. After adding the comment, it redirects the user to the
-        specified current post using the `header()` function. */
+        specified current post using the `header()` function.*/
 
         if (isset($comment) === true && $comment != '' && isset($identifier) === true && $identifier > 0 && $user && isset($user['id']) === true) {
             $commentRepository->addComment($comment);
@@ -80,10 +84,14 @@ class CommentController
         }
     }
 
+    /*
+    delete comment from database*/
+
     public function deleteComment(int $identifier)
     {
-        /* The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
-        all these conditions are true, it means that the comment can be deleted. */
+        /* 
+        The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
+        all these conditions are true, it means that the comment can be deleted.*/
 
         if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0) {
 
@@ -99,14 +107,18 @@ class CommentController
         }
     }
 
+    /*
+    valid comment in the database. After the confirmation, the comment gonna by available on post front*/
+
     public function validComment(int $identifier)
     {
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
 
-        /* The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
-        all these conditions are true, it means that the comment can be considered valid. */
+        /* 
+        The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
+        all these conditions are true, it means that the comment can be considered valid.*/
 
         if (isset($identifier) === true && is_int($identifier) && $identifier > 0) {
             $commentRepository->validComment($identifier);
@@ -116,14 +128,18 @@ class CommentController
         }
     }
 
+    /*
+    get all comments available in the database*/
+
     public function getComments(int $identifier)
     {
         $connection = new DatabaseConnection();
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
 
-        /* The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
-        all these conditions are true, it means that the comment can be retrieved. */
+        /*
+        The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
+        all these conditions are true, it means that the comment can be retrieved.*/
 
         if (isset($identifier) === true && is_int($identifier) && $identifier > 0) {
             return $commentRepository->getComments($identifier);

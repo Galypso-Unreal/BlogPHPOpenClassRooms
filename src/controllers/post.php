@@ -33,6 +33,8 @@ class PostController
      * within each function. Some functions return a result from the database, some return a header
      * redirect, and some throw exceptions.*/
 
+    /*
+    Get all posts available in the database to display on front page*/
     public function getPosts()
     {
 
@@ -43,6 +45,8 @@ class PostController
         return $postRepository->getPosts();
     }
 
+    /*
+    Get all informations of one post from a spesific  '$identifier'*/
     public function getPost(int $identifier)
     {
 
@@ -51,8 +55,9 @@ class PostController
         $postRepository->connection = $connection;
         $get = new GlobalGet();
 
-        /* The code is checking if the `$identifier` variable is set and is greater than 0. If
-        all these conditions are true, it means that the post can be get and displayed to the user. */
+        /*
+        The code is checking if the `$identifier` variable is set and is greater than 0. If
+        all these conditions are true, it means that the post can be get and displayed to the user.*/
 
         if ($get->getKey('id') && $get->getKey('id') > 0) {
             return $postRepository->getPost($identifier);
@@ -60,7 +65,8 @@ class PostController
             throw new Exception('Aucun identifiant de billet envoyé');
         }
     }
-
+    /*
+    Add post to in the database*/
     public function addPost(string $title, string $lead_content, string $content, int $fk_user_id)
     {
 
@@ -68,7 +74,8 @@ class PostController
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        /* The code checks whether the following variables are defined: title, lead_contnet, content and fk_user_id. If all these conditions are true, the user can add a post.
+        /*
+        The code checks whether the following variables are defined: title, lead_contnet, content and fk_user_id. If all these conditions are true, the user can add a post.
         After adding the post to the database, the user is redirected to the list of all posts available on the website. If it's not possible to add any post, the user get an Exception*/
 
         if (isset($title) && $title != '' && isset($lead_content) && $lead_content != '' && isset($content) && $content != '' && isset($fk_user_id) && $fk_user_id > 0) {
@@ -81,6 +88,8 @@ class PostController
         }
     }
 
+    /*
+    Modifies a specific post with the identifier parameter. The post will then be added to the database.*/
     public function modifyPost(int $identifier, string $title, string $lead_content, string $content, int $id_user)
     {
 
@@ -88,8 +97,9 @@ class PostController
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        /* The code is checking if the `$identifier` variable is set, and is greater than 0, if the $title is set, if the lead_content is set, if the id_user is set. If
-        all these conditions are true, it means that the post can be modified and the user is redirected to the listing of posts in the back office. If ones of these conditions is not good, the user get an Exception */
+        /*
+        The code is checking if the `$identifier` variable is set, and is greater than 0, if the $title is set, if the lead_content is set, if the id_user is set. If
+        all these conditions are true, it means that the post can be modified and the user is redirected to the listing of posts in the back office. If ones of these conditions is not good, the user get an Exception*/
 
         if (isset($identifier) && $identifier > 0 && isset($title) && $title != '' && isset($lead_content) && $lead_content != '' && isset($content) && $content != '' && isset($id_user) && $id_user > 0) {
             $postRepository->modifyPost($identifier, $title, $lead_content, $content, $id_user);
@@ -98,14 +108,16 @@ class PostController
             throw new Exception('La modification ne peut pas être effectuée');
         }
     }
-
+    /*
+    Delete a specific post with the identifier parameter. The post will then have the deletion date in the delete_at column, but will not be deleted from the database to avoid conflicts.*/
     public function deletePost(int $identifier)
     {
         $connection = new DatabaseConnection();
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        /* check if the variable $identifier is set and is greater than 0 */
+        /*
+        check if the variable $identifier is set and is greater than 0*/
 
         if (isset($identifier) && $identifier > 0) {
             $postRepository->deletePost($identifier);
@@ -115,6 +127,8 @@ class PostController
         }
     }
 
+    /*
+    Get the admins to create a dropdown in the admin menu with the different people able to add and modify posts*/
     public function getAdmins()
     {
 
@@ -122,7 +136,8 @@ class PostController
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        /* if the following methods can be done : getAdmins(), the method returns all admins in an array of data. Otherwise, an Exception is called*/
+        /*
+        if the following methods can be done : getAdmins(), the method returns all admins in an array of data. Otherwise, an Exception is called*/
         try {
             return $postRepository->getAdmins();
         } catch (\Throwable $th) {
@@ -130,6 +145,8 @@ class PostController
         }
     }
 
+    /*
+    Retrieves the information of the user who created the post and identifies him/her as the "author".*/
     public function getAuthor(int $identifier)
     {
 
@@ -137,8 +154,9 @@ class PostController
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        /* check if $identifier is valid, is an int and is more than 0.
-        Return the author of the post */
+        /* 
+        check if $identifier is valid, is an int and is more than 0.
+        Return the author of the post*/
 
         if (isset($identifier) && $identifier > 0 && is_int($identifier)) {
             return $postRepository->getAuthor($identifier);
