@@ -60,8 +60,7 @@ class PostRepository
         $data->execute();
 
         $posts = [];
-
-        while (($row = $data->fetch(PDO::FETCH_ASSOC)) === true) {
+        while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
 
             $post = new Post();
 
@@ -101,7 +100,7 @@ class PostRepository
         $data->bindParam(':id', $identifier, PDO::PARAM_INT);
         $data->execute();
 
-        while (($row = $data->fetch(PDO::FETCH_ASSOC)) === true) {
+        while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
 
             $post = new Post();
 
@@ -138,7 +137,7 @@ class PostRepository
 
         $data->execute();
 
-        while (($row = $data->fetch(PDO::FETCH_ASSOC)) === true) {
+        while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
             $author = [
                 'id' => htmlspecialchars($row['id'], ENT_NOQUOTES),
                 'firstname' => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
@@ -277,7 +276,7 @@ class PostRepository
 
         $admins = [];
 
-        while (($row = $data->fetch(PDO::FETCH_ASSOC)) === true) {
+        while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
             $admin = [
                 'id' => $row['id'],
                 'lastname' => $row['lastname'],
