@@ -35,6 +35,8 @@ class PostController
 
     /*
     Get all posts available in the database to display on front page*/
+
+
     public function getPosts()
     {
 
@@ -45,8 +47,11 @@ class PostController
         return $postRepository->getPosts();
     }
 
+
     /*
     Get all informations of one post from a spesific  '$identifier'*/
+
+
     public function getPost(int $identifier)
     {
 
@@ -65,8 +70,12 @@ class PostController
             throw new Exception('Aucun identifiant de billet envoyé');
         }
     }
+
+
     /*
     Add post to in the database*/
+
+
     public function addPost(string $title, string $lead_content, string $content, int $fk_user_id)
     {
 
@@ -88,8 +97,11 @@ class PostController
         }
     }
 
+
     /*
     Modifies a specific post with the identifier parameter. The post will then be added to the database.*/
+
+
     public function modifyPost(int $identifier, string $title, string $lead_content, string $content, int $id_user)
     {
 
@@ -108,8 +120,12 @@ class PostController
             throw new Exception('La modification ne peut pas être effectuée');
         }
     }
+
+
     /*
     Delete a specific post with the identifier parameter. The post will then have the deletion date in the delete_at column, but will not be deleted from the database to avoid conflicts.*/
+
+
     public function deletePost(int $identifier)
     {
         $connection = new DatabaseConnection();
@@ -127,8 +143,11 @@ class PostController
         }
     }
 
+
     /*
     Get the admins to create a dropdown in the admin menu with the different people able to add and modify posts*/
+
+
     public function getAdmins()
     {
 
@@ -145,8 +164,11 @@ class PostController
         }
     }
 
+
     /*
     Retrieves the information of the user who created the post and identifies him/her as the "author".*/
+
+    
     public function getAuthor(int $identifier)
     {
 
@@ -162,4 +184,6 @@ class PostController
             return $postRepository->getAuthor($identifier);
         }
     }
+
+    
 }

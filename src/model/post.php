@@ -48,6 +48,7 @@ class PostRepository
      * Post objects.
      * @return array an array of Post objects.*/
 
+     
     public function getPosts(): array
     {
 
@@ -79,12 +80,14 @@ class PostRepository
         return $posts;
     }
 
+
     /**
      * The function `getPost` retrieves a post from the database based on the given ID and returns it
      * as a `Post` object.
      * @param int identifier The parameter "identifier" is an integer that represents the ID of the post that we want
      * to retrieve from the database.
      * @return Post an instance of the Post class.*/
+
 
     public function getPost(int $identifier): Post
     {
@@ -121,6 +124,7 @@ class PostRepository
      * @return array containing the details of the author with the specified ID. The array includes
      * the author's ID, firstname, lastname, and email.*/
 
+
     public function getAuthor(int $identifier)
     {
 
@@ -147,7 +151,6 @@ class PostRepository
     }
 
 
-
     /**
      * The function `addPost` inserts a new post into the database with the provided title, lead
      * content, content, and user ID.
@@ -159,6 +162,7 @@ class PostRepository
      * @param int fk_user_id The parameter "fk_user_id" is the foreign key that represents the user ID
      * of the user who is creating the post. It is used to associate the post with the user in the
      * database.*/
+
 
     public function addPost(string $title, string $lead_content, string $content, int $fk_user_id): Void
     {
@@ -181,6 +185,7 @@ class PostRepository
         $insert->execute();
     }
 
+
     /**
      * The function `modifyPost` updates a post in the database with the provided title, lead content,
      * content, user ID, and modified date.
@@ -192,6 +197,7 @@ class PostRepository
      * @param string content The "content" parameter is a string that represents the updated content of
      * a post.
      * @param int id_user The id of the user who is modifying the post.*/
+
 
     public function modifyPost(int $identifier, string $title, string $lead_content, string $content, int $id_user): Void
     {
@@ -222,11 +228,13 @@ class PostRepository
         $insert->execute();
     }
 
+
     /**
      * The function `deletePost` updates the `deleted_at` column of a post in the `b_post` table with
      * the current date and time.
      * @param int identifier The parameter "$identifier" is an integer that represents the ID of the post that needs to
      * be deleted.*/
+
 
     public function deletePost(int $identifier)
     {
@@ -248,10 +256,12 @@ class PostRepository
         $delete->execute();
     }
 
+
     /**
      * The function `getAdmins()` retrieves a list of administrators from a database table.
      * @return array an array of admins. Each admin is represented by an associative array with keys
      * 'id', 'lastname', 'firstname', and 'email'.*/
+
 
     public function getAdmins(): array
     {
@@ -278,4 +288,6 @@ class PostRepository
         }
         return $admins;
     }
+
+    
 }

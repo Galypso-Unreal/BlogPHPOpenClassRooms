@@ -18,6 +18,7 @@ class DatabaseConnection
      * The function returns a PDO connection to a MySQL database.
      * @return PDO a PDO object, which represents a connection to a database.*/
 
+     
     public function getConnection(): PDO
 
     {
@@ -27,4 +28,6 @@ class DatabaseConnection
 
         return $this->database;
     }
+
+    
 }

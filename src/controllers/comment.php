@@ -31,6 +31,7 @@ class CommentController
      * @return The functions `getAllComments()`, `addComment()`, `deleteComment()`, `validComment()`,
      * and `getComments()` are all returning different values.*/
 
+
     public function getAllComments()
     {
 
@@ -47,8 +48,10 @@ class CommentController
         return $commentRepository->getAllComments();
     }
 
+
     /*
     Add comment to the database*/
+
 
     public function addComment(string $comment)
     {
@@ -84,8 +87,10 @@ class CommentController
         }
     }
 
+
     /*
     delete comment from database*/
+
 
     public function deleteComment(int $identifier)
     {
@@ -107,8 +112,10 @@ class CommentController
         }
     }
 
+
     /*
     valid comment in the database. After the confirmation, the comment gonna by available on post front*/
+
 
     public function validComment(int $identifier)
     {
@@ -127,10 +134,12 @@ class CommentController
             throw new Exception("L'id du commentaire n'est pas bon");
         }
     }
+    
 
     /*
     get all comments available in the database*/
 
+    
     public function getComments(int $identifier)
     {
         $connection = new DatabaseConnection();
@@ -147,4 +156,6 @@ class CommentController
             throw new Exception("Les commentaires ne peuvent pas être récupérés");
         }
     }
+
+
 }

@@ -39,6 +39,8 @@ class UserController
      * @return The function `createAccount()` returns either the result of the `createAccount()` method
      * from the `` object if all the input data is valid and the email is unique, or an
      * array of errors if any of the input data is invalid or the email is not unique.*/
+
+     
     public function createAccount()
     {
 
@@ -120,10 +122,13 @@ class UserController
         }
     }
 
+
     /**
      * The function checks if an email is unique by using a database connection and a user repository.
      * 
      * @return the result of the checkUniqueEmail() method from the UserRepository class.*/
+
+
     public function checkUniqueEmail()
     {
         $connection = new DatabaseConnection();
@@ -133,10 +138,13 @@ class UserController
         return $userRepository->checkUniqueEmail();
     }
 
+
     /**
      * The function checks if a user exists in the database.
      * 
      * @return the result of the checkUserExist() method from the UserRepository class.*/
+
+
     public function checkUserExist()
     {
 
@@ -147,12 +155,15 @@ class UserController
         return $userRepository->checkUserExist();
     }
 
+
     /**
      * The `login()` function handles the login functionality by checking if the email and password
      * fields are set, validating the user's credentials, and returning any errors encountered during
      * the process.
      * @return either the result of the login attempt (if successful) or an array of errors (if there
      * are any validation issues or the user does not exist).*/
+
+
     public function login()
     {
 
@@ -196,10 +207,13 @@ class UserController
         }
     }
 
+
     /**
      * The function retrieves all users from the database using a UserRepository object and a
      * DatabaseConnection object.
      * @return The getAllUsers() function is returning all the users from the UserRepository.*/
+
+
     public function getAllUsers()
     {
 
@@ -210,6 +224,7 @@ class UserController
         return $userRepository->getAllUsers();
     }
 
+
     /**
      * The `validateUser()` function checks if the given identifier is valid and calls the
      * corresponding method in the UserRepository to validate the user in the database.
@@ -217,6 +232,8 @@ class UserController
      * expected to be an integer value greater than 0.
      * @return The code is returning the result of the `validateUser()` method of the `$userRepository`
      * object.*/
+
+
     public function validateUser($identifier)
     {
 
@@ -237,6 +254,7 @@ class UserController
         }
     }
 
+
     /**
      * The `deleteUser()` function checks if the provided identifier is valid and calls the
      * corresponding method to delete the user from the database.
@@ -245,6 +263,8 @@ class UserController
      * the user.
      * @return The code is returning the result of the `deleteUser()` method of the `$userRepository`
      * object.*/
+
+
     public function deleteUser($identifier)
     {
 
@@ -264,4 +284,6 @@ class UserController
             throw new Exception("L'ID n'est pas correcte");
         }
     }
+
+    
 }

@@ -49,6 +49,7 @@ class CommentRepository
      * array of Comment objects.
      * @return array an array of Comment objects.*/
 
+
     public function getAllComments(): array
     {
 
@@ -79,10 +80,12 @@ class CommentRepository
         return $comments;
     }
 
+
     /**
      * The function `addComment` inserts a comment into the database with the specified comment, user
      * ID, and post ID.
      * @param string comment The comment that needs to be added to the database.*/
+
 
     public function addComment(string $comment): Void
     {
@@ -114,11 +117,13 @@ class CommentRepository
         $insert->execute();
     }
 
+
     /**
      * The function `deleteComment` updates the `deleted_at` column of a comment in the database with
      * the current date and time.
      * @param int identifier The parameter "$identifier" is an integer that represents the unique identifier of the
      * comment that needs to be deleted.*/
+
 
     public function deleteComment(int $identifier): Void
     {
@@ -140,11 +145,13 @@ class CommentRepository
         $delete->execute();
     }
 
+
     /**
      * The validComment function updates the is_valid field of a comment in the b_comment table to 1,
      * indicating that the comment is valid.
      * @param int identifier The parameter "$identifier" is an integer that represents the ID of the comment that needs
      * to be validated.*/
+
 
     public function validComment(int $identifier): Void
     {
@@ -160,12 +167,14 @@ class CommentRepository
         $data->execute();
     }
 
+
     /**
      * The function `getComments` retrieves comments from the database based on the provided post ID.
      * @param int identifier The parameter "$identifier" is an integer that represents the ID of a post. This function
      * retrieves all the comments associated with that post from the database.
      * @return array an array of Comment objects.*/
 
+     
     public function getComments(int $identifier): array
     {
 
@@ -194,4 +203,6 @@ class CommentRepository
         }
         return $comments;
     }
+
+    
 }

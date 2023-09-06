@@ -19,6 +19,7 @@ class FormController
      * length of each field is within the specified limits.
      * @return int 0 or 1.*/
 
+
     public function confirmationForm()
     {
         $post = new GlobalPost();
@@ -61,6 +62,7 @@ class FormController
             return 1;
         }
     }
+    
 
     /**
      * The function `sendMailContact` sends an email with contact information and a message if all
@@ -68,6 +70,7 @@ class FormController
      * @return an array called , which contains the values of the variables firstname,
      * lastname, email, and message.*/
 
+     
     public function sendMailContact()
     {
         $post = new GlobalPost();
@@ -110,4 +113,6 @@ class FormController
             throw new Exception("L'envoi du mail n'est pas valide. Un message, prénom, nom et une adresse email est obligatoire pour l'envoi du mail");
         }
     }
+
+
 }
