@@ -84,7 +84,7 @@ class PostRepository
     /**
      * The function `getPost` retrieves a post from the database based on the given ID and returns it
      * as a `Post` object.
-     * @param int identifier The parameter "identifier" is an integer that represents the ID of the post that we want
+     * @param int identifier The parameter "$identifier" is an integer that represents the ID of the post that we want
      * to retrieve from the database.
      * @return Post an instance of the Post class.*/
 

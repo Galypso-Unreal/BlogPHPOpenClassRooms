@@ -84,7 +84,8 @@ class CommentRepository
     /**
      * The function `addComment` inserts a comment into the database with the specified comment, user
      * ID, and post ID.
-     * @param string comment The comment that needs to be added to the database.*/
+     * @param string comment The parameter "$comment" is a string that represents the comment that will
+     * be added to the database.*/
 
 
     public function addComment(string $comment): Void
