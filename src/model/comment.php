@@ -95,7 +95,7 @@ class CommentRepository
         $session = new GlobalSession();
         $get = new GlobalGet();
 
-        if ($session->getSession('LOGGED_USER')['id'] == true) {
+        if ($session->getSession('LOGGED_USER')['id'] !== null) {
             $user =   htmlspecialchars($session->getSession('LOGGED_USER')['id'], ENT_NOQUOTES);
         }
 
@@ -103,7 +103,7 @@ class CommentRepository
             $comment_sec = htmlspecialchars($comment, ENT_NOQUOTES);
         }
 
-        if ($get->getKey('id')) {
+        if ($get->getKey('id') !== null) {
             $post = htmlspecialchars($get->getKey('id'), ENT_NOQUOTES);
         }
 

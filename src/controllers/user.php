@@ -57,23 +57,23 @@ class UserController
         `lastname`, `email`, `password`, and `confirmepassword` fields from the form submission and
         assigning them to the respective variables.*/
 
-        if ($post->getPost('firstname') == true) {
+        if ($post->getPost('firstname') !== null) {
             $firstname = $post->getPost('firstname');
         }
 
-        if ($post->getPost('lastname') == true) {
+        if ($post->getPost('lastname') !== null) {
             $lastname = $post->getPost('lastname');
         }
 
-        if ($post->getPost('email') == true) {
+        if ($post->getPost('email') !== null) {
             $email = $post->getPost('email');
         }
 
-        if ($post->getPost('password') == true) {
+        if ($post->getPost('password') !== null) {
             $password = $post->getPost('password');
         }
 
-        if ($post->getPost('confirmepassword') == true) {
+        if ($post->getPost('confirmepassword') !== null) {
             $confirmepassword = $post->getPost('confirmepassword');
         }
 
@@ -84,37 +84,37 @@ class UserController
         (up to 60 characters), `$lastname` (up to 60 characters), and `$email` (up to 100
         characters) to ensure they are within the allowed limits.*/
 
-        if ((isset($firstname) === true &&  strlen($firstname) > 0 && strlen($firstname) <= 60) && (isset($lastname) === true && strlen($lastname) > 0 && strlen($lastname) <= 60) && (isset($email) === true && strlen($email) > 0 && strlen($email) <= 100) && (isset($password) === true && strlen($password > 0)) && (isset($confirmepassword) === true && strlen($confirmepassword) > 0) && $password === $confirmepassword && $this->checkUniqueEmail() == 1) {
+        if ((isset($firstname) === true &&  strlen($firstname) > 0 === true && strlen($firstname) <= 60 === true) && (isset($lastname) === true && strlen($lastname) > 0 === true && strlen($lastname) <= 60 === true) && (isset($email) === true && strlen($email) > 0 === true && strlen($email) <= 100 === true) && (isset($password) === true && strlen($password) > 0 === true) && (isset($confirmepassword) === true && strlen($confirmepassword) > 0 === true) && $password === $confirmepassword && $this->checkUniqueEmail() === 1) {
 
             return $userRepository->createAccount();
         } else {
 
             $errors = [];
 
-            if (isset($firstname) === false || $firstname == '') {
+            if (isset($firstname) === false || $firstname === '') {
                 $errors['firstname'] = 'Veuillez enregister votre prénom';
             }
 
-            if (isset($lastname) === false || $lastname == '') {
+            if (isset($lastname) === false || $lastname === '') {
                 $errors['lastname'] = 'Veuillez enregister votre nom';
             }
 
-            if (isset($email) === false || $email == '') {
+            if (isset($email) === false || $email === '') {
                 $errors['email'] = 'Veuillez enregister votre email';
             }
 
-            if (isset($password) === false || $password == '') {
+            if (isset($password) === false || $password === '') {
                 $errors['password'] = 'Veuillez enregister votre mot de passe';
             }
 
-            if (isset($confirmepassword) === false || $confirmepassword == '') {
+            if (isset($confirmepassword) === false || $confirmepassword === '') {
                 $errors['confirmepassword'] = 'Veuillez confirmer votre mot de passe';
             }
-            if ($confirmepassword != $password) {
+            if ($confirmepassword !== $password) {
                 $errors['confirmepassword'] = "Le mot de passe de confirmation n'est pas correcte";
             }
 
-            if ($this->checkUniqueEmail() == 0) {
+            if ($this->checkUniqueEmail() === 0) {
                 $errors['email'] = 'Cet email est déjà existant';
             }
 
@@ -178,7 +178,7 @@ class UserController
         POST request. If both fields are set, the code assigns their values to the `$email` and
         `$password` variables.*/
 
-        if ($post->getPost('email') == true && $post->getPost('password') == true) {
+        if ($post->getPost('email') !== null && $post->getPost('password') !== null) {
             $email = $post->getPost('email');
             $password = $post->getPost('password');
         }
@@ -186,20 +186,20 @@ class UserController
         $check = $this->checkUserExist();
         $errors = [];
 
-        if ((isset($email) && $email != '') && (isset($password) && strlen($password) > 0 &&  $check == 1)) {
+        if ((isset($email) === true && $email !== '') && (isset($password) === true && strlen($password) > 0 === true &&  $check === 1)) {
             return $userRepository->login();
         } else {
 
-            if (isset($email) === false || $email == '') {
+            if (isset($email) === false || $email === '') {
                 $errors['email'] = 'Veuillez enregister votre email';
             }
-            if (isset($password) === false || $password == '') {
+            if (isset($password) === false || $password === '') {
                 $errors['password'] = 'Veuillez enregister votre mot de passe';
             }
-            if ($check == 0 && isset($password) && $password !== '' && isset($email) && $email !== '') {
+            if ($check === 0 && isset($password) === true && $password !== '' && isset($email) === true && $email !== '') {
                 $errors['check'] = "L'adresse email ou le mot de passe est incorrecte";
             }
-            if ($check == 2 && isset($password) && $password !== '' && isset($email) && $email !== '') {
+            if ($check === 2 && isset($password) === true && $password !== '' && isset($email) === true && $email !== '') {
                 $errors['check'] = "Votre compte n'est pas encore validé";
             }
 
@@ -247,7 +247,7 @@ class UserController
         `$userRepository` object and passes the `$identifier` as an argument. This method is responsible for
         validating a user in the database.*/
 
-        if (isset($identifier) && $identifier > 0 && is_int($identifier)) {
+        if (isset($identifier) === true && $identifier > 0 === true && is_int($identifier) === true) {
             return $userRepository->validateUser($identifier);
         } else {
             throw new Exception("L'ID n'est pas correcte");
@@ -278,7 +278,7 @@ class UserController
         `$userRepository` object and passes the `$identifier` as an argument. This method is responsible for
         deleting a user from the database.*/
 
-        if (isset($identifier) && $identifier > 0 && is_int($identifier)) {
+        if (isset($identifier) === true && $identifier > 0 === true && is_int($identifier) === true) {
             return $userRepository->deleteUser($identifier);
         } else {
             throw new Exception("L'ID n'est pas correcte");

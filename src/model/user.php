@@ -62,23 +62,23 @@ class UserRepository
 
         $insert = $db->prepare($sql);
 
-        if ($post->getPost('lastname') == true) {
+        if ($post->getPost('lastname') !== null) {
             $lastname = htmlspecialchars($post->getPost('lastname'), ENT_NOQUOTES);
         }
 
-        if ($post->getPost('firstname') == true) {
+        if ($post->getPost('firstname') !== null) {
             $firstname = htmlspecialchars($post->getPost('firstname'), ENT_NOQUOTES);
         }
 
-        if ($post->getPost('email') == true) {
+        if ($post->getPost('email') !== null) {
             $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
         }
 
-        if ($post->getPost('password') == true) {
+        if ($post->getPost('password') !== null) {
             $password = htmlspecialchars($post->getPost('password'), ENT_NOQUOTES);
         }
 
-        if (isset($lastname) && isset($firstname) && isset($email) && isset($password)) {
+        if (isset($lastname) === true && isset($firstname) === true && isset($email) === true && isset($password) === true) {
             $fk_id_role = 2;
 
             $chiff = sha1($password);
@@ -144,7 +144,7 @@ class UserRepository
 
         $data = $db->prepare($sql);
 
-        if ($post->getPost('email') == true && $post->getPost('password') == true) {
+        if ($post->getPost('email') !== null && $post->getPost('password') !== null) {
             $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
             $password = htmlspecialchars($post->getPost('password'), ENT_NOQUOTES);
             $chiff = sha1($password);
@@ -157,8 +157,8 @@ class UserRepository
 
         $row = $data->fetch(PDO::FETCH_ASSOC);
 
-        if ($row) {
-            if ($row['is_valid'] == 1) {
+        if (empty($row) === false) {
+            if ($row['is_valid'] === 1) {
                 return 1;
             } else {
                 return 2;
@@ -202,9 +202,9 @@ class UserRepository
 
         $row = $data->fetch(PDO::FETCH_ASSOC);
 
-        if ($row) {
+        if (empty($row) === false) {
 
-            if ($row['fk_id_role'] == 1) {
+            if ($row['fk_id_role'] === 1) {
 
                 $session->setSession(
                     'LOGGED_ADMIN',
@@ -287,7 +287,7 @@ class UserRepository
 
         $row = $data->fetch(PDO::FETCH_ASSOC);
 
-        if ($row) {
+        if (empty($row) === false) {
             $user = new User();
 
             $user->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);

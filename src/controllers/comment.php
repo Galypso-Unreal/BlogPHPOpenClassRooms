@@ -84,7 +84,7 @@ class CommentController
         `CommentRepository` object. After adding the comment, it redirects the user to the
         specified current post using the `header()` function.*/
 
-        if (isset($comment) === true && $comment != '' && isset($identifier) === true && $identifier > 0 && $user && isset($user['id']) === true) {
+        if (isset($comment) === true && $comment !== '' && isset($identifier) === true && $identifier > 0 && empty($user) === false && isset($user['id']) === true) {
             $commentRepository->addComment($comment);
             return header('Location: http://blog.local/actualites/index;php?action=getPost&id=' . $identifier);
         } else {
@@ -142,7 +142,7 @@ class CommentController
         The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be considered valid.*/
 
-        if (isset($identifier) === true && is_int($identifier) && $identifier > 0) {
+        if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0) {
             $commentRepository->validComment($identifier);
             return header('Location: http://blog.local/admin/comments');
         } else {
@@ -170,7 +170,7 @@ class CommentController
         The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be retrieved.*/
 
-        if (isset($identifier) === true && is_int($identifier) && $identifier > 0) {
+        if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0) {
             return $commentRepository->getComments($identifier);
         } else {
             throw new Exception("Les commentaires ne peuvent pas être récupérés");

@@ -71,7 +71,7 @@ class PostController
         The code is checking if the `$identifier` variable is set and is greater than 0. If
         all these conditions are true, it means that the post can be get and displayed to the user.*/
 
-        if ($get->getKey('id') && $get->getKey('id') > 0) {
+        if ($get->getKey('id') !== null && $get->getKey('id') > 0) {
             return $postRepository->getPost($identifier);
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');
@@ -107,7 +107,7 @@ class PostController
         The code checks whether the following variables are defined: title, lead_contnet, content and fk_user_id. If all these conditions are true, the user can add a post.
         After adding the post to the database, the user is redirected to the list of all posts available on the website. If it's not possible to add any post, the user get an Exception*/
 
-        if (isset($title) && $title != '' && isset($lead_content) && $lead_content != '' && isset($content) && $content != '' && isset($fk_user_id) && $fk_user_id > 0) {
+        if (isset($title) === true && $title !== '' && isset($lead_content) === true && $lead_content !== '' && isset($content) === true && $content !== '' && isset($fk_user_id) === true && $fk_user_id > 0) {
 
             $postRepository->addPost($title, $lead_content, $content, $fk_user_id);
             return header('Location: http://blog.local/admin/posts');
@@ -149,7 +149,7 @@ class PostController
         The code is checking if the `$identifier` variable is set, and is greater than 0, if the $title is set, if the lead_content is set, if the id_user is set. If
         all these conditions are true, it means that the post can be modified and the user is redirected to the listing of posts in the back office. If ones of these conditions is not good, the user get an Exception*/
 
-        if (isset($identifier) && $identifier > 0 && isset($title) && $title != '' && isset($lead_content) && $lead_content != '' && isset($content) && $content != '' && isset($id_user) && $id_user > 0) {
+        if (isset($identifier) === true && $identifier > 0 && isset($title) === true && $title !== '' && isset($lead_content) === true && $lead_content !== '' && isset($content) === true && $content !== '' && isset($id_user) === true && $id_user > 0) {
             $postRepository->modifyPost($identifier, $title, $lead_content, $content, $id_user);
             return header('Location: http://blog.local/admin/posts');
         } else {
@@ -176,7 +176,7 @@ class PostController
         /*
         check if the variable $identifier is set and is greater than 0*/
 
-        if (isset($identifier) && $identifier > 0) {
+        if (isset($identifier) === true && $identifier > 0) {
             $postRepository->deletePost($identifier);
             return header('Location: http://blog.local/admin/posts');
         } else {
@@ -225,7 +225,7 @@ class PostController
         check if $identifier is valid, is an int and is more than 0.
         Return the author of the post*/
 
-        if (isset($identifier) && $identifier > 0 && is_int($identifier)) {
+        if (isset($identifier) === true && $identifier > 0 && is_int($identifier) === true) {
             return $postRepository->getAuthor($identifier);
         }
     }

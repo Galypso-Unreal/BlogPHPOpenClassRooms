@@ -46,7 +46,7 @@ class FormController
                 $message = htmlspecialchars($post->getPost('message'), ENT_NOQUOTES);
             }
 
-            if (strlen($firstname > 50)) {
+            if (strlen($firstname > 50) === true) {
                 echo "Votre prénom est trop long";
                 return 0;
             } elseif (strlen($lastname) > 50) {
@@ -93,7 +93,7 @@ class FormController
 
 
 
-        if (isset($firstname) && $firstname != '' && isset($lastname) && $lastname != '' && isset($email) && $email != '' && isset($message) && $message != '') {
+        if (isset($firstname) === true && $firstname !== '' && isset($lastname) === true && $lastname !== '' && isset($email) === true && $email !== '' && isset($message) === true && $message !== '') {
 
             $informations = array(
                 'firstname' => $firstname,
