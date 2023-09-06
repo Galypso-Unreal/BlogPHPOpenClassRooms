@@ -25,7 +25,7 @@ $server = new GlobalServer();
 $get = new GlobalGet();
 
 //routeur
-if ($get->getKey('action') == true && $get->getKey('action') !== '') {
+if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
 
     // USER
 
@@ -35,12 +35,12 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
 
         $user = (new UserController())->login();
 
-        if ($user == 1) {
+        if ($user === 1) {
             header('Location: http://blog.local');
-        } else if ($user == 2) {
+        } else if ($user === 2) {
             header('Location: http://blog.local/admin/posts');
         } else {
-            if ($post->getPost('email') == true) {
+            if ($post->getPost('email') !== null) {
 
                 echo $twig->render('login.twig', array(
                     'errors' => $user,
@@ -55,7 +55,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
 
     if ($get->getKey('action') === 'logoutUser') {
 
-        if ($session->getSession('LOGGED_USER') == true) {
+        if ($session->getSession('LOGGED_USER') !== null) {
             $session->forgetSession('LOGGED_USER');
         }
 
@@ -64,7 +64,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
 
     if ($get->getKey('action') === 'logoutAdmin') {
 
-        if ($session->getSession('LOGGED_ADMIN') == true) {
+        if ($session->getSession('LOGGED_ADMIN') !== null) {
             $session->forgetSession('LOGGED_ADMIN');
         }
         header('Location: http://blog.local/');
@@ -85,7 +85,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
 
     if ($get->getKey('action') === 'confirmationForm') {
 
-        if ((new FormController())->confirmationForm() == 1) {
+        if ((new FormController())->confirmationForm() === 1) {
             $informations = (new FormController())->sendMailContact();
             echo $twig->render('elements/confirm.twig', array(
                 'informations' => $informations
@@ -114,7 +114,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
         $user = new UserController();
         $create = $user->createAccount();
 
-        if (is_array($create) == 1) {
+        if (is_array($create) === 1) {
             echo $twig->render('register.twig', array(
                 'errors' => $create,
                 'before' => $post->getAllPost()
@@ -167,7 +167,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
     } elseif ($host === '/register') {
         echo $twig->render('register.twig');
     } elseif ($host === '/admin/login') {
-        if ($session->getSession('LOGGED_ADMIN') == true) {
+        if ($session->getSession('LOGGED_ADMIN') !== null) {
             header('Location: /admin/posts');
         } else {
             echo $twig->render('admin/login.twig');
@@ -176,7 +176,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
 
     // BACK-OFFICE LINKS
 
-    if ($session->getSession('LOGGED_ADMIN') == true) {
+    if ($session->getSession('LOGGED_ADMIN') !== null) {
 
         if ($host === '/admin/post/add') {
             echo $twig->render('admin/post/add.twig', array(
@@ -189,7 +189,7 @@ if ($get->getKey('action') == true && $get->getKey('action') !== '') {
         } elseif (strpos($host, "admin/post/delete")) {
             (new PostController())->deletePost($get->getKey('id'));
         } elseif (strpos($host, "admin/post/modify")) {
-            if ($get->getKey('id') == true) {
+            if ($get->getKey('id') !== null) {
                 echo $twig->render('admin/post/modify.twig', array(
                     'post' => (new PostController())->getPost($get->getKey('id')),
                     'admins' => (new PostController())->getAdmins()

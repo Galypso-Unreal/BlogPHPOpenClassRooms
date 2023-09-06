@@ -64,7 +64,7 @@ class CommentRepository
 
         $comments = [];
 
-        while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
+        while (($row = $data->fetch(PDO::FETCH_ASSOC)) === true) {
             $comment = new Comment();
 
             $comment->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
@@ -192,7 +192,7 @@ class CommentRepository
 
         $comments = [];
 
-        while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
+        while (($row = $data->fetch(PDO::FETCH_ASSOC)) === true) {
 
             $comment = new Comment();
 

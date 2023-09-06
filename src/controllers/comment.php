@@ -69,7 +69,7 @@ class CommentController
 
         $user = $session->getSession('LOGGED_USER');
 
-        if ($get->getKey('id') == true) {
+        if ($get->getKey('id') !== null) {
             $identifier = $get->getKey('id');
         }
 
@@ -84,7 +84,7 @@ class CommentController
         `CommentRepository` object. After adding the comment, it redirects the user to the
         specified current post using the `header()` function.*/
 
-        if (isset($comment) === true && $comment !== '' && isset($identifier) === true && $identifier > 0 && empty($user) === false && isset($user['id']) === true) {
+        if (isset($comment) === true && $comment !== '' && isset($identifier) === true && $identifier > 0 === true && empty($user) === false && isset($user['id']) === true) {
             $commentRepository->addComment($comment);
             return header('Location: http://blog.local/actualites/index;php?action=getPost&id=' . $identifier);
         } else {
@@ -108,7 +108,7 @@ class CommentController
         The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be deleted.*/
 
-        if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0) {
+        if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0 === true) {
 
             $connection = new DatabaseConnection();
             $commentRepository = new commentRepository();
@@ -142,7 +142,7 @@ class CommentController
         The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be considered valid.*/
 
-        if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0) {
+        if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0 === true) {
             $commentRepository->validComment($identifier);
             return header('Location: http://blog.local/admin/comments');
         } else {
@@ -170,7 +170,7 @@ class CommentController
         The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be retrieved.*/
 
-        if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0) {
+        if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0 === true) {
             return $commentRepository->getComments($identifier);
         } else {
             throw new Exception("Les commentaires ne peuvent pas être récupérés");

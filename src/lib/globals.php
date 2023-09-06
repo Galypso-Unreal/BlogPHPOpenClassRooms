@@ -16,7 +16,7 @@ class GlobalGet
 
     public static function getKey($key)
     {
-        return (isset($_GET[$key]) ? filter_input(INPUT_GET, $key) : null);
+        return (isset($_GET[$key]) === true ? filter_input(INPUT_GET, $key) : null);
     }
 
 
@@ -50,7 +50,7 @@ class GlobalPost
 
     public static function getPost($key)
     {
-        return (isset($_POST[$key]) ? filter_input(INPUT_POST, $key) : null);
+        return (isset($_POST[$key]) === true ? filter_input(INPUT_POST, $key) : null);
     }
 
 
@@ -62,7 +62,7 @@ class GlobalPost
 
     public static function getAllPost()
     {
-        return (isset($_POST) ? filter_input_array(INPUT_POST) : null);
+        return (isset($_POST) === true ? filter_input_array(INPUT_POST) : null);
     }
 
 
@@ -106,7 +106,7 @@ class GlobalSession
 
     public static function getSession($key)
     {
-        return (isset($_SESSION[$key]) ? filter_var_array($_SESSION[$key]) : null);
+        return (isset($_SESSION[$key]) === true ? filter_var_array($_SESSION[$key]) : null);
     }
 
 
@@ -118,7 +118,7 @@ class GlobalSession
 
     public static function getAllSession()
     {
-        return (isset($_SESSION) ? filter_var_array($_SESSION) : null);
+        return (isset($_SESSION) === true ? filter_var_array($_SESSION) : null);
     }
 
 
@@ -163,7 +163,7 @@ class GlobalServer
 
     public static function getServer($key)
     {
-        return (isset($_SERVER[$key]) ? filter_var($_SERVER[$key]) : null);
+        return (isset($_SERVER[$key]) === true ? filter_var($_SERVER[$key]) : null);
     }
 
 
@@ -174,7 +174,7 @@ class GlobalServer
 
     public static function getAllServer()
     {
-        return (isset($_SERVER) ? filter_var_array($_SERVER) : null);
+        return (isset($_SERVER) === true ? filter_var_array($_SERVER) : null);
     }
 
 

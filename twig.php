@@ -18,7 +18,7 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $getID = new TwigFunction('get_ID', function () {
     $server = new GlobalServer();
-    if ($server->getServer('REQUEST_URI') == true) {
+    if ($server->getServer('REQUEST_URI') !== null) {
         $host = $server->getServer('REQUEST_URI');
         $identifier = explode('id=', $host);
         $identifier = end($identifier);
@@ -44,10 +44,10 @@ $session = new GlobalSession();
 
 $twig->addGlobal('img_assets', 'http://blog.local/src/assets/img/');
 
-if ($session->getSession('LOGGED_ADMIN') == true && !empty($session->getSession('LOGGED_ADMIN'))) {
+if ($session->getSession('LOGGED_ADMIN') !== null && empty($session->getSession('LOGGED_ADMIN')) === false) {
     $twig->addGlobal('admin_session', $session->getSession('LOGGED_ADMIN'));
 }
 
-if ($session->getSession('LOGGED_USER') == true && !empty($session->getSession('LOGGED_USER'))) {
+if ($session->getSession('LOGGED_USER') !== null && empty($session->getSession('LOGGED_USER')) === false) {
     $twig->addGlobal('user_session', $session->getSession('LOGGED_USER'));
 }
