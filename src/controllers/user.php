@@ -26,20 +26,20 @@ class UserController
 {
 
     /**
-         * The code contains PHP functions for creating an account, checking unique email, checking if a
-         * user exists, logging in, getting all users, validating a user, and deleting a user.
-         * @return The function `createAccount()` returns either the result of the `createAccount()` method
-         * from the `$userRepository` object if all the conditions are met, or an array of errors if any of
-         * the conditions fail.
+     * The code contains PHP functions for creating an account, checking unique email, checking if a
+     * user exists, logging in, getting all users, validating a user, and deleting a user.
+     * @return The function `createAccount()` returns either the result of the `createAccount()` method
+     * from the `$userRepository` object if all the conditions are met, or an array of errors if any of
+     * the conditions fail.
      */
 
 
     /**
-         * The function `createAccount()` is responsible for creating a new user account by validating the
-         * input data and checking for any errors.
-         * @return The function `createAccount()` returns either the result of the `createAccount()` method
-         * from the `` object if all the input data is valid and the email is unique, or an
-         * array of errors if any of the input data is invalid or the email is not unique.
+     * The function `createAccount()` is responsible for creating a new user account by validating the
+     * input data and checking for any errors.
+     * @return The function `createAccount()` returns either the result of the `createAccount()` method
+     * from the `` object if all the input data is valid and the email is unique, or an
+     * array of errors if any of the input data is invalid or the email is not unique.
      */
 
      
@@ -129,9 +129,9 @@ class UserController
 
 
     /**
-         * The function checks if an email is unique by using a database connection and a user repository.
-         * 
-         * @return the result of the checkUniqueEmail() method from the UserRepository class.
+     * The function checks if an email is unique by using a database connection and a user repository.
+     * 
+     * @return the result of the checkUniqueEmail() method from the UserRepository class.
      */
 
 
@@ -147,9 +147,9 @@ class UserController
 
 
     /**
-         * The function checks if a user exists in the database.
-         * 
-         * @return the result of the checkUserExist() method from the UserRepository class.
+     * The function checks if a user exists in the database.
+     * 
+     * @return the result of the checkUserExist() method from the UserRepository class.
      */
 
 
@@ -166,11 +166,11 @@ class UserController
 
 
     /**
-         * The `login()` function handles the login functionality by checking if the email and password
-         * fields are set, validating the user's credentials, and returning any errors encountered during
-         * the process.
-         * @return either the result of the login attempt (if successful) or an array of errors (if there
-         * are any validation issues or the user does not exist).
+     * The `login()` function handles the login functionality by checking if the email and password
+     * fields are set, validating the user's credentials, and returning any errors encountered during
+     * the process.
+     * @return either the result of the login attempt (if successful) or an array of errors (if there
+     * are any validation issues or the user does not exist).
      */
 
 
@@ -221,9 +221,9 @@ class UserController
 
 
     /**
-         * The function retrieves all users from the database using a UserRepository object and a
-         * DatabaseConnection object.
-         * @return The getAllUsers() function is returning all the users from the UserRepository.
+     * The function retrieves all users from the database using a UserRepository object and a
+     * DatabaseConnection object.
+     * @return The getAllUsers() function is returning all the users from the UserRepository.
      */
 
 
@@ -240,12 +240,12 @@ class UserController
 
 
     /**
-         * The `validateUser()` function checks if the given identifier is valid and calls the
-         * corresponding method in the UserRepository to validate the user in the database.
-         * @param identifier The `$identifier` parameter is used to identify a user in the database. It is
-         * expected to be an integer value greater than 0.
-         * @return The code is returning the result of the `validateUser()` method of the `$userRepository`
-         * object.
+     * The `validateUser()` function checks if the given identifier is valid and calls the
+     * corresponding method in the UserRepository to validate the user in the database.
+     * @param identifier The `$identifier` parameter is used to identify a user in the database. It is
+     * expected to be an integer value greater than 0.
+     * @return The code is returning the result of the `validateUser()` method of the `$userRepository`
+     * object.
      */
 
 
@@ -273,13 +273,13 @@ class UserController
 
 
     /**
-         * The `deleteUser()` function checks if the provided identifier is valid and calls the
-         * corresponding method to delete the user from the database.
-         * @param identifier The `$identifier` parameter is used to identify the user that needs to be
-         * deleted from the database. It should be an integer value representing the unique identifier of
-         * the user.
-         * @return The code is returning the result of the `deleteUser()` method of the `$userRepository`
-         * object.
+     * The `deleteUser()` function checks if the provided identifier is valid and calls the
+     * corresponding method to delete the user from the database.
+     * @param identifier The `$identifier` parameter is used to identify the user that needs to be
+     * deleted from the database. It should be an integer value representing the unique identifier of
+     * the user.
+     * @return The code is returning the result of the `deleteUser()` method of the `$userRepository`
+     * object.
      */
 
 

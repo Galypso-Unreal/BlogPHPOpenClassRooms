@@ -38,10 +38,10 @@ class CommentController
     {
 
         /* 
-        The code is creating a new instance of the `DatabaseConnection` class and a new instance of
-        the `CommentRepository` class. It then assigns the `DatabaseConnection` object to the
-        `connection` property of the `CommentRepository` object. This allows the `CommentRepository`
-        object to have access to the database connection and perform operations on the database.
+            The code is creating a new instance of the `DatabaseConnection` class and a new instance of
+            the `CommentRepository` class. It then assigns the `DatabaseConnection` object to the
+            `connection` property of the `CommentRepository` object. This allows the `CommentRepository`
+            object to have access to the database connection and perform operations on the database.
         */
 
         $connection = new DatabaseConnection();
@@ -98,12 +98,12 @@ class CommentController
 
 
     /**
-         * This PHP function deletes a comment from a database if the identifier is set, is an integer, and
-         * is greater than 0, otherwise it throws an exception.
-         * @param int identifier The `identifier` parameter is an integer that represents the unique
-         * identifier of the comment that needs to be deleted.
-         * @return mixed code is returning a header redirect to the URL "http://blog.local/admin/comments"
-         * after deleting the comment.
+     * This PHP function deletes a comment from a database if the identifier is set, is an integer, and
+     * is greater than 0, otherwise it throws an exception.
+     * @param int identifier The `identifier` parameter is an integer that represents the unique
+     * identifier of the comment that needs to be deleted.
+     * @return mixed code is returning a header redirect to the URL "http://blog.local/admin/comments"
+     * after deleting the comment.
      */
 
 
@@ -131,12 +131,12 @@ class CommentController
 
 
     /**
-         * The function checks if a comment identifier is valid and redirects to the admin comments page if
-         * it is, otherwise it throws an exception.
-         * @param int identifier The `identifier` parameter is an integer that represents the ID of a
-         * comment.
-         * @return a header redirect to the URL "http://blog.local/admin/comments" if the comment
-         * identifier is valid.
+     * The function checks if a comment identifier is valid and redirects to the admin comments page if
+     * it is, otherwise it throws an exception.
+     * @param int identifier The `identifier` parameter is an integer that represents the ID of a
+     * comment.
+     * @return a header redirect to the URL "http://blog.local/admin/comments" if the comment
+     * identifier is valid.
      */
 
 
@@ -162,12 +162,12 @@ class CommentController
     
 
     /**
-         * This PHP function retrieves comments based on a given identifier if it meets certain conditions,
-         * otherwise it throws an exception.
-         * @param int identifier The `identifier` parameter is an integer that represents the unique
-         * identifier of the comment that needs to be retrieved.
-         * @return mixed the conditions in the if statement are true, the function will return the result of
-         * calling the `getComments()` method on the `$commentRepository` object.
+     * This PHP function retrieves comments based on a given identifier if it meets certain conditions,
+     * otherwise it throws an exception.
+     * @param int identifier The `identifier` parameter is an integer that represents the unique
+     * identifier of the comment that needs to be retrieved.
+     * @return mixed the conditions in the if statement are true, the function will return the result of
+     * calling the `getComments()` method on the `$commentRepository` object.
      */
 
 

@@ -54,9 +54,9 @@ class PostRepository
     public DatabaseConnection $connection;
 
     /**
-         * The function `getPosts` retrieves all posts from the database and returns them as an array of
-         * Post objects.
-         * @return array an array of Post objects.
+     * The function `getPosts` retrieves all posts from the database and returns them as an array of
+     * Post objects.
+     * @return array an array of Post objects.
      */
 
      
@@ -93,11 +93,11 @@ class PostRepository
 
 
     /**
-         * The function `getPost` retrieves a post from the database based on the given ID and returns it
-         * as a `Post` object.
-         * @param int identifier The parameter "$identifier" is an integer that represents the ID of the post that we want
-         * to retrieve from the database.
-         * @return Post an instance of the Post class.
+     * The function `getPost` retrieves a post from the database based on the given ID and returns it
+     * as a `Post` object.
+     * @param int identifier The parameter "$identifier" is an integer that represents the ID of the post that we want
+     * to retrieve from the database.
+     * @return Post an instance of the Post class.
      */
 
 
@@ -131,11 +131,11 @@ class PostRepository
 
 
     /**
-         * The function `getAuthor` retrieves author information from a database based on the provided ID.
-         * @param int identifier The parameter "$identifier" is an integer that represents the ID of the author you want to
-         * retrieve from the database.
-         * @return array containing the details of the author with the specified ID. The array includes
-         * the author's ID, firstname, lastname, and email.
+     * The function `getAuthor` retrieves author information from a database based on the provided ID.
+     * @param int identifier The parameter "$identifier" is an integer that represents the ID of the author you want to
+     * retrieve from the database.
+     * @return array containing the details of the author with the specified ID. The array includes
+     * the author's ID, firstname, lastname, and email.
      */
 
 
@@ -162,16 +162,16 @@ class PostRepository
 
 
     /**
-         * The function `addPost` inserts a new post into the database with the provided title, lead
-         * content, content, and user ID.
-         * @param string $title The title of the post.
-         * @param string lead_content The lead_content parameter is a string that represents the
-         * introductory or summary content of the post.
-         * @param string content The "content" parameter is a string that represents the main content of
-         * the post. It can contain any text or HTML content that you want to display in the post.
-         * @param int fk_user_id The parameter "fk_user_id" is the foreign key that represents the user ID
-         * of the user who is creating the post. It is used to associate the post with the user in the
-         * database.
+     * The function `addPost` inserts a new post into the database with the provided title, lead
+     * content, content, and user ID.
+     * @param string $title The title of the post.
+     * @param string lead_content The lead_content parameter is a string that represents the
+     * introductory or summary content of the post.
+     * @param string content The "content" parameter is a string that represents the main content of
+     * the post. It can contain any text or HTML content that you want to display in the post.
+     * @param int fk_user_id The parameter "fk_user_id" is the foreign key that represents the user ID
+     * of the user who is creating the post. It is used to associate the post with the user in the
+     * database.
      */
 
 
@@ -199,16 +199,16 @@ class PostRepository
 
 
     /**
-         * The function `modifyPost` updates a post in the database with the provided title, lead content,
-         * content, user ID, and modified date.
-         * @param int id The ID of the post that needs to be modified.
-         * @param string title The title of the post that you want to modify.
-         * @param string lead_content The parameter "lead_content" is a string that represents the
-         * introductory content of a post. It is typically a shorter version of the main content and is
-         * used to provide a summary or preview of the post.
-         * @param string content The "content" parameter is a string that represents the updated content of
-         * a post.
-         * @param int id_user The id of the user who is modifying the post.
+     * The function `modifyPost` updates a post in the database with the provided title, lead content,
+     * content, user ID, and modified date.
+     * @param int id The ID of the post that needs to be modified.
+     * @param string title The title of the post that you want to modify.
+     * @param string lead_content The parameter "lead_content" is a string that represents the
+     * introductory content of a post. It is typically a shorter version of the main content and is
+     * used to provide a summary or preview of the post.
+     * @param string content The "content" parameter is a string that represents the updated content of
+     * a post.
+     * @param int id_user The id of the user who is modifying the post.
      */
 
 
@@ -244,10 +244,10 @@ class PostRepository
 
 
     /**
-         * The function `deletePost` updates the `deleted_at` column of a post in the `b_post` table with
-         * the current date and time.
-         * @param int identifier The parameter "$identifier" is an integer that represents the ID of the post that needs to
-         * be deleted.
+     * The function `deletePost` updates the `deleted_at` column of a post in the `b_post` table with
+     * the current date and time.
+     * @param int identifier The parameter "$identifier" is an integer that represents the ID of the post that needs to
+     * be deleted.
      */
 
 
@@ -274,9 +274,9 @@ class PostRepository
 
 
     /**
-         * The function `getAdmins()` retrieves a list of administrators from a database table.
-         * @return array an array of admins. Each admin is represented by an associative array with keys
-         * 'id', 'lastname', 'firstname', and 'email'.
+     * The function `getAdmins()` retrieves a list of administrators from a database table.
+     * @return array an array of admins. Each admin is represented by an associative array with keys
+     * 'id', 'lastname', 'firstname', and 'email'.
      */
 
 
