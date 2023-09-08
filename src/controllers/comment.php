@@ -58,6 +58,7 @@ class CommentController
      * the comment to the database and redirects the user to the current post.
      * @param string comment The `$comment` parameter is a string that represents the comment that
      * needs to be added.
+     * 
      * @return mixed code is returning a header redirect to the specified URL if all the conditions in
      * the if statement are true.
      */
@@ -102,6 +103,7 @@ class CommentController
      * is greater than 0, otherwise it throws an exception.
      * @param int identifier The `identifier` parameter is an integer that represents the unique
      * identifier of the comment that needs to be deleted.
+     * 
      * @return mixed code is returning a header redirect to the URL "http://blog.local/admin/comments"
      * after deleting the comment.
      */
@@ -135,6 +137,7 @@ class CommentController
      * it is, otherwise it throws an exception.
      * @param int identifier The `identifier` parameter is an integer that represents the ID of a
      * comment.
+     * 
      * @return a header redirect to the URL "http://blog.local/admin/comments" if the comment
      * identifier is valid.
      */
@@ -166,6 +169,7 @@ class CommentController
      * otherwise it throws an exception.
      * @param int identifier The `identifier` parameter is an integer that represents the unique
      * identifier of the comment that needs to be retrieved.
+     * 
      * @return mixed the conditions in the if statement are true, the function will return the result of
      * calling the `getComments()` method on the `$commentRepository` object.
      */

@@ -189,6 +189,7 @@ class CommentRepository
      * The function `getComments` retrieves comments from the database based on the provided post ID.
      * @param int identifier The parameter "$identifier" is an integer that represents the ID of a post. This function
      * retrieves all the comments associated with that post from the database.
+     * 
      * @return array an array of Comment objects.
      */
 
