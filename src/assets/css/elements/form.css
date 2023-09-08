@@ -94,7 +94,7 @@ textarea:focus {
   font-size: 1.5rem;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
   .container-form  form {
     flex-direction: row;
   }

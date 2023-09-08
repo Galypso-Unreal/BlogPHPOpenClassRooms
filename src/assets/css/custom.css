@@ -12,7 +12,7 @@ html {
 }
 
 .informations-homepage  {
-  padding: 12rem 0 0rem;
+  padding: 12rem 0rem 0rem;
 }
 
 .informations-homepage  .presentation {
@@ -22,7 +22,7 @@ html {
   gap: 3rem;
 }
 
-.informations-homepage  .name .inner_name {
+.informations-homepage  .name .inner-name {
   font-size: 7rem;
 }
 
@@ -41,20 +41,20 @@ html {
   position: relative;
 }
 
-.informations-homepage  .picture .social_links {
+.informations-homepage  .picture .social-links {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  right: 0;
+  right: 0rem;
   position: absolute;
   width: auto;
   top: calc(100% + 2rem);
 }
 
 .informations-homepage  .picture::after {
-  top: 0;
+  top: 0rem;
   z-index: -1;
-  left: 0;
+  left: 0rem;
   background-color: brown;
   width: 150%;
   transform: rotate(45deg);
@@ -73,7 +73,7 @@ html {
 }
 
 .separator {
-  margin: 2rem 0;
+  margin: 2rem 0rem;
   height: 0.2rem;
   background-color: var(--bs-body-color);
   width: 100%;
@@ -81,7 +81,7 @@ html {
 }
 
 .separator-small {
-  margin: 1rem 0;
+  margin: 1rem 0rem;
   height: 0.1rem;
   background-color: white;
   width: 100%;
@@ -112,12 +112,15 @@ html {
   flex-direction: column;
   gap: 2rem;
 }
+
 .floating-window-user a:hover{
     color: black;
 }
+
 .header-account {
     cursor: pointer;
 }
+
 .header-account small {
   font-size: 1.5rem;
   font-weight: 200;
@@ -154,18 +157,18 @@ footer .contain-listing {
 }
 
 .post-header {
-  padding: 0;
+  padding: 0rem;
 }
 
 .post-content {
-  padding: 0;
+  padding: 0rem;
   width: 100%;
-  margin: 0 auto;
+  margin: 0rem auto;
   max-width: 92rem;
 }
 
 .masthead .container {
-  padding: 0;
+  padding: 0rem;
 }
 
 .post-header {
@@ -188,7 +191,7 @@ footer .contain-listing {
   color: white;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
   footer .contain-listing {
     align-items: unset;
   }

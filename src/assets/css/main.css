@@ -1,7 +1,4 @@
-@import "styles.css";
-
-@import "variables.css";
-
-@import "custom.css";
-
-@import "elements/_all.css";
+@import url("styles.css");
+@import url("variables.css");
+@import url("custom.css");
+@import url("elements/_all.css");

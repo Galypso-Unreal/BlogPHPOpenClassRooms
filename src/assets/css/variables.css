@@ -1,5 +1,5 @@
 :root {
-  --color-black: #212529;
+--bs-black: #212529;
 }
 
 html,
@@ -31,7 +31,7 @@ a {
   font-size: 1.5rem;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
   h1,
   .h1-style {
     font-size: 6.5rem;
@@ -52,8 +52,8 @@ a {
   }
 }
 
-.navbar {
-  background-color: var(--color-black) !important;
+#mainNav {
+  background-color: var(--bs-black);
 }
 
 a.anim {
