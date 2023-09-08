@@ -57,7 +57,8 @@ class PostController
     /**
      * This PHP function retrieves a post from a database based on an identifier, but throws an
      * exception if the identifier is not provided or is invalid.
-     * @param int identifier The `$identifier` parameter is an integer that represents the unique identifier of a post. It is used to retrieve a specific post from the database.
+     * @param int $identifier
+     * The `$identifier` parameter is an integer that represents the unique identifier of a post. It is used to retrieve a specific post from the database.
      * 
      * @return mixed code is returning the result of the `getPost()` method from the `$postRepository`
      * object.
@@ -90,13 +91,17 @@ class PostController
      * The function `addPost` checks if the required variables are defined and not empty, and if so,
      * adds a post to the database and redirects the user to the list of all posts, otherwise throws an
      * exception.
-     * @param string '$title' The title of the post.
+     * @param string '$title'
+     * The title of the post.
      * 
-     * @param string '$lead_content' The parameter "$lead_content" is a string that represents the introductory content or summary of the post. It provides a brief overview or teaser of the main content of the post.
+     * @param string '$lead_content'
+     * The parameter "$lead_content" is a string that represents the introductory content or summary of the post. It provides a brief overview or teaser of the main content of the post.
      * 
-     * @param string content The "$content" parameter is a string that represents the main content of the post. It typically contains the detailed information or body of the post.
+     * @param string content
+     * The "$content" parameter is a string that represents the main content of the post. It typically contains the detailed information or body of the post.
      * 
-     * @param int fk_user_id The parameter "$fk_user_id" is the foreign key that represents the user who is adding the post. It is an integer value that corresponds to the ID of the user in the database.
+     * @param int $fk_user_id
+     * The parameter "$fk_user_id" is the foreign key that represents the user who is adding the post. It is an integer value that corresponds to the ID of the user in the database.
      * 
      * @return mixed header redirect to the URL "http://blog.local/admin/posts" if all the conditions for
      * adding a post are met.
@@ -130,15 +135,20 @@ class PostController
     /**
      * The function `modifyPost` checks if the necessary variables are set and valid, and if so,
      * modifies a post and redirects the user to the post listing page, otherwise throws an exception.
-     * @param int '$identifier' The identifier is an integer that represents the unique identifier of the post that needs to be modified. It is used to identify the specific post in the database.
+     * @param int '$identifier'
+     * The identifier is an integer that represents the unique identifier of the post that needs to be modified. It is used to identify the specific post in the database.
      * 
-     * @param string '$title' The title of the post that you want to modify. It should be a string.
+     * @param string '$title'
+     * The title of the post that you want to modify. It should be a string.
      * 
-     * @param string '$lead_content' The `lead_content` parameter is a string that represents the introductory or summary content of a blog post. It is typically a shorter version of the main content and is often used to provide a preview or teaser of the post.
+     * @param string '$lead_content'
+     * The `lead_content` parameter is a string that represents the introductory or summary content of a blog post. It is typically a shorter version of the main content and is often used to provide a preview or teaser of the post.
      * 
-     * @param string '$content' The `content` parameter is a string that represents the main content of the post. It typically contains the body of the post, including text, images, and any other media that the post may include.
+     * @param string '$content'
+     * The `content` parameter is a string that represents the main content of the post. It typically contains the body of the post, including text, images, and any other media that the post may include.
      * 
-     * @param int '$id_user' The `id_user` parameter is an integer that represents the identifier of the user who is modifying the post. It is used to ensure that the user has the necessary permissions to modify the post.
+     * @param int '$id_user'
+     * The `id_user` parameter is an integer that represents the identifier of the user who is modifying the post. It is used to ensure that the user has the necessary permissions to modify the post.
      * 
      * @return mixed header redirect to the URL "http://blog.local/admin/posts" if all the conditions are
      * met and the post is successfully modified. If any of the conditions are not met, an Exception
@@ -171,7 +181,8 @@ class PostController
     /**
      * This PHP function deletes a post from the database based on the given identifier and redirects
      * the user to the admin posts page.
-     * @param int '$identifier' The identifier parameter is an integer that represents the unique identifier of the post that needs to be deleted.
+     * @param int '$identifier'
+     * The identifier parameter is an integer that represents the unique identifier of the post that needs to be deleted.
      * 
      * @return mixed header redirect to the URL "http://blog.local/admin/posts" if the condition is met and
      * the post is successfully deleted.
@@ -226,7 +237,8 @@ class PostController
     
     /**
      * This PHP function retrieves the author of a post based on the given identifier.
-     * @param int identifier The '$identifier' parameter is an integer that represents the ID of a post.
+     * @param int $identifier
+     * The 'identifier'parameter is an integer that represents the ID of a post.
      * 
      * @return mixed author of the post is being returned.
      */
