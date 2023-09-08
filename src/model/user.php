@@ -20,15 +20,21 @@ class User
 {
 
     public int $identifier;
+
     public string $lastname;
+
     public string $firstname;
+
     public string $email;
+
     public string $password;
+
     public int $is_valid;
+
     public ?string $deleted_at;
+
     public int $fk_id_role;
 }
-
 /*
 The `UserRepository` class is responsible for interacting with the database to perform various
 operations related to the `User` entity. It contains methods for creating a new user account,

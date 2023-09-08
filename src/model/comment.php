@@ -17,11 +17,17 @@ status, deletion timestamp, and foreign keys for user and post.*/
 
 class Comment
 {
+
     public int $identifier;
+
     public string $comment;
+
     public bool $is_valid;
+
     public ?string $deleted_at;
+
     public int $fk_user_id;
+
     public int $fk_post_id;
 }
 
@@ -34,7 +40,6 @@ SQL queries.*/
 
 class CommentRepository
 {
-
     /*
     `public DatabaseConnection ;` is declaring a public property named `` of
     type `DatabaseConnection`. This property is used to store an instance of the

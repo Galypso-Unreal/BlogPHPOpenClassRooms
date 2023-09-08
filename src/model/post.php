@@ -17,12 +17,19 @@ class Post
 {
 
     public int $identifier;
+
     public string $title;
+
     public string $lead_content;
+
     public string $content;
+
     public string $created_at;
+
     public string $modified_at;
+
     public ?string $deleted_at;
+    
     public int $fk_user_id;
 }
 
