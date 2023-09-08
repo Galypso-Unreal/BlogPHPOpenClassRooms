@@ -86,7 +86,6 @@ class UserController
             characters) to ensure they are within the allowed limits.
         */
         if ((isset($firstname) === true &&  strlen($firstname) > 0 === true && strlen($firstname) <= 60 === true) && (isset($lastname) === true && strlen($lastname) > 0 === true && strlen($lastname) <= 60 === true) && (isset($email) === true && strlen($email) > 0 === true && strlen($email) <= 100 === true) && (isset($password) === true && strlen($password) > 0 === true) && (isset($confirmepassword) === true && strlen($confirmepassword) > 0 === true) && $password === $confirmepassword && $this->checkUniqueEmail() === 1) {
-
             return $userRepository->createAccount();
         } else {
 
@@ -127,7 +126,7 @@ class UserController
 
     /**
      * The function checks if an email is unique by using a database connection and a user repository.
-     * 
+     *
      * @return the result of the checkUniqueEmail() method from the UserRepository class.
      */
     public function checkUniqueEmail()
@@ -143,7 +142,7 @@ class UserController
 
     /**
      * The function checks if a user exists in the database.
-     * 
+     *
      * @return the result of the checkUserExist() method from the UserRepository class.
      */
     public function checkUserExist()
@@ -232,7 +231,7 @@ class UserController
      * corresponding method in the UserRepository to validate the user in the database.
      * @param int The `$identifier` Identifier
      * parameter is used to identify a user in the database. It is expected to be an integer value greater than 0.
-     * 
+     *
      * @return The code is returning the result of the `validateUser()` method of the `$userRepository`
      * object.
      */
@@ -263,7 +262,7 @@ class UserController
      * corresponding method to delete the user from the database.
      * @param int The `$identifier` Identifier
      * parameter is used to identify the user that needs to be deleted from the database. It should be an integer value representing the unique identifier of the user.
-     * 
+     *
      * @return The code is returning the result of the `deleteUser()` method of the `$userRepository`
      * object.
      */

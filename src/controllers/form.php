@@ -1,5 +1,5 @@
 <?php
-// Checking all inputs in form
+// Checking all inputs in form.
 namespace Application\Controllers\Form;
 
 use Exception;
@@ -58,6 +58,7 @@ class FormController
             }
             return 1;
         }
+        // End if
 
     }
     
@@ -91,15 +92,14 @@ class FormController
 
 
         if (isset($firstname) === true && $firstname !== '' && isset($lastname) === true && $lastname !== '' && isset($email) === true && $email !== '' && isset($message) === true && $message !== '') {
-
             $informations = array('firstname' => $firstname,'lastname' => $lastname,'email' => $email,'message' => $message);
 
-            $to = 'johann.moser0681@gmail.com';
+            $toMail = 'johann.moser0681@gmail.com';
             $subject = 'Demande de contact';
 
 
             $message = 'Prénom : ' . $firstname . PHP_EOL . 'Nom : ' . $lastname . PHP_EOL . 'Email : ' . $email . PHP_EOL . 'Message : ' . $message . PHP_EOL;
-            mail($to, $subject, $message);
+            mail($toMail, $subject, $message);
             return $informations;
         } else {
             throw new Exception("L'envoi du mail n'est pas valide. Un message, prénom, nom et une adresse email est obligatoire pour l'envoi du mail");

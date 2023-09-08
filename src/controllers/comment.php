@@ -35,7 +35,7 @@ class CommentController
     public function getAllComments()
     {
 
-        /* 
+        /*
             The code is creating a new instance of the `DatabaseConnection` class and a new instance of
             the `CommentRepository` class. It then assigns the `DatabaseConnection` object to the
             `connection` property of the `CommentRepository` object. This allows the `CommentRepository`
@@ -56,7 +56,7 @@ class CommentController
      * the comment to the database and redirects the user to the current post.
      * @param string $comment Comment
      * The `$comment` parameter is a string that represents the comment that needs to be added.
-     * 
+     *
      * @return mixed code is returning a header redirect to the specified URL if all the conditions in
      * the if statement are true.
      */
@@ -75,7 +75,7 @@ class CommentController
             $identifier = $get->getKey('id');
         }
 
-        /* 
+        /*
             The code is checking if the `$comment` variable is set and not empty, if the `$identifier` variable
             is set and greater than 0, if the `$user` variable is set and if the `$user->identifier` property is
             set. If all these conditions are true, it means that the comment and user information are
@@ -85,7 +85,7 @@ class CommentController
         */
         if (isset($comment) === true && $comment !== '' && isset($identifier) === true && $identifier > 0 === true && empty($user) === false && isset($user['id']) === true) {
             $commentRepository->addComment($comment);
-            return header('Location: http://blog.local/actualites/index;php?action=getPost&id=' . $identifier);
+            return header('Location: http://blog.local/actualites/index;php?action=getPost&id='.$identifier);
         } else {
             throw new Exception('Vous ne pouvez pas ajouter de commentaire');
         }
@@ -99,7 +99,7 @@ class CommentController
      * @param int $identifier Identifier
      * The `$identifier` parameter is an integer that represents the unique
      * identifier of the comment that needs to be deleted.
-     * 
+     *
      * @return mixed code is returning a header redirect to the URL "http://blog.local/admin/comments"
      * after deleting the comment.
      */
@@ -132,7 +132,7 @@ class CommentController
      * @param int $identifier Identifier
      * The `$identifier` parameter is an integer that represents the ID of a
      * comment.
-     * 
+     *
      * @return a header redirect to the URL "http://blog.local/admin/comments" if the comment
      * identifier is valid.
      */
@@ -142,7 +142,7 @@ class CommentController
         $commentRepository = new commentRepository();
         $commentRepository->connection = $connection;
 
-        /* 
+        /*
             The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
             all these conditions are true, it means that the comment can be considered valid.
         */
@@ -163,7 +163,7 @@ class CommentController
      * @param int $identifier Identifier
      * The `$identifier` parameter is an integer that represents the unique
      * identifier of the comment that needs to be retrieved.
-     * 
+     *
      * @return mixed the conditions in the if statement are true, the function will return the result of
      * calling the `getComments()` method on the `$commentRepository` object.
      */

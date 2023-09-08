@@ -10,7 +10,7 @@ class GlobalGet
      * key, and returns it after filtering it.
      * @param string $key Key
      * is the name of the key that you want to retrieve from the superglobal array.
-     * 
+     *
      * @return mixed value of the specified key from the  array if it is set, otherwise it returns
      * null.
      */
@@ -29,7 +29,7 @@ class GlobalPost
      * The function sets a value in the  array using a specified key.
      * @param string $key Key
      * parameter is a string that represents the name of the key in the  array where the value will be stored.
-     * 
+     *
      * @param mixed $value Value
      * parameter is the value that you want to set for the given key in the
      *  array.
@@ -46,7 +46,7 @@ class GlobalPost
      * security purposes.
      * @param string $key Key
      * parameter is the name of the input field in the HTML form that you want to retrieve the value for.
-     * 
+     *
      * @return mixed value of the specified key from the  array if it is set, otherwise it returns
      * null.
      */
@@ -92,7 +92,7 @@ class GlobalSession
      * The function sets a value in the PHP session using a given key.
      * @param string $key Key
      * is a string that represents the name of the session variable you want to set. It is used to identify the session variable and retrieve its value later.
-     * 
+     *
      * @param mixed $value Value
      * parameter is the value that you want to store in the session variable.
      */
@@ -148,7 +148,7 @@ class GlobalServer
      * The function sets a value in the  superglobal array using the provided key.
      * @param string $key Key
      * parameter is a string that represents the name of the server variable that you want to set.
-     * 
+     *
      * @param mixed $value Value
      * parameter is the value that you want to set for the specified key in the
      *  array.
@@ -165,7 +165,7 @@ class GlobalServer
      * provided key, and returns it after applying the filter_var function.
      * @param string $key Key
      * parameter is a string that represents the name of the server variable that you want to retrieve.
-     * 
+     *
      * @return mixed value of the [$key] if it is set, otherwise it is returning null.
      */
     public static function getServer($key)

@@ -26,22 +26,16 @@ $get = new GlobalGet();
 
 // Routeur
 if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
-
     // USER
-
     // Login
-
     if ($get->getKey('action') === 'loginUser') {
-
         $user = (new UserController())->login();
-
         if ($user === 1) {
             header('Location: http://blog.local');
         } else if ($user === 2) {
             header('Location: http://blog.local/admin/posts');
         } else {
             if ($post->getPost('email') !== null) {
-
                 echo $twig->render('login.twig', array('errors' => $user,'email' => htmlspecialchars($post->getPost('email'), ENT_NOQUOTES),
 
                 ));
@@ -52,7 +46,6 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
     // LOGOUT
 
     if ($get->getKey('action') === 'logoutUser') {
-
         if ($session->getSession('LOGGED_USER') !== null) {
             $session->forgetSession('LOGGED_USER');
         }
@@ -71,7 +64,6 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
     // If send contact at form homepage
 
     if ($get->getKey('action') === 'getPost') {
-
         $identifier = $get->getKey('id');
         $post = (new PostController())->getPost($identifier);
         $comments = (new CommentController())->getComments($identifier);
@@ -79,14 +71,12 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
     }
 
     if ($get->getKey('action') === 'confirmationForm') {
-
         if ((new FormController())->confirmationForm() === 1) {
             $informations = (new FormController())->sendMailContact();
             echo $twig->render('elements/confirm.twig', array('informations' => $informations));
         }
     }
     if ($get->getKey('action') === 'addPost') {
-
         $title = $post->getPost('title');
         $lead_content = $post->getPost('lead_content');
         $content = $post->getPost('content');
@@ -95,7 +85,6 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         (new PostController())->addPost($title, $lead_content, $content, $fk_user_id);
     }
     if ($get->getKey('action') === 'modifyPost') {
-
         $title = $post->getPost('title');
         $lead_content = $post->getPost('lead_content');
         $content = $post->getPost('content');
@@ -103,7 +92,6 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         (new PostController())->modifyPost($get->getKey('id'), $title, $lead_content, $content, $id_user);
     }
     if ($get->getKey('action') === 'createAccount') {
-
         $user = new UserController();
         $create = $user->createAccount();
 
@@ -165,7 +153,6 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
     // BACK-OFFICE LINKS
 
     if ($session->getSession('LOGGED_ADMIN') !== null) {
-
         if ($host === '/admin/post/add') {
             echo $twig->render('admin/post/add.twig', array('admins' => (new PostController())->getAdmins()));
         } elseif ($host === '/admin/posts') {
@@ -177,10 +164,8 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
                 echo $twig->render('admin/post/modify.twig', array('post' => (new PostController())->getPost($get->getKey('id')),'admins' => (new PostController())->getAdmins()));
             }
         } elseif (strpos($host, "admin/comments")) {
-
             echo $twig->render('admin/comment/comments.twig', array('comments' => (new CommentController())->getAllComments()));
         } elseif (strpos($host, "admin/users")) {
-
             echo $twig->render('admin/user/users.twig', array('users' => (new UserController())->getAllUsers()));
         }
     }

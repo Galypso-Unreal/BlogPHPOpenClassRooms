@@ -43,7 +43,7 @@ class PostRepository
 {
 
     /*
-        `public DatabaseConnection ;` is declaring a public property `$connection` of type
+        The `public DatabaseConnection ;` is declaring a public property `$connection` of type
         `DatabaseConnection` in the `PostRepository` class. This property is used to store an instance
         of the `DatabaseConnection` class, which is responsible for establishing a connection to the
         database.
@@ -58,11 +58,11 @@ class PostRepository
     public function getPosts(): array
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT * FROM b_post WHERE deleted_at is NULL";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
         $data->execute();
 
         $posts = [];
@@ -92,17 +92,17 @@ class PostRepository
      * as a `Post` object.
      * @param int $identifier Identifier
      * The parameter "$identifier" is an integer that represents the ID of the post that we want to retrieve from the database.
-     * 
+     *
      * @return Post an instance of the Post class.
      */
     public function getPost(int $identifier): Post
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT * FROM b_post WHERE id=:id";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $data->bindParam(':id', $identifier, PDO::PARAM_INT);
         $data->execute();
@@ -128,18 +128,18 @@ class PostRepository
      * The function `getAuthor` retrieves author information from a database based on the provided ID.
      * @param int $identifier Identifier
      * The parameter "$identifier" is an integer that represents the ID of the author you want to retrieve from the database.
-     * 
+     *
      * @return array containing the details of the author with the specified ID. The array includes
      * the author's ID, firstname, lastname, and email.
      */
     public function getAuthor(int $identifier)
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT id,firstname,lastname,email FROM b_user WHERE id = :id";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
@@ -162,11 +162,11 @@ class PostRepository
      * 
      * @param string '$lead_content' Lead_content
      * The lead_content parameter is a string that represents the introductory or summary content of the post.
-     * 
+     *
      * @param string '$content' Content
-     * 
+     *
      * The "content" parameter is a string that represents the main content of the post. It can contain any text or HTML content that you want to display in the post.
-     * 
+     *
      * @param int '$fk_user_id' Fk_user_id
      * The parameter "fk_user_id" is the foreign key that represents the user ID
      * of the user who is creating the post. It is used to associate the post with the user in the
@@ -175,11 +175,11 @@ class PostRepository
     public function addPost(string $title, string $lead_content, string $content, int $fk_user_id): Void
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "INSERT INTO b_post (title,lead_content,content,fk_user_id) VALUES (:title,:lead_content,:content,:fk_user_id)";
 
-        $insert = $db->prepare($sql);
+        $insert = $database->prepare($sql);
         $lead_content_sec = htmlspecialchars($lead_content, ENT_NOQUOTES);
         $title_sec = htmlspecialchars($title, ENT_NOQUOTES);
         $content_sec = htmlspecialchars($content, ENT_NOQUOTES);
@@ -200,27 +200,27 @@ class PostRepository
      * content, user ID, and modified date.
      * @param int '$identifier' Identifier
      * The identifier of the post that needs to be modified.
-     * 
+     *
      * @param string '$title' Title
      * The title of the post that you want to modify.
-     * 
+     *
      * @param string '$lead_content' Lead_content
      * The parameter "lead_content" is a string that represents the introductory content of a post. It is typically a shorter version of the main content and is used to provide a summary or preview of the post.
-     * 
+     *
      * @param string '$content' Content
      * The "content" parameter is a string that represents the updated content of a post.
-     * 
+     *
      * @param int '$id_user' Id_user
      * The id of the user who is modifying the post.
      */
     public function modifyPost(int $identifier, string $title, string $lead_content, string $content, int $id_user): Void
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
 
         $sql = "UPDATE b_post SET title=:title,lead_content=:lead_content,content=:content,fk_user_id=:fk_user_id,modified_at=:modified_at WHERE id=:id";
-        $insert = $db->prepare($sql);
+        $insert = $database->prepare($sql);
 
         $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
         $datef = htmlspecialchars($date->format('Y-m-d H:i:s'), ENT_NOQUOTES);
@@ -253,7 +253,7 @@ class PostRepository
     public function deletePost(int $identifier)
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
 
 
@@ -262,7 +262,7 @@ class PostRepository
 
         $sql = "UPDATE b_post SET deleted_at=:deleted_at WHERE id=:id";
 
-        $delete = $db->prepare($sql);
+        $delete = $database->prepare($sql);
 
         $delete->bindParam('deleted_at', $datef);
         $delete->bindParam('id', $identifier, PDO::PARAM_INT);
@@ -281,11 +281,11 @@ class PostRepository
     {
 
         $database = new DatabaseConnection();
-        $db = $database->getConnection();
+        $database = $database->getConnection();
 
         $sql = "SELECT u.id,u.lastname,u.firstname,u.email FROM b_user u JOIN b_role r ON r.id = u.fk_id_role WHERE r.label = 'Administrateur'";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $data->execute();
 

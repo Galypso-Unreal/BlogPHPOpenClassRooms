@@ -60,11 +60,11 @@ class UserRepository
     {
         $post = new GlobalPost();
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "INSERT INTO b_user (lastname,firstname,email,password,fk_id_role) VALUES (:lastname,:firstname,:email,:password,:fk_id_role)";
 
-        $insert = $db->prepare($sql);
+        $insert = $database->prepare($sql);
 
         if ($post->getPost('lastname') !== null) {
             $lastname = htmlspecialchars($post->getPost('lastname'), ENT_NOQUOTES);
@@ -109,11 +109,11 @@ class UserRepository
     {
         $post = new GlobalPost();
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT * FROM b_user WHERE email = :email";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
 
@@ -142,11 +142,11 @@ class UserRepository
     {
         $post = new GlobalPost();
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT email,password,is_valid FROM b_user WHERE email=:email AND password=:password";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         if ($post->getPost('email') !== null && $post->getPost('password') !== null) {
             $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
@@ -187,11 +187,11 @@ class UserRepository
         $post = new GlobalPost();
         $session = new GlobalSession();
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT id,email,firstname,lastname,fk_id_role FROM b_user WHERE email=:email AND password=:password";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
         $password = htmlspecialchars($post->getPost('password'), ENT_NOQUOTES);
@@ -207,9 +207,7 @@ class UserRepository
         $row = $data->fetch(PDO::FETCH_ASSOC);
 
         if (empty($row) === false) {
-
             if ($row['fk_id_role'] === 1) {
-
                 $session->setSession(
                     'LOGGED_ADMIN',
                     array("id" => htmlspecialchars($row['id'], ENT_NOQUOTES),"email" => htmlspecialchars($row['email'], ENT_NOQUOTES),"firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),"lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)));
@@ -233,11 +231,11 @@ class UserRepository
     public function getAllUsers(): array
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT * FROM b_user WHERE NOT fk_id_role = 1 AND deleted_at IS NULL";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $data->execute();
 
@@ -270,11 +268,11 @@ class UserRepository
     public function getUser(): User
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT * FROM b_user WHERE fk_id_role = 1 AND id = :id";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $data->execute();
 
@@ -282,7 +280,6 @@ class UserRepository
 
         if (empty($row) === false) {
             $user = new User();
-
             $user->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
             $user->firstname = htmlspecialchars($row['firstname'], ENT_NOQUOTES);
             $user->lastname = htmlspecialchars($row['lastname'], ENT_NOQUOTES);
@@ -303,11 +300,11 @@ class UserRepository
     public function validateUser(int $identifier)
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "UPDATE b_user SET is_valid = 1 WHERE id=:id";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
@@ -325,14 +322,14 @@ class UserRepository
     public function deleteUser(int $identifier)
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
         $datef = htmlspecialchars($date->format('Y-m-d H:i:s'), ENT_NOQUOTES);
 
         $sql = "UPDATE b_user SET deleted_at=:deleted_at WHERE id=:id";
 
-        $delete = $db->prepare($sql);
+        $delete = $database->prepare($sql);
 
         $delete->bindParam('deleted_at', $datef);
         $delete->bindParam('id', $identifier, PDO::PARAM_INT);

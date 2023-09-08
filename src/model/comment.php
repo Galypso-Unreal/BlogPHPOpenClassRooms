@@ -11,7 +11,7 @@ use PDO;
 use DateTime;
 use DateTimeZone;
 
-/* 
+/*
     The Comment class represents a comment with various properties such as id, comment content, validity
     status, deletion timestamp, and foreign keys for user and post.
 */
@@ -41,7 +41,7 @@ class Comment
 class CommentRepository
 {
     /*
-        `public DatabaseConnection ;` is declaring a public property named `` of
+        The `public DatabaseConnection ;` is declaring a public property named `` of
         type `DatabaseConnection`. This property is used to store an instance of the
         `DatabaseConnection` class, which is responsible for establishing a connection with the
         database. By declaring this property as public, it can be accessed and used by other methods
@@ -57,12 +57,12 @@ class CommentRepository
     public function getAllComments(): array
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT * FROM b_comment WHERE deleted_at IS NULL ORDER BY is_valid";
 
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $data->execute();
 
@@ -95,7 +95,7 @@ class CommentRepository
     public function addComment(string $comment): Void
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
         $session = new GlobalSession();
         $get = new GlobalGet();
 
@@ -113,7 +113,7 @@ class CommentRepository
 
 
         $sql = "INSERT INTO b_comment (comment,fk_user_id,fk_post_id) VALUES (:comment,:fk_user_id,:fk_post_id)";
-        $insert = $db->prepare($sql);
+        $insert = $database->prepare($sql);
 
         $insert->bindParam(':comment', $comment_sec);
         $insert->bindParam(':fk_user_id', $user, PDO::PARAM_INT);
@@ -133,7 +133,7 @@ class CommentRepository
     public function deleteComment(int $identifier): Void
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $date = new DateTime('now', new DateTimeZone('Europe/Paris'),);
         $datef = htmlspecialchars($date->format('Y-m-d H:i:s'), ENT_NOQUOTES);
@@ -141,7 +141,7 @@ class CommentRepository
         $sql = "UPDATE b_comment SET deleted_at=:deleted_at WHERE id=:id";
 
 
-        $delete = $db->prepare($sql);
+        $delete = $database->prepare($sql);
 
         $delete->bindParam('deleted_at', $datef);
         $delete->bindParam('id', $identifier, PDO::PARAM_INT);
@@ -161,11 +161,11 @@ class CommentRepository
     public function validComment(int $identifier): Void
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "UPDATE b_comment SET is_valid='1' WHERE id=:id";
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
@@ -178,18 +178,18 @@ class CommentRepository
      * The function `getComments` retrieves comments from the database based on the provided post ID.
      * @param int $identifier Identifier
      * The parameter "$identifier" is an integer that represents the ID of a post. This function retrieves all the comments associated with that post from the database.
-     * 
+     *
      * @return array an array of Comment objects.
      */
     public function getComments(int $identifier): array
     {
 
-        $db = $this->connection->getConnection();
+        $database = $this->connection->getConnection();
 
         $sql = "SELECT id,comment,fk_user_id FROM b_comment WHERE fk_post_id = :id AND is_valid = '1' AND deleted_at IS NULL";
 
 
-        $data = $db->prepare($sql);
+        $data = $database->prepare($sql);
 
         $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
