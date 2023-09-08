@@ -1,8 +1,8 @@
-.container_form {
+.container-form  {
   padding: 10rem 0;
 }
 
-.container_form form {
+.container-form  form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,12 +11,12 @@
   gap: 3rem;
 }
 
-.container_form form .input.full {
+.container-form  form .input.full {
   max-width: 100%;
   flex: 0 100%;
 }
 
-.container_form form label {
+.container-form  form label {
   font-size: 1.7rem;
 }
 
@@ -39,7 +39,7 @@ textarea:focus {
   outline: none;
 }
 
-.container_form form .input {
+.container-form  form .input {
   flex: 0 100%;
   max-width: 100%;
   display: flex;
@@ -95,7 +95,7 @@ textarea:focus {
 }
 
 @media screen and (min-width: 992px) {
-  .container_form form {
+  .container-form  form {
     flex-direction: row;
   }
 
@@ -103,7 +103,7 @@ textarea:focus {
     align-items: unset;
   }
 
-  .container_form form .input {
+  .container-form  form .input {
     flex: 0 50%;
     max-width: calc(50% - 1.5rem);
   }
