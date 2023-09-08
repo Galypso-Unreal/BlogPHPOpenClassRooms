@@ -94,7 +94,7 @@ class CommentRepository
     /**
      * The function `addComment` inserts a comment into the database with the specified comment, user
      * ID, and post ID.
-     * @param string comment
+     * @param string $comment parameter
      * The parameter "$comment" is a string that represents the comment that will be added to the database.
      */
 
@@ -134,7 +134,7 @@ class CommentRepository
     /**
      * The function `deleteComment` updates the `deleted_at` column of a comment in the database with
      * the current date and time.
-     * @param int identifier
+     * @param int $identifier parameter
      * The parameter "$identifier" is an integer that represents the unique identifier of the comment that needs to be deleted.
      */
 
@@ -164,7 +164,7 @@ class CommentRepository
     /**
      * The validComment function updates the is_valid field of a comment in the b_comment table to 1,
      * indicating that the comment is valid.
-     * @param int identifier
+     * @param int $identifier parameter
      * The parameter "$identifier" is an integer that represents the ID of the comment that needs to be validated.
      */
 
@@ -187,7 +187,7 @@ class CommentRepository
 
     /**
      * The function `getComments` retrieves comments from the database based on the provided post ID.
-     * @param int identifier
+     * @param int $identifier parameter
      * The parameter "$identifier" is an integer that represents the ID of a post. This function retrieves all the comments associated with that post from the database.
      * 
      * @return array an array of Comment objects.

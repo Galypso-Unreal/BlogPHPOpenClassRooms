@@ -93,7 +93,7 @@ class PostRepository
     /**
      * The function `getPost` retrieves a post from the database based on the given ID and returns it
      * as a `Post` object.
-     * @param int identifier
+     * @param int $identifier parameter
      * The parameter "$identifier" is an integer that represents the ID of the post that we want to retrieve from the database.
      * 
      * @return Post an instance of the Post class.
@@ -131,7 +131,7 @@ class PostRepository
 
     /**
      * The function `getAuthor` retrieves author information from a database based on the provided ID.
-     * @param int identifier
+     * @param int $identifier parameter
      * The parameter "$identifier" is an integer that represents the ID of the author you want to retrieve from the database.
      * 
      * @return array containing the details of the author with the specified ID. The array includes
@@ -164,16 +164,16 @@ class PostRepository
     /**
      * The function `addPost` inserts a new post into the database with the provided title, lead
      * content, content, and user ID.
-     * @param string '$title'
+     * @param string '$title' parameter
      * The title of the post.
      * 
-     * @param string '$lead_content'
+     * @param string '$lead_content' parameter
      * The lead_content parameter is a string that represents the introductory or summary content of the post.
      * 
-     * @param string '$content'
+     * @param string '$content' parameter
      * The "content" parameter is a string that represents the main content of the post. It can contain any text or HTML content that you want to display in the post.
      * 
-     * @param int '$fk_user_id'
+     * @param int '$fk_user_id' parameter
      * The parameter "fk_user_id" is the foreign key that represents the user ID
      * of the user who is creating the post. It is used to associate the post with the user in the
      * database.
@@ -206,19 +206,19 @@ class PostRepository
     /**
      * The function `modifyPost` updates a post in the database with the provided title, lead content,
      * content, user ID, and modified date.
-     * @param int '$identifier'
+     * @param int '$identifier' parameter
      * The identifier of the post that needs to be modified.
      * 
-     * @param string '$title'
+     * @param string '$title' parameter
      * The title of the post that you want to modify.
      * 
-     * @param string '$lead_content'
+     * @param string '$lead_content' parameter
      * The parameter "lead_content" is a string that represents the introductory content of a post. It is typically a shorter version of the main content and is used to provide a summary or preview of the post.
      * 
-     * @param string '$content'
+     * @param string '$content' parameter
      * The "content" parameter is a string that represents the updated content of a post.
      * 
-     * @param int '$id_user'
+     * @param int '$id_user' parameter
      * The id of the user who is modifying the post.
      */
 
@@ -257,7 +257,7 @@ class PostRepository
     /**
      * The function `deletePost` updates the `deleted_at` column of a post in the `b_post` table with
      * the current date and time.
-     * @param int identifier
+     * @param int $identifier parameter
      * The parameter "$identifier" is an integer that represents the ID of the post that needs to be deleted.
      */
 
