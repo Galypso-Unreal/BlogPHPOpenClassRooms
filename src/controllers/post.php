@@ -49,6 +49,7 @@ class PostController
         return $postRepository->getPosts();
         
     }
+    //End getPosts()
 
 
     /**
@@ -211,6 +212,7 @@ class PostController
         /*
             If the following methods can be done : getAdmins(), the method returns all admins in an array of data. Otherwise, an Exception is called
         */
+
         try {
             return $postRepository->getAdmins();
         } catch (\Throwable $th) {

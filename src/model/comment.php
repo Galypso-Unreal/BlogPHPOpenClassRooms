@@ -15,6 +15,7 @@ use DateTimeZone;
     The Comment class represents a comment with various properties such as id, comment content, validity
     status, deletion timestamp, and foreign keys for user and post.
 */
+
 class Comment
 {
 
@@ -30,6 +31,7 @@ class Comment
 
     public int $fk_post_id;
 }
+
 /*
     The `CommentRepository` class is responsible for interacting with the database to perform CRUD
     (Create, Read, Update, Delete) operations on the `Comment` objects. It contains methods for
@@ -208,3 +210,4 @@ class CommentRepository
 
     
 }
+//End class

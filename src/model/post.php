@@ -32,6 +32,7 @@ class Post
     
     public int $fk_user_id;
 }
+//End class
 
 /*
     The `PostRepository` class is responsible for interacting with the database to perform CRUD
@@ -41,7 +42,6 @@ class Post
 */
 class PostRepository
 {
-
     /*
         The `public DatabaseConnection ;` is declaring a public property `$connection` of type
         `DatabaseConnection` in the `PostRepository` class. This property is used to store an instance

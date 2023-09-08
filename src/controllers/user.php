@@ -85,6 +85,7 @@ class UserController
             (up to 60 characters), `$lastname` (up to 60 characters), and `$email` (up to 100
             characters) to ensure they are within the allowed limits.
         */
+
         if ((isset($firstname) === true &&  strlen($firstname) > 0 === true && strlen($firstname) <= 60 === true) && (isset($lastname) === true && strlen($lastname) > 0 === true && strlen($lastname) <= 60 === true) && (isset($email) === true && strlen($email) > 0 === true && strlen($email) <= 100 === true) && (isset($password) === true && strlen($password) > 0 === true) && (isset($confirmepassword) === true && strlen($confirmepassword) > 0 === true) && $password === $confirmepassword && $this->checkUniqueEmail() === 1) {
             return $userRepository->createAccount();
         } else {
@@ -120,8 +121,8 @@ class UserController
 
             return $errors;
         }
-
     }
+    //End createAccount()
 
 
     /**

@@ -39,7 +39,7 @@ class GlobalPost
         $_POST[$key] = $value;
 
     }
-
+    //End setPost()
 
     /**
      * The function retrieves a value from the  array using the given key, and filters it for

@@ -11,6 +11,7 @@ use Application\Lib\Globals\GlobalPost;
     The `class FormController` is a PHP class that contains two functions: `confirmationForm()` and
     `sendMailContact()`.
 */
+
 class FormController
 {
 
@@ -60,6 +61,7 @@ class FormController
         }
         // End if
     }
+    //End confirmationForm()
 
     /**
      * The function `sendMailContact` sends an email with contact information and a message if all

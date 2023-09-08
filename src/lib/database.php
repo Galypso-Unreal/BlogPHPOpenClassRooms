@@ -10,6 +10,7 @@ use PDO;
     property `` which is an instance of the `PDO` class, and a method `getConnection()` which
     returns the database connection.
 */
+
 class DatabaseConnection
 {
 
@@ -26,6 +27,7 @@ class DatabaseConnection
         }
         return $this->database;
     }
+    //End getConnection()
 
     
 }

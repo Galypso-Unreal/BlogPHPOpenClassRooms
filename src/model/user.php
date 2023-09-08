@@ -16,6 +16,7 @@ use Exception;
     The User class represents a user with various properties such as id, lastname, firstname, email,
     password, is_valid, deleted_at, and fk_id_role.
 */
+
 class User
 {
 
@@ -35,6 +36,8 @@ class User
 
     public int $fk_id_role;
 }
+//End class
+
 /*
     The `UserRepository` class is responsible for interacting with the database to perform various
     operations related to the `User` entity. It contains methods for creating a new user account,

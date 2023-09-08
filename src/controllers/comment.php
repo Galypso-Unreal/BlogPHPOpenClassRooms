@@ -50,7 +50,7 @@ class CommentController
         return $commentRepository->getAllComments();
 
     }
-
+    //End getAllComments()
 
     /**
      * The function `addComment` checks if the comment and user information are valid, and if so, adds
@@ -84,6 +84,7 @@ class CommentController
             `CommentRepository` object. After adding the comment, it redirects the user to the
             specified current post using the `header()` function.
         */
+
         if (isset($comment) === true && $comment !== '' && isset($identifier) === true && $identifier > 0 === true && empty($user) === false && isset($user['id']) === true) {
             $commentRepository->addComment($comment);
             return header('Location: http://blog.local/actualites/index;php?action=getPost&id='.$identifier);
