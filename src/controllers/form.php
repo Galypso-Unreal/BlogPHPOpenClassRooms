@@ -95,12 +95,7 @@ class FormController
 
         if (isset($firstname) === true && $firstname !== '' && isset($lastname) === true && $lastname !== '' && isset($email) === true && $email !== '' && isset($message) === true && $message !== '') {
 
-            $informations = array(
-                'firstname' => $firstname,
-                'lastname' => $lastname,
-                'email' => $email,
-                'message' => $message
-            );
+            $informations = array('firstname' => $firstname,'lastname' => $lastname,'email' => $email,'message' => $message);
 
             $to = 'johann.moser0681@gmail.com';
             $subject = 'Demande de contact';

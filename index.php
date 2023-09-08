@@ -42,9 +42,7 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         } else {
             if ($post->getPost('email') !== null) {
 
-                echo $twig->render('login.twig', array(
-                    'errors' => $user,
-                    'email' => htmlspecialchars($post->getPost('email'), ENT_NOQUOTES),
+                echo $twig->render('login.twig', array('errors' => $user,'email' => htmlspecialchars($post->getPost('email'), ENT_NOQUOTES),
 
                 ));
             }
@@ -77,19 +75,14 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         $identifier = $get->getKey('id');
         $post = (new PostController())->getPost($identifier);
         $comments = (new CommentController())->getComments($identifier);
-        echo $twig->render('post.twig', array(
-            'post' => $post,
-            'comments' => $comments
-        ));
+        echo $twig->render('post.twig', array('post' => $post,'comments' => $comments));
     }
 
     if ($get->getKey('action') === 'confirmationForm') {
 
         if ((new FormController())->confirmationForm() === 1) {
             $informations = (new FormController())->sendMailContact();
-            echo $twig->render('elements/confirm.twig', array(
-                'informations' => $informations
-            ));
+            echo $twig->render('elements/confirm.twig', array('informations' => $informations));
         }
     }
     if ($get->getKey('action') === 'addPost') {
@@ -115,10 +108,7 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         $create = $user->createAccount();
 
         if (is_array($create) === 1) {
-            echo $twig->render('register.twig', array(
-                'errors' => $create,
-                'before' => $post->getAllPost()
-            ));
+            echo $twig->render('register.twig', array('errors' => $create,'before' => $post->getAllPost()));
         } else {
             echo $twig->render('register-send.twig', array());
         }
@@ -155,9 +145,7 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
     if ($host === "/") {
         echo $twig->render('index.twig');
     } elseif ($host === "/actualites/") {
-        echo $twig->render('posts.twig', array(
-            'posts' => (new PostController())->getPosts(),
-        ));
+        echo $twig->render('posts.twig', array('posts' => (new PostController())->getPosts()));
     } elseif ($host === '/login' && $session->getSession('LOGGED_USER') == true) {
         header('Location: http://blog.local');
     } elseif ($host === '/login') {
@@ -179,32 +167,21 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
     if ($session->getSession('LOGGED_ADMIN') !== null) {
 
         if ($host === '/admin/post/add') {
-            echo $twig->render('admin/post/add.twig', array(
-                'admins' => (new PostController())->getAdmins(),
-            ));
+            echo $twig->render('admin/post/add.twig', array('admins' => (new PostController())->getAdmins()));
         } elseif ($host === '/admin/posts') {
-            echo $twig->render('admin/post/posts.twig', array(
-                'posts' => (new PostController())->getPosts(),
-            ));
+            echo $twig->render('admin/post/posts.twig', array('posts' => (new PostController())->getPosts()));
         } elseif (strpos($host, "admin/post/delete")) {
             (new PostController())->deletePost($get->getKey('id'));
         } elseif (strpos($host, "admin/post/modify")) {
             if ($get->getKey('id') !== null) {
-                echo $twig->render('admin/post/modify.twig', array(
-                    'post' => (new PostController())->getPost($get->getKey('id')),
-                    'admins' => (new PostController())->getAdmins()
-                ));
+                echo $twig->render('admin/post/modify.twig', array('post' => (new PostController())->getPost($get->getKey('id')),'admins' => (new PostController())->getAdmins()));
             }
         } elseif (strpos($host, "admin/comments")) {
 
-            echo $twig->render('admin/comment/comments.twig', array(
-                'comments' => (new CommentController())->getAllComments()
-            ));
+            echo $twig->render('admin/comment/comments.twig', array('comments' => (new CommentController())->getAllComments()));
         } elseif (strpos($host, "admin/users")) {
 
-            echo $twig->render('admin/user/users.twig', array(
-                'users' => (new UserController())->getAllUsers()
-            ));
+            echo $twig->render('admin/user/users.twig', array('users' => (new UserController())->getAllUsers()));
         }
     }
 }

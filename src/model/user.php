@@ -214,21 +214,10 @@ class UserRepository
 
                 $session->setSession(
                     'LOGGED_ADMIN',
-                    array(
-                        "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
-                        "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
-                        "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
-                        "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
-                    )
-                );
+                    array("id" => htmlspecialchars($row['id'], ENT_NOQUOTES),"email" => htmlspecialchars($row['email'], ENT_NOQUOTES),"firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),"lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)));
                 return 2;
             } else {
-                $session->setSession('LOGGED_USER', array(
-                    "id" => htmlspecialchars($row['id'], ENT_NOQUOTES),
-                    "email" => htmlspecialchars($row['email'], ENT_NOQUOTES),
-                    "firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
-                    "lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)
-                ));
+                $session->setSession('LOGGED_USER', array("id" => htmlspecialchars($row['id'], ENT_NOQUOTES),"email" => htmlspecialchars($row['email'], ENT_NOQUOTES),"firstname" => htmlspecialchars($row['firstname'], ENT_NOQUOTES),"lastname" => htmlspecialchars($row['lastname'], ENT_NOQUOTES)));
                 return 1;
             }
         } else {

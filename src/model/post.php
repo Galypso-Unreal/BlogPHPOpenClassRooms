@@ -145,12 +145,7 @@ class PostRepository
         $data->execute();
 
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
-            $author = [
-                'id' => htmlspecialchars($row['id'], ENT_NOQUOTES),
-                'firstname' => htmlspecialchars($row['firstname'], ENT_NOQUOTES),
-                'lastname' => htmlspecialchars($row['lastname'], ENT_NOQUOTES),
-                'email' => htmlspecialchars($row['email'], ENT_NOQUOTES)
-            ];
+            $author = ['id' => htmlspecialchars($row['id'], ENT_NOQUOTES),'firstname' => htmlspecialchars($row['firstname'], ENT_NOQUOTES),'lastname' => htmlspecialchars($row['lastname'], ENT_NOQUOTES),'email' => htmlspecialchars($row['email'], ENT_NOQUOTES)];
         }
 
         return $author;
@@ -284,12 +279,7 @@ class PostRepository
         $admins = [];
 
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
-            $admin = [
-                'id' => $row['id'],
-                'lastname' => $row['lastname'],
-                'firstname' => $row['firstname'],
-                'email' => $row['email'],
-            ];
+            $admin = ['id' => $row['id'],'lastname' => $row['lastname'],'firstname' => $row['firstname'],'email' => $row['email']];
             $admins[] = $admin;
         }
         return $admins;
