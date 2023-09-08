@@ -35,7 +35,6 @@ class PostController
      * redirect, and some throw exceptions.
      */
 
-    
     /**
      * The function retrieves posts from a database using a connection and repository object.
      * @return mixed result of the `getPosts()` method from the `PostRepository` class.
@@ -118,7 +117,6 @@ class PostController
             $postRepository->addPost($title, $lead_content, $content, $fk_user_id);
             return header('Location: http://blog.local/admin/posts');
         } else {
-
             throw new Exception('Le formulaire est incomplet');
         }
 

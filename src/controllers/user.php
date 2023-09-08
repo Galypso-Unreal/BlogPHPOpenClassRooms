@@ -284,7 +284,6 @@ class UserController
         } else {
             throw new Exception("L'ID n'est pas correcte");
         }
-        
     }
 
     

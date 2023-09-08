@@ -67,9 +67,7 @@ class PostRepository
 
         $posts = [];
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
-
             $post = new Post();
-
             $post->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
             $post->title = htmlspecialchars($row['title'], ENT_NOQUOTES);
             $post->lead_content = htmlspecialchars($row['lead_content'], ENT_NOQUOTES);
@@ -108,9 +106,7 @@ class PostRepository
         $data->execute();
 
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
-
             $post = new Post();
-
             $post->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
             $post->title = htmlspecialchars($row['title'], ENT_NOQUOTES);
             $post->lead_content = htmlspecialchars($row['lead_content'], ENT_NOQUOTES);

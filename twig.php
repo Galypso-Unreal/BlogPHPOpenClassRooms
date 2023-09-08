@@ -30,13 +30,12 @@ $twig->addFunction($getID);
 
 
 $displayAuthor = new TwigFunction('displayAuthor', function (int $identifier) {
-
+    
     $connection = new DatabaseConnection();
     $postRepository = new PostRepository();
     $postRepository->connection = $connection;
 
     return $postRepository->getAuthor($identifier);
-    
 });
 
 $twig->addFunction($displayAuthor);

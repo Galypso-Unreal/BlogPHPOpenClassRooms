@@ -30,7 +30,6 @@ class Comment
 
     public int $fk_post_id;
 }
-
 /*
     The `CommentRepository` class is responsible for interacting with the database to perform CRUD
     (Create, Read, Update, Delete) operations on the `Comment` objects. It contains methods for
@@ -160,7 +159,6 @@ class CommentRepository
      */
     public function validComment(int $identifier): Void
     {
-
         $database = $this->connection->getConnection();
 
         $sql = "UPDATE b_comment SET is_valid='1' WHERE id=:id";
@@ -170,7 +168,6 @@ class CommentRepository
         $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
         $data->execute();
-
     }
 
 
@@ -198,9 +195,7 @@ class CommentRepository
         $comments = [];
 
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
-
             $comment = new Comment();
-
             $comment->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
             $comment->comment = htmlspecialchars($row['comment'], ENT_NOQUOTES);
             $comment->fk_user_id = htmlspecialchars($row['fk_user_id'], ENT_NOQUOTES);

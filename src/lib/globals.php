@@ -184,8 +184,6 @@ class GlobalServer
         return (isset($_SERVER) === true ? filter_var_array($_SERVER) : null);
 
     }
-
-
     /**
      * The function "forgetServer" in PHP is used to remove a specific key from the 
      * superglobal array.
@@ -197,6 +195,4 @@ class GlobalServer
         unset($_SERVER[$key]);
         
     }
-
-    
 }

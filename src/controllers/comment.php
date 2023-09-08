@@ -32,9 +32,10 @@ class CommentController
      * @return The functions `getAllComments()`, `addComment()`, `deleteComment()`, `validComment()`,
      * and `getComments()` are all returning different values.
      */
+
+     
     public function getAllComments()
     {
-
         /*
             The code is creating a new instance of the `DatabaseConnection` class and a new instance of
             the `CommentRepository` class. It then assigns the `DatabaseConnection` object to the
@@ -111,7 +112,6 @@ class CommentController
         */
 
         if (isset($identifier) === true && is_int($identifier) === true && $identifier > 0 === true) {
-
             $connection = new DatabaseConnection();
             $commentRepository = new commentRepository();
             $commentRepository->connection = $connection;
@@ -155,8 +155,6 @@ class CommentController
         }
 
     }
-    
-
     /**
      * This PHP function retrieves comments based on a given identifier if it meets certain conditions,
      * otherwise it throws an exception.

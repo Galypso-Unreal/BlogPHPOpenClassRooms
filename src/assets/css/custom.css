@@ -12,7 +12,7 @@ html {
 }
 
 .informations-homepage  {
-  padding: 12rem 0rem 0rem;
+  padding: 12rem 0 0;
 }
 
 .informations-homepage  .presentation {
@@ -45,16 +45,16 @@ html {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  right: 0rem;
+  right: 0;
   position: absolute;
   width: auto;
   top: calc(100% + 2rem);
 }
 
 .informations-homepage  .picture::after {
-  top: 0rem;
+  top: 0;
   z-index: -1;
-  left: 0rem;
+  left: 0;
   background-color: brown;
   width: 150%;
   transform: rotate(45deg);
@@ -73,7 +73,7 @@ html {
 }
 
 .separator {
-  margin: 2rem 0rem;
+  margin: 2rem 0;
   height: 0.2rem;
   background-color: var(--bs-body-color);
   width: 100%;
@@ -81,7 +81,7 @@ html {
 }
 
 .separator-small {
-  margin: 1rem 0rem;
+  margin: 1rem 0;
   height: 0.1rem;
   background-color: white;
   width: 100%;
@@ -93,7 +93,7 @@ html {
   font-weight: bold;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (width >= 768px) {
   .informations-homepage  .presentation {
     flex-direction: row;
   }
@@ -157,18 +157,18 @@ footer .contain-listing {
 }
 
 .post-header {
-  padding: 0rem;
+  padding: 0;
 }
 
 .post-content {
-  padding: 0rem;
+  padding: 0;
   width: 100%;
-  margin: 0rem auto;
+  margin: 0 auto;
   max-width: 92rem;
 }
 
 .masthead .container {
-  padding: 0rem;
+  padding: 0;
 }
 
 .post-header {

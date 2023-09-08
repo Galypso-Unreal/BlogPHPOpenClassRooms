@@ -19,6 +19,7 @@ class FormController
      * length of each field is within the specified limits.
      * @return int 0 or 1.
      */
+    
     public function confirmationForm()
     {
         $post = new GlobalPost();
@@ -26,7 +27,6 @@ class FormController
             echo "Le formulaire n'est pas valide il vous faut : un nom, un prénom, un email et un message";
             return 0;
         } else {
-
             if ($post->getPost('firstname') !== null) {
                 $firstname = htmlspecialchars($post->getPost('firstname'), ENT_NOQUOTES);
             }
@@ -59,9 +59,7 @@ class FormController
             return 1;
         }
         // End if
-
     }
-    
 
     /**
      * The function `sendMailContact` sends an email with contact information and a message if all
@@ -88,8 +86,6 @@ class FormController
         if ($post->getPost('message') !== null) {
             $message = htmlspecialchars($post->getPost('message'), ENT_NOQUOTES);
         }
-
-
 
         if (isset($firstname) === true && $firstname !== '' && isset($lastname) === true && $lastname !== '' && isset($email) === true && $email !== '' && isset($message) === true && $message !== '') {
             $informations = array('firstname' => $firstname,'lastname' => $lastname,'email' => $email,'message' => $message);

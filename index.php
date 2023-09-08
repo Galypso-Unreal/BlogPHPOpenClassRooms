@@ -37,7 +37,6 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         } else {
             if ($post->getPost('email') !== null) {
                 echo $twig->render('login.twig', array('errors' => $user,'email' => htmlspecialchars($post->getPost('email'), ENT_NOQUOTES),
-
                 ));
             }
         }
@@ -49,27 +48,22 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         if ($session->getSession('LOGGED_USER') !== null) {
             $session->forgetSession('LOGGED_USER');
         }
-
         header('Location: http://blog.local/');
     }
 
     if ($get->getKey('action') === 'logoutAdmin') {
-
         if ($session->getSession('LOGGED_ADMIN') !== null) {
             $session->forgetSession('LOGGED_ADMIN');
         }
         header('Location: http://blog.local/');
     }
-
     // If send contact at form homepage
-
     if ($get->getKey('action') === 'getPost') {
         $identifier = $get->getKey('id');
         $post = (new PostController())->getPost($identifier);
         $comments = (new CommentController())->getComments($identifier);
         echo $twig->render('post.twig', array('post' => $post,'comments' => $comments));
     }
-
     if ($get->getKey('action') === 'confirmationForm') {
         if ((new FormController())->confirmationForm() === 1) {
             $informations = (new FormController())->sendMailContact();
@@ -106,30 +100,22 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         (new CommentController())->addComment($comment);
     }
     if ($get->getKey('action') === 'validComment') {
-
         (new CommentController())->validComment($get->getKey('id'));
     }
-
     if ($get->getKey('action') === 'deleteComment') {
-
         (new CommentController())->deleteComment($get->getKey('id'));
     }
     if ($get->getKey('action') === 'validateUser') {
-
         (new UserController())->validateUser((int)$get->getKey('id'));
         header("Location: /admin/users/");
     }
     if ($get->getKey('action') === 'deleteUser') {
-
         (new UserController())->deleteUser((int)$get->getKey('id'));
         header("Location: /admin/users/");
     }
 } else {
-
     // FRONT OFFICE LINKS 
-
     $host = $server->getServer('REQUEST_URI');
-
     if ($host === "/") {
         echo $twig->render('index.twig');
     } elseif ($host === "/actualites/") {
@@ -149,9 +135,7 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
             echo $twig->render('admin/login.twig');
         }
     }
-
     // BACK-OFFICE LINKS
-
     if ($session->getSession('LOGGED_ADMIN') !== null) {
         if ($host === '/admin/post/add') {
             echo $twig->render('admin/post/add.twig', array('admins' => (new PostController())->getAdmins()));

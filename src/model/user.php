@@ -95,10 +95,7 @@ class UserRepository
 
             $insert->execute();
         }
-        
     }
-
-
     /**
      * The function checks if an email is unique by querying the database for any existing records with
      * the same email.
@@ -219,7 +216,6 @@ class UserRepository
         } else {
             throw new Exception('Une erreur est survenue lors de la récupération des données');
         }
-
     }
 
 
@@ -243,7 +239,6 @@ class UserRepository
 
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
             $user = new User();
-
             $user->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
             $user->lastname = htmlspecialchars($row['lastname'], ENT_NOQUOTES);
             $user->firstname = htmlspecialchars($row['firstname'], ENT_NOQUOTES);
@@ -255,7 +250,6 @@ class UserRepository
             $users[] = $user;
         }
         return $users;
-
     }
 
 
