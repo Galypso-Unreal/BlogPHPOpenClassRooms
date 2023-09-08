@@ -59,8 +59,6 @@ class UserRepository
     /**
      * The function creates a new user account by inserting the user's information into the database.
      */
-
-
     public function createAccount(): Void
     {
         $post = new GlobalPost();
@@ -335,8 +333,7 @@ class UserRepository
     /**
      * The deleteUser function updates the deleted_at column of the b_user table with the current date
      * and time for a specific user ID.
-     * @param int identifier The parameter "$identifierid" is an integer that represents the ID of the user that needs to
-     * be deleted from the database.
+     * @param int identifier The parameter "$identifier" is an integer that represents the ID of the user that needs to be deleted from the database.
      */
 
 

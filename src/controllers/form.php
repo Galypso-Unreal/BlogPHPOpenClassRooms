@@ -20,8 +20,6 @@ class FormController
      * length of each field is within the specified limits.
      * @return int 0 or 1.
      */
-
-
     public function confirmationForm()
     {
         $post = new GlobalPost();
