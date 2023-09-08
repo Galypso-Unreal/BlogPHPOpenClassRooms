@@ -40,8 +40,6 @@ class PostController
      * The function retrieves posts from a database using a connection and repository object.
      * @return mixed result of the `getPosts()` method from the `PostRepository` class.
      */
-
-
     public function getPosts()
     {
 
@@ -63,8 +61,6 @@ class PostController
      * @return mixed code is returning the result of the `getPost()` method from the `$postRepository`
      * object.
      */
-
-
     public function getPost(int $identifier)
     {
 
@@ -106,8 +102,6 @@ class PostController
      * @return mixed header redirect to the URL "http://blog.local/admin/posts" if all the conditions for
      * adding a post are met.
      */
-
-
     public function addPost(string $title, string $lead_content, string $content, int $fk_user_id)
     {
 
@@ -154,8 +148,6 @@ class PostController
      * met and the post is successfully modified. If any of the conditions are not met, an Exception
      * with the message "La modification ne peut pas être effectuée" is thrown.
      */
-
-
     public function modifyPost(int $identifier, string $title, string $lead_content, string $content, int $id_user)
     {
 
@@ -187,8 +179,6 @@ class PostController
      * @return mixed header redirect to the URL "http://blog.local/admin/posts" if the condition is met and
      * the post is successfully deleted.
      */
-
-
     public function deletePost(int $identifier)
     {
         $connection = new DatabaseConnection();
@@ -214,8 +204,6 @@ class PostController
      * returns them in an array, or throws an exception if there is an error with the database.
      * @return mixed method is returning all admins in an array of data.
      */
-
-
     public function getAdmins()
     {
 
@@ -242,8 +230,6 @@ class PostController
      * 
      * @return mixed author of the post is being returned.
      */
-
-
     public function getAuthor(int $identifier)
     {
 

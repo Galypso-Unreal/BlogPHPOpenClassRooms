@@ -13,7 +13,6 @@ use DateTimeZone;
     The class "Post" represents a post with various properties such as id, title, content, created_at,
     modified_at, deleted_at, and fk_user_id.
 */
-
 class Post
 {
 
@@ -40,7 +39,6 @@ class Post
     by its ID, retrieving the author of a post, adding a new post, modifying an existing post, deleting
     a post, and retrieving a list of administrators.
 */
-
 class PostRepository
 {
 
@@ -50,7 +48,6 @@ class PostRepository
         of the `DatabaseConnection` class, which is responsible for establishing a connection to the
         database.
     */
-
     public DatabaseConnection $connection;
 
     /**
@@ -98,8 +95,6 @@ class PostRepository
      * 
      * @return Post an instance of the Post class.
      */
-
-
     public function getPost(int $identifier): Post
     {
 
@@ -137,8 +132,6 @@ class PostRepository
      * @return array containing the details of the author with the specified ID. The array includes
      * the author's ID, firstname, lastname, and email.
      */
-
-
     public function getAuthor(int $identifier)
     {
 
@@ -171,6 +164,7 @@ class PostRepository
      * The lead_content parameter is a string that represents the introductory or summary content of the post.
      * 
      * @param string '$content' Content
+     * 
      * The "content" parameter is a string that represents the main content of the post. It can contain any text or HTML content that you want to display in the post.
      * 
      * @param int '$fk_user_id' Fk_user_id
@@ -178,8 +172,6 @@ class PostRepository
      * of the user who is creating the post. It is used to associate the post with the user in the
      * database.
      */
-
-
     public function addPost(string $title, string $lead_content, string $content, int $fk_user_id): Void
     {
 
@@ -221,8 +213,6 @@ class PostRepository
      * @param int '$id_user' Id_user
      * The id of the user who is modifying the post.
      */
-
-
     public function modifyPost(int $identifier, string $title, string $lead_content, string $content, int $id_user): Void
     {
 
@@ -260,8 +250,6 @@ class PostRepository
      * @param int $identifier Identifier
      * The parameter "$identifier" is an integer that represents the ID of the post that needs to be deleted.
      */
-
-
     public function deletePost(int $identifier)
     {
 
@@ -289,8 +277,6 @@ class PostRepository
      * @return array an array of admins. Each admin is represented by an associative array with keys
      * 'id', 'lastname', 'firstname', and 'email'.
      */
-
-
     public function getAdmins(): array
     {
 

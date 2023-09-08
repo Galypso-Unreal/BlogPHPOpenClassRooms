@@ -32,8 +32,6 @@ class CommentController
      * @return The functions `getAllComments()`, `addComment()`, `deleteComment()`, `validComment()`,
      * and `getComments()` are all returning different values.
      */
-
-
     public function getAllComments()
     {
 
@@ -62,8 +60,6 @@ class CommentController
      * @return mixed code is returning a header redirect to the specified URL if all the conditions in
      * the if statement are true.
      */
-
-
     public function addComment(string $comment)
     {
 
@@ -87,7 +83,6 @@ class CommentController
             `CommentRepository` object. After adding the comment, it redirects the user to the
             specified current post using the `header()` function.
         */
-
         if (isset($comment) === true && $comment !== '' && isset($identifier) === true && $identifier > 0 === true && empty($user) === false && isset($user['id']) === true) {
             $commentRepository->addComment($comment);
             return header('Location: http://blog.local/actualites/index;php?action=getPost&id=' . $identifier);
@@ -108,8 +103,6 @@ class CommentController
      * @return mixed code is returning a header redirect to the URL "http://blog.local/admin/comments"
      * after deleting the comment.
      */
-
-
     public function deleteComment(int $identifier)
     {
         /*
@@ -143,8 +136,6 @@ class CommentController
      * @return a header redirect to the URL "http://blog.local/admin/comments" if the comment
      * identifier is valid.
      */
-
-
     public function validComment(int $identifier)
     {
         $connection = new DatabaseConnection();
@@ -176,8 +167,6 @@ class CommentController
      * @return mixed the conditions in the if statement are true, the function will return the result of
      * calling the `getComments()` method on the `$commentRepository` object.
      */
-
-
     public function getComments(int $identifier)
     {
         $connection = new DatabaseConnection();

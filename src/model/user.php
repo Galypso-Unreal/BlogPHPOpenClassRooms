@@ -16,7 +16,6 @@ use Exception;
     The User class represents a user with various properties such as id, lastname, firstname, email,
     password, is_valid, deleted_at, and fk_id_role.
 */
-
 class User
 {
 
@@ -43,7 +42,6 @@ class User
     retrieving a specific user, validating a user, and deleting a user. These methods use the
     `DatabaseConnection` class to establish a connection with the database and execute SQL queries.
 */
-
 class UserRepository
 {
 
@@ -53,7 +51,6 @@ class UserRepository
         connection with the database and perform various database operations in the methods of the
         `UserRepository` class.
     */
-
     public DatabaseConnection $connection;
 
     /**
@@ -108,8 +105,6 @@ class UserRepository
      * @return Int an integer value. If the query returns at least one row, it will return 0.
      * Otherwise, it will return 1.
      */
-
-
     public function checkUniqueEmail(): Int
     {
         $post = new GlobalPost();
@@ -143,8 +138,6 @@ class UserRepository
      * @return Int an integer value. If the user exists and is valid, it returns 1. If the user exists
      * but is not valid, it returns 2. If the user does not exist, it returns 0.
      */
-
-
     public function checkUserExist(): Int
     {
         $post = new GlobalPost();
@@ -189,8 +182,6 @@ class UserRepository
      * it returns 2. If the login is successful and the user has a regular user role, it returns 1. If
      * there is an error during the login process, it throws an exception.
      */
-
-
     public function login(): Int
     {
         $post = new GlobalPost();
@@ -239,8 +230,6 @@ class UserRepository
      * have not been deleted.
      * @return array an array of User objects.
      */
-
-
     public function getAllUsers(): array
     {
 
@@ -278,8 +267,6 @@ class UserRepository
      * @return User an instance of the User class if a row is found in the database with the specified
      * conditions. If no row is found, it returns 0.
      */
-
-
     public function getUser(): User
     {
 
@@ -313,8 +300,6 @@ class UserRepository
      * @param int $identifier Identifier
      * The parameter "$identifier" is an integer representing the user's ID.
      */
-
-
     public function validateUser(int $identifier)
     {
 
@@ -337,8 +322,6 @@ class UserRepository
      * @param int $identifier Identifier
      * The parameter "$identifier" is an integer that represents the ID of the user that needs to be deleted from the database.
      */
-
-
     public function deleteUser(int $identifier)
     {
 

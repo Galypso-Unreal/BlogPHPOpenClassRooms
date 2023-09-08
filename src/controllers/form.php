@@ -11,7 +11,6 @@ use Application\Lib\Globals\GlobalPost;
     The `class FormController` is a PHP class that contains two functions: `confirmationForm()` and
     `sendMailContact()`.
 */
-
 class FormController
 {
 
@@ -69,8 +68,6 @@ class FormController
      * @return an array called , which contains the values of the variables firstname,
      * lastname, email, and message.
      */
-
-     
     public function sendMailContact()
     {
         $post = new GlobalPost();

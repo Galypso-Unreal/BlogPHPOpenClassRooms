@@ -41,8 +41,6 @@ class UserController
      * from the `$userRepository` object if all the input data is valid and the email is unique, or an
      * array of errors if any of the input data is invalid or the email is not unique.
      */
-
-     
     public function createAccount()
     {
 
@@ -87,7 +85,6 @@ class UserController
             (up to 60 characters), `$lastname` (up to 60 characters), and `$email` (up to 100
             characters) to ensure they are within the allowed limits.
         */
-
         if ((isset($firstname) === true &&  strlen($firstname) > 0 === true && strlen($firstname) <= 60 === true) && (isset($lastname) === true && strlen($lastname) > 0 === true && strlen($lastname) <= 60 === true) && (isset($email) === true && strlen($email) > 0 === true && strlen($email) <= 100 === true) && (isset($password) === true && strlen($password) > 0 === true) && (isset($confirmepassword) === true && strlen($confirmepassword) > 0 === true) && $password === $confirmepassword && $this->checkUniqueEmail() === 1) {
 
             return $userRepository->createAccount();
@@ -133,8 +130,6 @@ class UserController
      * 
      * @return the result of the checkUniqueEmail() method from the UserRepository class.
      */
-
-
     public function checkUniqueEmail()
     {
         $connection = new DatabaseConnection();
@@ -151,8 +146,6 @@ class UserController
      * 
      * @return the result of the checkUserExist() method from the UserRepository class.
      */
-
-
     public function checkUserExist()
     {
 
@@ -172,8 +165,6 @@ class UserController
      * @return either the result of the login attempt (if successful) or an array of errors (if there
      * are any validation issues or the user does not exist).
      */
-
-
     public function login()
     {
 
@@ -188,7 +179,6 @@ class UserController
             POST request. If both fields are set, the code assigns their values to the `$email` and
             `$password` variables.
         */
-
         if ($post->getPost('email') !== null && $post->getPost('password') !== null) {
             $email = $post->getPost('email');
             $password = $post->getPost('password');
@@ -225,8 +215,6 @@ class UserController
      * DatabaseConnection object.
      * @return The getAllUsers() function is returning all the users from the UserRepository.
      */
-
-
     public function getAllUsers()
     {
 
@@ -248,8 +236,6 @@ class UserController
      * @return The code is returning the result of the `validateUser()` method of the `$userRepository`
      * object.
      */
-
-
     public function validateUser($identifier)
     {
 
@@ -263,7 +249,6 @@ class UserController
             `$userRepository` object and passes the `$identifier` as an argument. This method is responsible for
             validating a user in the database.
         */
-
         if (isset($identifier) === true && $identifier > 0 === true && is_int($identifier) === true) {
             return $userRepository->validateUser($identifier);
         } else {
@@ -282,8 +267,6 @@ class UserController
      * @return The code is returning the result of the `deleteUser()` method of the `$userRepository`
      * object.
      */
-
-
     public function deleteUser($identifier)
     {
 
@@ -297,7 +280,6 @@ class UserController
             `$userRepository` object and passes the `$identifier` as an argument. This method is responsible for
             deleting a user from the database.
         */
-
         if (isset($identifier) === true && $identifier > 0 === true && is_int($identifier) === true) {
             return $userRepository->deleteUser($identifier);
         } else {

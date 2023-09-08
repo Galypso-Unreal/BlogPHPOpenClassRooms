@@ -50,8 +50,6 @@ class GlobalPost
      * @return mixed value of the specified key from the  array if it is set, otherwise it returns
      * null.
      */
-
-
     public static function getPost($key)
     {
         return (isset($_POST[$key]) === true ? filter_input(INPUT_POST, $key) : null);
@@ -64,8 +62,6 @@ class GlobalPost
      * @return array filtered input array of the  superglobal variable if it is set, otherwise it
      * returns null.
      */
-
-
     public static function getAllPost()
     {
         return (isset($_POST) === true ? filter_input_array(INPUT_POST) : null);
@@ -100,8 +96,6 @@ class GlobalSession
      * @param mixed $value Value
      * parameter is the value that you want to store in the session variable.
      */
-
-
     public static function setSession($key, $value)
     {
         $_SESSION[$key] = $value;
@@ -114,8 +108,6 @@ class GlobalSession
      * @param string $key Key
      * is a string that represents the name of the session variable you want to set. It is used to identify the session variable and retrieve its value later.
      */
-
-
     public static function getSession($key)
     {
         return (isset($_SESSION[$key]) === true ? filter_var_array($_SESSION[$key]) : null);
@@ -128,8 +120,6 @@ class GlobalSession
      * @return array value of  after filtering it using filter_var_array. If  is set,
      * it will return the filtered array. If  is not set, it will return null.
      */
-
-
     public static function getAllSession()
     {
         return (isset($_SESSION) === true ? filter_var_array($_SESSION) : null);
@@ -142,8 +132,6 @@ class GlobalSession
      * @param string $key Key
      * parameter is the name of the session variable that you want to remove from the  array.
      */
-
-
     public static function forgetSession($key)
     {
         unset($_SESSION[$key]);
@@ -165,8 +153,6 @@ class GlobalServer
      * parameter is the value that you want to set for the specified key in the
      *  array.
      */
-
-
     public static function setServer($key, $value)
     {
         $_SERVER[$key] = $value;
@@ -182,8 +168,6 @@ class GlobalServer
      * 
      * @return mixed value of the [$key] if it is set, otherwise it is returning null.
      */
-
-
     public static function getServer($key)
     {
         return (isset($_SERVER[$key]) === true ? filter_var($_SERVER[$key]) : null);
@@ -195,8 +179,6 @@ class GlobalServer
      * The function returns all server variables if they exist, otherwise it returns null.
      * @return array  array after filtering its values using the filter_var_array() function.
      */
-
-
     public static function getAllServer()
     {
         return (isset($_SERVER) === true ? filter_var_array($_SERVER) : null);
@@ -210,8 +192,6 @@ class GlobalServer
      * @param string $key Key
      * parameter is the name of the server variable that you want to remove from the array.
      */
-
-
     public static function forgetServer($key)
     {
         unset($_SERVER[$key]);

@@ -15,7 +15,6 @@ use DateTimeZone;
     The Comment class represents a comment with various properties such as id, comment content, validity
     status, deletion timestamp, and foreign keys for user and post.
 */
-
 class Comment
 {
 
@@ -39,7 +38,6 @@ class Comment
     methods use the `DatabaseConnection` class to establish a connection with the database and execute
     SQL queries.
 */
-
 class CommentRepository
 {
     /*
@@ -49,7 +47,6 @@ class CommentRepository
         database. By declaring this property as public, it can be accessed and used by other methods
         within the `CommentRepository` class.
     */
-
     public DatabaseConnection $connection;
 
     /**
@@ -57,8 +54,6 @@ class CommentRepository
      * array of Comment objects.
      * @return array an array of Comment objects.
      */
-
-
     public function getAllComments(): array
     {
 
@@ -97,8 +92,6 @@ class CommentRepository
      * @param string $comment Comment
      * The parameter "$comment" is a string that represents the comment that will be added to the database.
      */
-
-
     public function addComment(string $comment): Void
     {
 
@@ -137,8 +130,6 @@ class CommentRepository
      * @param int $identifier Identifier
      * The parameter "$identifier" is an integer that represents the unique identifier of the comment that needs to be deleted.
      */
-
-
     public function deleteComment(int $identifier): Void
     {
 
@@ -167,8 +158,6 @@ class CommentRepository
      * @param int $identifier Identifier
      * The parameter "$identifier" is an integer that represents the ID of the comment that needs to be validated.
      */
-
-
     public function validComment(int $identifier): Void
     {
 
@@ -192,8 +181,6 @@ class CommentRepository
      * 
      * @return array an array of Comment objects.
      */
-
-     
     public function getComments(int $identifier): array
     {
 
