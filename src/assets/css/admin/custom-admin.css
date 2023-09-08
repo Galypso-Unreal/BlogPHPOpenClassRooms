@@ -1,6 +1,7 @@
 .datatable-container {
   overflow-x: auto;
 }
+
 .datatable-container table {
   width: 100%;
 }
