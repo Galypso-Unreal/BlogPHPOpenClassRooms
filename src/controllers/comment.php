@@ -56,7 +56,7 @@ class CommentController
     /**
      * The function `addComment` checks if the comment and user information are valid, and if so, adds
      * the comment to the database and redirects the user to the current post.
-     * @param string $comment
+     * @param string $comment Comment
      * The `$comment` parameter is a string that represents the comment that needs to be added.
      * 
      * @return mixed code is returning a header redirect to the specified URL if all the conditions in
@@ -101,7 +101,7 @@ class CommentController
     /**
      * This PHP function deletes a comment from a database if the identifier is set, is an integer, and
      * is greater than 0, otherwise it throws an exception.
-     * @param int $identifier
+     * @param int $identifier Identifier
      * The `$identifier` parameter is an integer that represents the unique
      * identifier of the comment that needs to be deleted.
      * 
@@ -136,7 +136,7 @@ class CommentController
     /**
      * The function checks if a comment identifier is valid and redirects to the admin comments page if
      * it is, otherwise it throws an exception.
-     * @param int $identifier
+     * @param int $identifier Identifier
      * The `$identifier` parameter is an integer that represents the ID of a
      * comment.
      * 
@@ -169,7 +169,7 @@ class CommentController
     /**
      * This PHP function retrieves comments based on a given identifier if it meets certain conditions,
      * otherwise it throws an exception.
-     * @param int $identifier
+     * @param int $identifier Identifier
      * The `$identifier` parameter is an integer that represents the unique
      * identifier of the comment that needs to be retrieved.
      * 

@@ -242,7 +242,7 @@ class UserController
     /**
      * The `validateUser()` function checks if the given identifier is valid and calls the
      * corresponding method in the UserRepository to validate the user in the database.
-     * @param int The `$identifier`
+     * @param int The `$identifier` Identifier
      * parameter is used to identify a user in the database. It is expected to be an integer value greater than 0.
      * 
      * @return The code is returning the result of the `validateUser()` method of the `$userRepository`
@@ -276,7 +276,7 @@ class UserController
     /**
      * The `deleteUser()` function checks if the provided identifier is valid and calls the
      * corresponding method to delete the user from the database.
-     * @param int The `$identifier`
+     * @param int The `$identifier` Identifier
      * parameter is used to identify the user that needs to be deleted from the database. It should be an integer value representing the unique identifier of the user.
      * 
      * @return The code is returning the result of the `deleteUser()` method of the `$userRepository`
