@@ -310,7 +310,7 @@ class UserRepository
     /**
      * The function updates the "is_valid" field of a user in the "b_user" table to 1, indicating that
      * the user is valid.
-     * @param int $identifier parameter
+     * @param int $identifier
      * The parameter "$identifier" is an integer representing the user's ID.
      */
 
@@ -334,7 +334,7 @@ class UserRepository
     /**
      * The deleteUser function updates the deleted_at column of the b_user table with the current date
      * and time for a specific user ID.
-     * @param int $identifier parameter
+     * @param int $identifier
      * The parameter "$identifier" is an integer that represents the ID of the user that needs to be deleted from the database.
      */
 
