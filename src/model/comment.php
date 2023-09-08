@@ -12,8 +12,9 @@ use DateTime;
 use DateTimeZone;
 
 /* 
-The Comment class represents a comment with various properties such as id, comment content, validity
-status, deletion timestamp, and foreign keys for user and post.*/
+    The Comment class represents a comment with various properties such as id, comment content, validity
+    status, deletion timestamp, and foreign keys for user and post.
+*/
 
 class Comment
 {
@@ -32,27 +33,30 @@ class Comment
 }
 
 /*
-The `CommentRepository` class is responsible for interacting with the database to perform CRUD
-(Create, Read, Update, Delete) operations on the `Comment` objects. It contains methods for
-retrieving all comments, adding a new comment, deleting a comment, and validating a comment. These
-methods use the `DatabaseConnection` class to establish a connection with the database and execute
-SQL queries.*/
+    The `CommentRepository` class is responsible for interacting with the database to perform CRUD
+    (Create, Read, Update, Delete) operations on the `Comment` objects. It contains methods for
+    retrieving all comments, adding a new comment, deleting a comment, and validating a comment. These
+    methods use the `DatabaseConnection` class to establish a connection with the database and execute
+    SQL queries.
+*/
 
 class CommentRepository
 {
     /*
-    `public DatabaseConnection ;` is declaring a public property named `` of
-    type `DatabaseConnection`. This property is used to store an instance of the
-    `DatabaseConnection` class, which is responsible for establishing a connection with the
-    database. By declaring this property as public, it can be accessed and used by other methods
-    within the `CommentRepository` class.*/
+        `public DatabaseConnection ;` is declaring a public property named `` of
+        type `DatabaseConnection`. This property is used to store an instance of the
+        `DatabaseConnection` class, which is responsible for establishing a connection with the
+        database. By declaring this property as public, it can be accessed and used by other methods
+        within the `CommentRepository` class.
+    */
 
     public DatabaseConnection $connection;
 
     /**
-     * The function getAllComments retrieves all comments from the database and returns them as an
-     * array of Comment objects.
-     * @return array an array of Comment objects.*/
+         * The function getAllComments retrieves all comments from the database and returns them as an
+         * array of Comment objects.
+         * @return array an array of Comment objects.
+     */
 
 
     public function getAllComments(): array
@@ -85,13 +89,14 @@ class CommentRepository
         return $comments;
 
     }
-
+    
 
     /**
-     * The function `addComment` inserts a comment into the database with the specified comment, user
-     * ID, and post ID.
-     * @param string comment The parameter "$comment" is a string that represents the comment that will
-     * be added to the database.*/
+         * The function `addComment` inserts a comment into the database with the specified comment, user
+         * ID, and post ID.
+         * @param string comment The parameter "$comment" is a string that represents the comment that will
+         * be added to the database.
+     */
 
 
     public function addComment(string $comment): Void
@@ -127,10 +132,11 @@ class CommentRepository
 
 
     /**
-     * The function `deleteComment` updates the `deleted_at` column of a comment in the database with
-     * the current date and time.
-     * @param int identifier The parameter "$identifier" is an integer that represents the unique identifier of the
-     * comment that needs to be deleted.*/
+         * The function `deleteComment` updates the `deleted_at` column of a comment in the database with
+         * the current date and time.
+         * @param int identifier The parameter "$identifier" is an integer that represents the unique identifier of the
+         * comment that needs to be deleted.
+     */
 
 
     public function deleteComment(int $identifier): Void
@@ -156,10 +162,11 @@ class CommentRepository
 
 
     /**
-     * The validComment function updates the is_valid field of a comment in the b_comment table to 1,
-     * indicating that the comment is valid.
-     * @param int identifier The parameter "$identifier" is an integer that represents the ID of the comment that needs
-     * to be validated.*/
+         * The validComment function updates the is_valid field of a comment in the b_comment table to 1,
+         * indicating that the comment is valid.
+         * @param int identifier The parameter "$identifier" is an integer that represents the ID of the comment that needs
+         * to be validated.
+     */
 
 
     public function validComment(int $identifier): Void
@@ -179,10 +186,11 @@ class CommentRepository
 
 
     /**
-     * The function `getComments` retrieves comments from the database based on the provided post ID.
-     * @param int identifier The parameter "$identifier" is an integer that represents the ID of a post. This function
-     * retrieves all the comments associated with that post from the database.
-     * @return array an array of Comment objects.*/
+         * The function `getComments` retrieves comments from the database based on the provided post ID.
+         * @param int identifier The parameter "$identifier" is an integer that represents the ID of a post. This function
+         * retrieves all the comments associated with that post from the database.
+         * @return array an array of Comment objects.
+     */
 
      
     public function getComments(int $identifier): array

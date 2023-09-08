@@ -8,16 +8,18 @@ use Application\Lib\Globals\GlobalPost;
 
 
 /*
-The `class FormController` is a PHP class that contains two functions: `confirmationForm()` and
-`sendMailContact()`.*/
+    The `class FormController` is a PHP class that contains two functions: `confirmationForm()` and
+    `sendMailContact()`.
+*/
 
 class FormController
 {
 
     /**
-     * The function checks if a form is valid by verifying if all required fields are set and if the
-     * length of each field is within the specified limits.
-     * @return int 0 or 1.*/
+         * The function checks if a form is valid by verifying if all required fields are set and if the
+         * length of each field is within the specified limits.
+         * @return int 0 or 1.
+     */
 
 
     public function confirmationForm()
@@ -64,10 +66,11 @@ class FormController
     
 
     /**
-     * The function `sendMailContact` sends an email with contact information and a message if all
-     * required fields are filled out.
-     * @return an array called , which contains the values of the variables firstname,
-     * lastname, email, and message.*/
+         * The function `sendMailContact` sends an email with contact information and a message if all
+         * required fields are filled out.
+         * @return an array called , which contains the values of the variables firstname,
+         * lastname, email, and message.
+     */
 
      
     public function sendMailContact()

@@ -2,7 +2,7 @@
 
 namespace Application\Model\User;
 
-require_once('./src/lib/database.php');
+require_once './src/lib/database.php';
 
 use Application\Lib\Database\DatabaseConnection;
 use Application\Lib\Globals\GlobalPost;
@@ -13,8 +13,9 @@ use DateTimeZone;
 use Exception;
 
 /*
-The User class represents a user with various properties such as id, lastname, firstname, email,
-password, is_valid, deleted_at, and fk_id_role.*/
+    The User class represents a user with various properties such as id, lastname, firstname, email,
+    password, is_valid, deleted_at, and fk_id_role.
+*/
 
 class User
 {
@@ -36,25 +37,28 @@ class User
     public int $fk_id_role;
 }
 /*
-The `UserRepository` class is responsible for interacting with the database to perform various
-operations related to the `User` entity. It contains methods for creating a new user account,
-checking if an email is unique, checking if a user exists, logging in a user, retrieving all users,
-retrieving a specific user, validating a user, and deleting a user. These methods use the
-`DatabaseConnection` class to establish a connection with the database and execute SQL queries.*/
+    The `UserRepository` class is responsible for interacting with the database to perform various
+    operations related to the `User` entity. It contains methods for creating a new user account,
+    checking if an email is unique, checking if a user exists, logging in a user, retrieving all users,
+    retrieving a specific user, validating a user, and deleting a user. These methods use the
+    `DatabaseConnection` class to establish a connection with the database and execute SQL queries.
+*/
 
 class UserRepository
 {
 
     /*
-    `public DatabaseConnection ;` is declaring a public property `` of type
-    `DatabaseConnection` in the `UserRepository` class. This property is used to establish a
-    connection with the database and perform various database operations in the methods of the
-    `UserRepository` class.*/
+        `public DatabaseConnection ;` is declaring a public property `` of type
+        `DatabaseConnection` in the `UserRepository` class. This property is used to establish a
+        connection with the database and perform various database operations in the methods of the
+        `UserRepository` class.
+    */
 
     public DatabaseConnection $connection;
 
     /**
-     * The function creates a new user account by inserting the user's information into the database.*/
+         * The function creates a new user account by inserting the user's information into the database.
+     */
 
 
     public function createAccount(): Void
@@ -101,10 +105,11 @@ class UserRepository
 
 
     /**
-     * The function checks if an email is unique by querying the database for any existing records with
-     * the same email.
-     * @return Int an integer value. If the query returns at least one row, it will return 0.
-     * Otherwise, it will return 1.*/
+         * The function checks if an email is unique by querying the database for any existing records with
+         * the same email.
+         * @return Int an integer value. If the query returns at least one row, it will return 0.
+         * Otherwise, it will return 1.
+     */
 
 
     public function checkUniqueEmail(): Int
@@ -135,10 +140,11 @@ class UserRepository
 
 
     /**
-     * The function `checkUserExist` checks if a user exists in the database based on their email and
-     * password, and returns a value indicating the user's validity status.
-     * @return Int an integer value. If the user exists and is valid, it returns 1. If the user exists
-     * but is not valid, it returns 2. If the user does not exist, it returns 0.*/
+         * The function `checkUserExist` checks if a user exists in the database based on their email and
+         * password, and returns a value indicating the user's validity status.
+         * @return Int an integer value. If the user exists and is valid, it returns 1. If the user exists
+         * but is not valid, it returns 2. If the user does not exist, it returns 0.
+     */
 
 
     public function checkUserExist(): Int
@@ -178,12 +184,13 @@ class UserRepository
 
 
     /**
-     * The login function in PHP checks if the provided email and password match a user in the
-     * database, and if so, sets a cookie with the user's information and returns a value indicating
-     * the user's role.
-     * @return Int an integer value. If the login is successful and the user has the role of an admin,
-     * it returns 2. If the login is successful and the user has a regular user role, it returns 1. If
-     * there is an error during the login process, it throws an exception.*/
+         * The login function in PHP checks if the provided email and password match a user in the
+         * database, and if so, sets a cookie with the user's information and returns a value indicating
+         * the user's role.
+         * @return Int an integer value. If the login is successful and the user has the role of an admin,
+         * it returns 2. If the login is successful and the user has a regular user role, it returns 1. If
+         * there is an error during the login process, it throws an exception.
+     */
 
 
     public function login(): Int
@@ -230,9 +237,10 @@ class UserRepository
 
 
     /**
-     * The function getAllUsers retrieves all users from the database who are not administrators and
-     * have not been deleted.
-     * @return array an array of User objects.*/
+         * The function getAllUsers retrieves all users from the database who are not administrators and
+         * have not been deleted.
+         * @return array an array of User objects.
+     */
 
 
     public function getAllUsers(): array
@@ -267,10 +275,11 @@ class UserRepository
 
 
     /**
-     * The getUser function retrieves a user from the database with a specific role and ID, and returns
-     * a User object with the user's information.
-     * @return User an instance of the User class if a row is found in the database with the specified
-     * conditions. If no row is found, it returns 0.*/
+         * The getUser function retrieves a user from the database with a specific role and ID, and returns
+         * a User object with the user's information.
+         * @return User an instance of the User class if a row is found in the database with the specified
+         * conditions. If no row is found, it returns 0.
+     */
 
 
     public function getUser(): User
@@ -301,9 +310,10 @@ class UserRepository
 
 
     /**
-     * The function updates the "is_valid" field of a user in the "b_user" table to 1, indicating that
-     * the user is valid.
-     * @param int identifier The parameter "$identifier" is an integer representing the user's ID.*/
+         * The function updates the "is_valid" field of a user in the "b_user" table to 1, indicating that
+         * the user is valid.
+         * @param int identifier The parameter "$identifier" is an integer representing the user's ID.
+     */
 
 
     public function validateUser(int $identifier)
@@ -323,10 +333,11 @@ class UserRepository
 
 
     /**
-     * The deleteUser function updates the deleted_at column of the b_user table with the current date
-     * and time for a specific user ID.
-     * @param int identifier The parameter "$identifierid" is an integer that represents the ID of the user that needs to
-     * be deleted from the database.*/
+         * The deleteUser function updates the deleted_at column of the b_user table with the current date
+         * and time for a specific user ID.
+         * @param int identifier The parameter "$identifierid" is an integer that represents the ID of the user that needs to
+         * be deleted from the database.
+     */
 
 
     public function deleteUser(int $identifier)
