@@ -24,12 +24,12 @@ $session = new GlobalSession();
 $server = new GlobalServer();
 $get = new GlobalGet();
 
-//routeur
+// Routeur
 if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
 
     // USER
 
-    //login
+    // Login
 
     if ($get->getKey('action') === 'loginUser') {
 
@@ -49,7 +49,7 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         }
     }
 
-    //LOGOUT
+    // LOGOUT
 
     if ($get->getKey('action') === 'logoutUser') {
 
@@ -68,7 +68,7 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         header('Location: http://blog.local/');
     }
 
-    // if send contact at form homepage
+    // If send contact at form homepage
 
     if ($get->getKey('action') === 'getPost') {
 
@@ -185,5 +185,3 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         }
     }
 }
-
-// echo $twig->render('index.twig');

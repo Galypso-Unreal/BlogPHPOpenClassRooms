@@ -11,7 +11,7 @@ require __DIR__ . '/vendor/autoload.php';
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/src/views');
 $twig = new \Twig\Environment($loader, ['debug' => true]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
-// define all globals variable usable in twig
+// Define all globals variable usable in twig
 
 
 
@@ -36,6 +36,7 @@ $displayAuthor = new TwigFunction('displayAuthor', function (int $identifier) {
     $postRepository->connection = $connection;
 
     return $postRepository->getAuthor($identifier);
+    
 });
 
 $twig->addFunction($displayAuthor);

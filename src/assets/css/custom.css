@@ -112,8 +112,13 @@ html {
   flex-direction: column;
   gap: 2rem;
 }
-
-.header-account  {
+.floating-window-user a:hover{
+    color: black;
+}
+.header-account {
+    cursor: pointer;
+}
+.header-account small {
   font-size: 1.5rem;
   font-weight: 200;
   color: white;

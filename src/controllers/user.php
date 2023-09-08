@@ -12,7 +12,7 @@ use Application\Lib\Globals\GlobalPost;
 use Application\Model\User\UserRepository;
 use Exception;
 
-/* 
+/*
 The `class UserController` is a PHP class that contains functions for handling user-related
 operations such as creating an account, checking unique email, checking if a user exists, logging
 in, getting all users, validating a user, and deleting a user. It uses a `DatabaseConnection` class
@@ -35,7 +35,6 @@ class UserController
     /**
      * The function `createAccount()` is responsible for creating a new user account by validating the
      * input data and checking for any errors.
-     * 
      * @return The function `createAccount()` returns either the result of the `createAccount()` method
      * from the `` object if all the input data is valid and the email is unique, or an
      * array of errors if any of the input data is invalid or the email is not unique.*/
@@ -49,7 +48,7 @@ class UserController
         $userRepository->connection = $connection;
         $post = new GlobalPost();
 
-        /* 
+        /*
         The code is assigning the values of the `$post` superglobal variables to the corresponding
         variables. These variables are used to store the user input data for creating a new user
         account. The `$post` superglobal is an associative array that contains data submitted via
@@ -77,7 +76,7 @@ class UserController
             $confirmepassword = $post->getPost('confirmepassword');
         }
 
-        /* 
+        /*
         This code block is checking the validity of the input data for creating a new user account.
         It checks if all the required fields (`firstname`, `lastname`, `email`, `password`,
         `confirmepassword`) are set and not empty. It also checks the length of the `$firstname`
@@ -120,6 +119,7 @@ class UserController
 
             return $errors;
         }
+
     }
 
 
@@ -136,6 +136,7 @@ class UserController
         $userRepository->connection = $connection;
 
         return $userRepository->checkUniqueEmail();
+
     }
 
 
@@ -153,6 +154,7 @@ class UserController
         $userRepository->connection = $connection;
 
         return $userRepository->checkUserExist();
+
     }
 
 
@@ -172,7 +174,7 @@ class UserController
         $userRepository->connection = $connection;
         $post = new GlobalPost();
 
-        /* 
+        /*
         This code block is handling the login functionality. It checks if the `email` and `password`
         fields are set in the `$_POST` superglobal array, which contains data submitted via an HTTP
         POST request. If both fields are set, the code assigns their values to the `$email` and
@@ -205,6 +207,7 @@ class UserController
 
             return $errors;
         }
+
     }
 
 
@@ -222,6 +225,7 @@ class UserController
         $userRepository->connection = $connection;
 
         return $userRepository->getAllUsers();
+
     }
 
 
@@ -241,7 +245,7 @@ class UserController
         $userRepository = new UserRepository();
         $userRepository->connection = $connection;
 
-        /* 
+        /*
         The code block is checking if the `$identifier` variable is set, greater than 0, and of type
         integer. If all these conditions are true, it calls the `validateUser()` method of the
         `$userRepository` object and passes the `$identifier` as an argument. This method is responsible for
@@ -252,6 +256,7 @@ class UserController
         } else {
             throw new Exception("L'ID n'est pas correcte");
         }
+
     }
 
 
@@ -272,7 +277,7 @@ class UserController
         $userRepository = new UserRepository();
         $userRepository->connection = $connection;
 
-        /* 
+        /*
         The code block is checking if the `$identifier` variable is set, greater than 0, and of type
         integer. If all these conditions are true, it calls the `deleteUser()` method of the
         `$userRepository` object and passes the `$identifier` as an argument. This method is responsible for
@@ -283,6 +288,7 @@ class UserController
         } else {
             throw new Exception("L'ID n'est pas correcte");
         }
+        
     }
 
     

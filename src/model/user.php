@@ -51,7 +51,6 @@ class UserRepository
     connection with the database and perform various database operations in the methods of the
     `UserRepository` class.*/
 
-    
     public DatabaseConnection $connection;
 
     /**
@@ -97,6 +96,7 @@ class UserRepository
 
             $insert->execute();
         }
+        
     }
 
 
@@ -130,6 +130,7 @@ class UserRepository
         } else {
             return 1;
         }
+
     }
 
 
@@ -172,6 +173,7 @@ class UserRepository
         } else {
             return 0;
         }
+
     }
 
 
@@ -223,6 +225,7 @@ class UserRepository
         } else {
             throw new Exception('Une erreur est survenue lors de la récupération des données');
         }
+
     }
 
 
@@ -248,17 +251,18 @@ class UserRepository
         while (($row = $data->fetch(PDO::FETCH_ASSOC))) {
             $user = new User();
 
-            $user->identifier =     htmlspecialchars($row['id'], ENT_NOQUOTES);
-            $user->lastname =     htmlspecialchars($row['lastname'], ENT_NOQUOTES);
-            $user->firstname =     htmlspecialchars($row['firstname'], ENT_NOQUOTES);
-            $user->email =    htmlspecialchars($row['email'], ENT_NOQUOTES);
-            $user->is_valid =    htmlspecialchars($row['is_valid'], ENT_NOQUOTES);
-            $user->fk_id_role =    htmlspecialchars($row['fk_id_role'], ENT_NOQUOTES);
+            $user->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $user->lastname = htmlspecialchars($row['lastname'], ENT_NOQUOTES);
+            $user->firstname = htmlspecialchars($row['firstname'], ENT_NOQUOTES);
+            $user->email = htmlspecialchars($row['email'], ENT_NOQUOTES);
+            $user->is_valid = htmlspecialchars($row['is_valid'], ENT_NOQUOTES);
+            $user->fk_id_role = htmlspecialchars($row['fk_id_role'], ENT_NOQUOTES);
 
 
             $users[] = $user;
         }
         return $users;
+
     }
 
 
@@ -292,6 +296,7 @@ class UserRepository
             return $user;
         }
         return 0;
+
     }
 
 
@@ -313,6 +318,7 @@ class UserRepository
         $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
         $data->execute();
+
     }
 
 
@@ -339,6 +345,7 @@ class UserRepository
         $delete->bindParam('id', $identifier, PDO::PARAM_INT);
 
         $delete->execute();
+
     }
 
     

@@ -12,13 +12,11 @@ class GlobalGet
      * superglobal array.
      * @return mixed value of the specified key from the  array if it is set, otherwise it returns
      * null.*/
-
-
     public static function getKey($key)
     {
         return (isset($_GET[$key]) === true ? filter_input(INPUT_GET, $key) : null);
-    }
 
+    }
 
 }
 
@@ -36,6 +34,7 @@ class GlobalPost
     public static function setPost($key, $value)
     {
         $_POST[$key] = $value;
+
     }
 
 
@@ -51,6 +50,7 @@ class GlobalPost
     public static function getPost($key)
     {
         return (isset($_POST[$key]) === true ? filter_input(INPUT_POST, $key) : null);
+
     }
 
 
@@ -63,19 +63,19 @@ class GlobalPost
     public static function getAllPost()
     {
         return (isset($_POST) === true ? filter_input_array(INPUT_POST) : null);
+
     }
 
 
     /**
-     * The function "forgetPost" in PHP is used to remove a specific key-value pair from the 
+     * The function "forgetPost" in PHP is used to remove a specific key-value pair from the
      * superglobal array.
      * @param string The "$key" parameter is the name of the post variable that you want to remove from the
      *  array.*/
-
-
     public static function forgetPost($key)
     {
         unset($_POST[$key]);
+
     }
 
 
@@ -95,6 +95,7 @@ class GlobalSession
     public static function setSession($key, $value)
     {
         $_SESSION[$key] = $value;
+
     }
 
 
@@ -107,6 +108,7 @@ class GlobalSession
     public static function getSession($key)
     {
         return (isset($_SESSION[$key]) === true ? filter_var_array($_SESSION[$key]) : null);
+
     }
 
 
@@ -119,6 +121,7 @@ class GlobalSession
     public static function getAllSession()
     {
         return (isset($_SESSION) === true ? filter_var_array($_SESSION) : null);
+
     }
 
 
@@ -131,6 +134,7 @@ class GlobalSession
     public static function forgetSession($key)
     {
         unset($_SESSION[$key]);
+
     }
 
 
@@ -150,6 +154,7 @@ class GlobalServer
     public static function setServer($key, $value)
     {
         $_SERVER[$key] = $value;
+
     }
 
 
@@ -164,6 +169,7 @@ class GlobalServer
     public static function getServer($key)
     {
         return (isset($_SERVER[$key]) === true ? filter_var($_SERVER[$key]) : null);
+
     }
 
 
@@ -175,6 +181,7 @@ class GlobalServer
     public static function getAllServer()
     {
         return (isset($_SERVER) === true ? filter_var_array($_SERVER) : null);
+
     }
 
 
@@ -188,6 +195,7 @@ class GlobalServer
     public static function forgetServer($key)
     {
         unset($_SERVER[$key]);
+        
     }
 
     

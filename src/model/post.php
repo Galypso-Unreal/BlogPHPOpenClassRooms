@@ -71,19 +71,20 @@ class PostRepository
 
             $post = new Post();
 
-            $post->identifier =     htmlspecialchars($row['id'], ENT_NOQUOTES);
-            $post->title =     htmlspecialchars($row['title'], ENT_NOQUOTES);
-            $post->lead_content =     htmlspecialchars($row['lead_content'], ENT_NOQUOTES);
-            $post->content =    htmlspecialchars($row['content'], ENT_NOQUOTES);
-            $post->created_at =    htmlspecialchars($row['created_at'], ENT_NOQUOTES);
-            $post->modified_at =     htmlspecialchars($row['modified_at'], ENT_NOQUOTES);
-            $post->deleted_at =   htmlspecialchars($row['deleted_at'], ENT_NOQUOTES);
-            $post->fk_user_id =   htmlspecialchars($row['fk_user_id'], ENT_NOQUOTES);
+            $post->identifier = htmlspecialchars($row['id'], ENT_NOQUOTES);
+            $post->title = htmlspecialchars($row['title'], ENT_NOQUOTES);
+            $post->lead_content = htmlspecialchars($row['lead_content'], ENT_NOQUOTES);
+            $post->content = htmlspecialchars($row['content'], ENT_NOQUOTES);
+            $post->created_at = htmlspecialchars($row['created_at'], ENT_NOQUOTES);
+            $post->modified_at = htmlspecialchars($row['modified_at'], ENT_NOQUOTES);
+            $post->deleted_at = htmlspecialchars($row['deleted_at'], ENT_NOQUOTES);
+            $post->fk_user_id = htmlspecialchars($row['fk_user_id'], ENT_NOQUOTES);
 
 
             $posts[] = $post;
         }
         return $posts;
+        
     }
 
 
@@ -120,6 +121,7 @@ class PostRepository
         }
 
         return $post;
+
     }
 
 
@@ -149,6 +151,7 @@ class PostRepository
         }
 
         return $author;
+
     }
 
 
@@ -184,6 +187,7 @@ class PostRepository
         $insert->bindParam(':fk_user_id', $fk_user_id, PDO::PARAM_INT);
 
         $insert->execute();
+
     }
 
 
@@ -227,6 +231,7 @@ class PostRepository
         $insert->bindParam(':id', $id_sec, PDO::PARAM_INT);
 
         $insert->execute();
+
     }
 
 
@@ -255,6 +260,7 @@ class PostRepository
         $delete->bindParam('id', $identifier, PDO::PARAM_INT);
 
         $delete->execute();
+
     }
 
 
@@ -283,6 +289,7 @@ class PostRepository
             $admins[] = $admin;
         }
         return $admins;
+
     }
 
     

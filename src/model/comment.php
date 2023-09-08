@@ -83,6 +83,7 @@ class CommentRepository
             $comments[] = $comment;
         }
         return $comments;
+
     }
 
 
@@ -101,7 +102,7 @@ class CommentRepository
         $get = new GlobalGet();
 
         if ($session->getSession('LOGGED_USER')['id'] !== null) {
-            $user =   htmlspecialchars($session->getSession('LOGGED_USER')['id'], ENT_NOQUOTES);
+            $user = htmlspecialchars($session->getSession('LOGGED_USER')['id'], ENT_NOQUOTES);
         }
 
         if (isset($comment) === true) {
@@ -121,6 +122,7 @@ class CommentRepository
         $insert->bindParam(':fk_post_id', $post, PDO::PARAM_INT);
 
         $insert->execute();
+
     }
 
 
@@ -149,6 +151,7 @@ class CommentRepository
 
 
         $delete->execute();
+
     }
 
 
@@ -171,6 +174,7 @@ class CommentRepository
         $data->bindParam(':id', $identifier, PDO::PARAM_INT);
 
         $data->execute();
+
     }
 
 
@@ -208,6 +212,7 @@ class CommentRepository
             $comments[] = $comment;
         }
         return $comments;
+        
     }
 
     

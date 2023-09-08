@@ -1,5 +1,5 @@
 <?php
-// checking all varaibles in form
+// Checking all inputs in form
 namespace Application\Controllers\Form;
 
 use Exception;
@@ -7,7 +7,7 @@ use Application\Lib\Globals\GlobalPost;
 
 
 
-/* 
+/*
 The `class FormController` is a PHP class that contains two functions: `confirmationForm()` and
 `sendMailContact()`.*/
 
@@ -23,8 +23,6 @@ class FormController
     public function confirmationForm()
     {
         $post = new GlobalPost();
-
-
         if ($post->getPost('firstname') === null || $post->getPost('lastname') === null || $post->getPost('email') === null || $post->getPost('message') === null) {
             echo "Le formulaire n'est pas valide il vous faut : un nom, un prénom, un email et un message";
             return 0;
@@ -61,6 +59,7 @@ class FormController
             }
             return 1;
         }
+
     }
     
 
@@ -107,6 +106,7 @@ class FormController
         } else {
             throw new Exception("L'envoi du mail n'est pas valide. Un message, prénom, nom et une adresse email est obligatoire pour l'envoi du mail");
         }
+        
     }
 
 

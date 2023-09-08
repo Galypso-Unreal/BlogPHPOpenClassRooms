@@ -14,7 +14,7 @@ use Application\Model\Comment\CommentRepository;
 use Exception;
 
 
-/* 
+/*
 The `class CommentController` is a PHP class that serves as a controller for handling comments in an
 application. It contains several methods for managing comments, such as retrieving all comments,
 adding a new comment, deleting a comment, validating a comment, and retrieving comments for a
@@ -46,6 +46,7 @@ class CommentController
         $commentRepository->connection = $connection;
 
         return $commentRepository->getAllComments();
+
     }
 
 
@@ -73,9 +74,6 @@ class CommentController
             $identifier = $get->getKey('id');
         }
 
-
-
-
         /* 
         The code is checking if the `$comment` variable is set and not empty, if the `$identifier` variable
         is set and greater than 0, if the `$user` variable is set and if the `$user->identifier` property is
@@ -90,6 +88,7 @@ class CommentController
         } else {
             throw new Exception('Vous ne pouvez pas ajouter de commentaire');
         }
+
     }
 
 
@@ -104,7 +103,7 @@ class CommentController
 
     public function deleteComment(int $identifier)
     {
-        /* 
+        /*
         The code is checking if the `$identifier` variable is set, is an integer, and is greater than 0. If
         all these conditions are true, it means that the comment can be deleted.*/
 
@@ -120,6 +119,7 @@ class CommentController
         } else {
             throw new Exception("L'id n'est pas correct");
         }
+
     }
 
 
@@ -148,6 +148,7 @@ class CommentController
         } else {
             throw new Exception("L'id du commentaire n'est pas bon");
         }
+
     }
     
 
@@ -175,6 +176,7 @@ class CommentController
         } else {
             throw new Exception("Les commentaires ne peuvent pas être récupérés");
         }
+        
     }
 
 

@@ -1,7 +1,7 @@
-.comment-form {
+.container .comments-container .comment-form {
   width: 100%;
-  flex-direction: column !important;
-  align-items: self-start !important;
+  flex-direction: column;
+  align-items: self-start;
 }
 
 .comment-form .form-floating {

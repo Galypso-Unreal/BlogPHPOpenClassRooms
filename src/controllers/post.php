@@ -28,7 +28,6 @@ class PostController
     /**
      * The code contains various functions related to retrieving, adding, modifying, and deleting posts
      * and authors in a blog system.
-     * 
      * @return The functions are returning different values depending on the logic and conditions
      * within each function. Some functions return a result from the database, some return a header
      * redirect, and some throw exceptions.*/
@@ -47,6 +46,7 @@ class PostController
         $postRepository->connection = $connection;
 
         return $postRepository->getPosts();
+        
     }
 
 
@@ -76,6 +76,7 @@ class PostController
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');
         }
+
     }
 
 
@@ -115,6 +116,7 @@ class PostController
 
             throw new Exception('Le formulaire est incomplet');
         }
+
     }
 
 
@@ -155,6 +157,7 @@ class PostController
         } else {
             throw new Exception('La modification ne peut pas être effectuée');
         }
+
     }
 
 
@@ -182,6 +185,7 @@ class PostController
         } else {
             throw new Exception("L'id n'est pas correcte");
         }
+
     }
 
 
@@ -205,6 +209,7 @@ class PostController
         } catch (\Throwable $th) {
             throw new Exception('Une erreur est survenue avec la base de données');
         }
+
     }
 
     
@@ -221,13 +226,14 @@ class PostController
         $postRepository = new PostRepository();
         $postRepository->connection = $connection;
 
-        /* 
+        /*
         check if $identifier is valid, is an int and is more than 0.
         Return the author of the post*/
 
         if (isset($identifier) === true && $identifier > 0 && is_int($identifier) === true) {
             return $postRepository->getAuthor($identifier);
         }
+
     }
 
     
