@@ -15,7 +15,6 @@ use DateTimeZone;
 */
 class Post
 {
-
     /*
         The line `public int $identifier;` is declaring a public property `$identifier` of type `int` in
         the `Post` class. This property represents the ID of a post. It is used to uniquely identify a

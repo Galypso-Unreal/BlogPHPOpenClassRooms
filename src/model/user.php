@@ -19,7 +19,6 @@ use Exception;
 
 class User
 {
-
     /*
         The line `public int $identifier;` is declaring a public property `$identifier` of type `int` in
         the `User` class. This property represents the identifier or ID of a user. It can be used to

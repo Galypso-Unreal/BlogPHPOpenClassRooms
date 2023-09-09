@@ -16,7 +16,10 @@ class GlobalGet
      */
     public static function getKey($key)
     {
-        return (isset($_GET[$key]) === true ? filter_input(INPUT_GET, $key) : null);
+        if (isset($_GET[$key]) === true) {
+            return filter_input(INPUT_GET, $key);
+        }
+        return null;
 
     }
 
@@ -52,7 +55,10 @@ class GlobalPost
      */
     public static function getPost($key)
     {
-        return (isset($_POST[$key]) === true ? filter_input(INPUT_POST, $key) : null);
+        if (isset($_POST[$key]) === true) {
+            return filter_input(INPUT_POST, $key);
+        }
+        return null;
 
     }
 
@@ -64,7 +70,10 @@ class GlobalPost
      */
     public static function getAllPost()
     {
-        return (isset($_POST) === true ? filter_input_array(INPUT_POST) : null);
+        if (isset($_POST) === true) {
+            return filter_input_array(INPUT_POST);
+        }
+        return null;
 
     }
 
@@ -110,7 +119,10 @@ class GlobalSession
      */
     public static function getSession($key)
     {
-        return (isset($_SESSION[$key]) === true ? filter_var_array($_SESSION[$key]) : null);
+        if (isset($_SESSION[$key]) === true) {
+            return filter_var_array($_SESSION[$key]);
+        }
+        return null;
 
     }
 
@@ -122,7 +134,10 @@ class GlobalSession
      */
     public static function getAllSession()
     {
-        return (isset($_SESSION) === true ? filter_var_array($_SESSION) : null);
+        if (isset($_SESSION) === true) {
+            return filter_var_array($_SESSION);
+        }
+        return null;
 
     }
 
@@ -170,7 +185,10 @@ class GlobalServer
      */
     public static function getServer($key)
     {
-        return (isset($_SERVER[$key]) === true ? filter_var($_SERVER[$key]) : null);
+        if (isset($_SERVER[$key]) === true) {
+            return filter_var($_SERVER[$key]);
+        }
+        return null;
 
     }
 
@@ -181,7 +199,10 @@ class GlobalServer
      */
     public static function getAllServer()
     {
-        return (isset($_SERVER) === true ? filter_var_array($_SERVER) : null);
+        if (isset($_SERVER) === true) {
+            return filter_var_array($_SERVER);
+        }
+        return null;
 
     }
     /**

@@ -42,7 +42,6 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
     }
 
     // LOGOUT.
-
     if ($get->getKey('action') === 'logoutUser') {
         if ($session->getSession('LOGGED_USER') !== null) {
             $session->forgetSession('LOGGED_USER');

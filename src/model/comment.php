@@ -18,7 +18,6 @@ use DateTimeZone;
 
 class Comment
 {
-
     /*
         The line `public int $identifier;` is declaring a public property named `$identifier` of type
         `int` in the `Comment` class. This property represents the unique identifier of a comment. By
