@@ -20,20 +20,56 @@ use Exception;
 class User
 {
 
+    /*
+        The line `public int $identifier;` is declaring a public property `$identifier` of type `int` in
+        the `User` class. This property represents the identifier or ID of a user. It can be used to
+        store and access the ID of a user object.
+    */
     public int $identifier;
 
+    /*
+        The line `public string $lastname;` is declaring a public property `$lastname` of type `string`
+        in the `User` class. This property represents the lastname of a user and can be used to store
+        and access the lastname of a user object.
+    */
     public string $lastname;
 
+    /*
+        The line `public string $firstname;` is declaring a public property `$firstname` of type
+        `string` in the `User` class. This property represents the firstname of a user and can be used
+        to store and access the firstname of a user object.
+    */
     public string $firstname;
 
+    /*
+        The line `public string $email;` is declaring a public property `$email` of type
+        `string` in the `User` class. This property represents the email of a user and can be used
+        to store and access the email of a user object.
+    */
     public string $email;
 
+    /*
+        The above code is declaring a public string variable named "$passowrd" in PHP.
+        This is the password of user coded in SHA1
+    */
     public string $password;
 
+    /*
+        The line `public bool $is_valid;` is declaring a public property named `$is_valid` of type
+        `bool` in the `Comment` class. This property represents the validity status of a comment. By
+        declaring it as public, it can be accessed and modified from outside the class.
+    */
     public int $is_valid;
 
+    /*
+        The above code is declaring a public property named "$deleted_at" in a PHP class. The property
+        has a type hint of "?string", which means it can either be a string or null.
+    */
     public ?string $deleted_at;
 
+    /*
+        $fk_id_role is the ID of the role of the user. For example ID:2 is a basic user.
+    */
     public int $fk_id_role;
 }
 //End class
@@ -48,12 +84,11 @@ class User
 class UserRepository
 {
 
+    
     /*
-        `public DatabaseConnection ;` is declaring a public property `` of type
-        `DatabaseConnection` in the `UserRepository` class. This property is used to establish a
-        connection with the database and perform various database operations in the methods of the
-        `UserRepository` class.
-    */
+     * The above code is declaring a public property named `$connection` of type `DatabaseConnection`
+     * in a PHP class.
+     */
     public DatabaseConnection $connection;
 
     /**

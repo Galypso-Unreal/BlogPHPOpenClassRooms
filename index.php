@@ -24,10 +24,10 @@ $session = new GlobalSession();
 $server = new GlobalServer();
 $get = new GlobalGet();
 
-// Routeur
+// Routeur.
 if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
-    // USER
-    // Login
+    // USER.
+    // Login.
     if ($get->getKey('action') === 'loginUser') {
         $user = (new UserController())->login();
         if ($user === 1) {
@@ -36,13 +36,12 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
             header('Location: http://blog.local/admin/posts');
         } else {
             if ($post->getPost('email') !== null) {
-                echo $twig->render('login.twig', array('errors' => $user,'email' => htmlspecialchars($post->getPost('email'), ENT_NOQUOTES),
-                ));
+                echo $twig->render('login.twig', array('errors' => $user,'email' => htmlspecialchars($post->getPost('email'), ENT_NOQUOTES)));
             }
         }
     }
 
-    // LOGOUT
+    // LOGOUT.
 
     if ($get->getKey('action') === 'logoutUser') {
         if ($session->getSession('LOGGED_USER') !== null) {
@@ -57,7 +56,7 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         }
         header('Location: http://blog.local/');
     }
-    // If send contact at form homepage
+    // If send contact at form homepage.
     if ($get->getKey('action') === 'getPost') {
         $identifier = $get->getKey('id');
         $post = (new PostController())->getPost($identifier);
@@ -114,7 +113,7 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         header("Location: /admin/users/");
     }
 } else {
-    // FRONT OFFICE LINKS 
+    // FRONT OFFICE LINKS.
     $host = $server->getServer('REQUEST_URI');
     if ($host === "/") {
         echo $twig->render('index.twig');
@@ -135,7 +134,7 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
             echo $twig->render('admin/login.twig');
         }
     }
-    // BACK-OFFICE LINKS
+    // BACK-OFFICE LINKS.
     if ($session->getSession('LOGGED_ADMIN') !== null) {
         if ($host === '/admin/post/add') {
             echo $twig->render('admin/post/add.twig', array('admins' => (new PostController())->getAdmins()));

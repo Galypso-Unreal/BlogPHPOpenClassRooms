@@ -1,5 +1,5 @@
 {
-    "docwriter.style": "Auto-detect",
+    "docwriter.style": "Doxygen",
     "docwriter.progress.trackMethods": true,
     "docwriter.progress.trackClasses": true
 }

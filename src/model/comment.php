@@ -19,16 +19,48 @@ use DateTimeZone;
 class Comment
 {
 
+    /*
+        The line `public int $identifier;` is declaring a public property named `$identifier` of type
+        `int` in the `Comment` class. This property represents the unique identifier of a comment. By
+        declaring it as public, it can be accessed and modified from outside the class.
+    */
     public int $identifier;
 
+    /*
+        The line `public string $comment;` is declaring a public property named `$comment` of type
+        `string` in the `Comment` class. This property represents the comment content of a comment
+        object. By declaring it as public, it can be accessed and modified from outside the class.
+    */
     public string $comment;
 
+    /*
+        The line `public bool $is_valid;` is declaring a public property named `$is_valid` of type
+        `bool` in the `Comment` class. This property represents the validity status of a comment. By
+        declaring it as public, it can be accessed and modified from outside the class.
+    */
     public bool $is_valid;
 
+    /*
+        The line `public ?string $deleted_at;` is declaring a public property named `$deleted_at` of
+        type `string` in the `Comment` class. This property represents the deletion timestamp of a
+        comment.
+    */
     public ?string $deleted_at;
 
+    /*
+        The line `public int $fk_user_id;` is declaring a public property named `$fk_user_id` of type
+        `int` in the `Comment` class. This property represents the foreign key for the user associated
+        with a comment. By declaring it as public, it can be accessed and modified from outside the
+        class.
+    */
     public int $fk_user_id;
 
+    /*
+        The line `public int $fk_post_id;` is declaring a public property named `$fk_post_id` of type
+        `int` in the `Comment` class. This property represents the foreign key for the post associated
+        with a comment. By declaring it as public, it can be accessed and modified from outside the
+        class.
+    */
     public int $fk_post_id;
 }
 

@@ -16,20 +16,56 @@ use DateTimeZone;
 class Post
 {
 
+    /*
+        The line `public int $identifier;` is declaring a public property `$identifier` of type `int` in
+        the `Post` class. This property represents the ID of a post. It is used to uniquely identify a
+        post in the database.
+    */
     public int $identifier;
 
+    /*
+        The line `public string $title;` is declaring a public property `$title` of type `string` in the
+        `Post` class. This property represents the title of a post. It is used to store the title of a
+        post object.
+    */
     public string $title;
 
+    /*
+        The line `public string $lead_content;` is declaring a public property `$lead_content` of type
+        `string` in the `Post` class. This property represents the lead content of a post, which is
+        typically a shorter version of the main content and is used to provide a summary or preview of
+        the post. It is used to store the lead content of a post object.
+    */
     public string $lead_content;
 
+    /*
+        The line `public string $content;` is declaring a public property `$content` of type `string` in
+        the `Post` class. This property represents the content of a post, which is the main text or HTML
+        content of the post. It is used to store the content of a post object.
+    */
     public string $content;
 
+    /*
+        The above code is declaring a public string property called "$created_at" in a PHP class.
+    */
     public string $created_at;
 
+    /*
+        The above code is declaring a public property named "$modified_at" with a data type of string in
+        a PHP class.
+    */
     public string $modified_at;
 
+    /*
+        The above code is declaring a public property named "$deleted_at" in a PHP class. The property
+        has a type hint of "?string", which means it can either be a string or null.
+    */
     public ?string $deleted_at;
-    
+
+    /*
+        The above code is declaring a public property named "$fk_user_id" in a PHP class. The property
+        has a type hint of "int". It's used to define a User Id to assosiate a post
+    */
     public int $fk_user_id;
 }
 //End class
