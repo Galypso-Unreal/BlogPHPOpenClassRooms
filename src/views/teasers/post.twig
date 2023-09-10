@@ -1,14 +1,14 @@
 <!-- Post preview-->
 <article class="post_{{post.id}}">
-	<div class="post-preview">
-		<a href="index.php?action=getPost&id={{post.id|url_encode}}">
-			<h2 class="post-title">{{post.title}}</h2>
-			<h3 class="post-subtitle">{{post.lead_content}}</h3>
-		</a>
-		<p class="post-meta">
+    <div class="post-preview">
+        <a href="index.php?action=getPost&id={{post.identifier|url_encode}}">
+            <h2 class="post-title">{{post.title}}</h2>
+            <h3 class="post-subtitle">{{post.lead_content}}</h3>
+        </a>
+        <p class="post-meta">
 
-			Posté le {{post.modified_at|date("m/d/Y")}}
-		</p>
-	</div>
-	<hr class="my-4" />
+            Posté le {{post.modified_at|date("m/d/Y")}}
+        </p>
+    </div>
+    <hr class="my-4" />
 </article>

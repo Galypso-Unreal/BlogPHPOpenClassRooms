@@ -1,48 +1,53 @@
 <?php
 
 use Twig\TwigFunction;
-use Twig\Extra\String\StringExtension;
 use Application\Model\Post\PostRepository;
 use Application\Lib\Database\DatabaseConnection;
-use Symfony\Component\DependencyInjection\Dumper\Dumper;
+use Application\Lib\Globals\GlobalServer;
+use Application\Lib\Globals\GlobalSession;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/src/views');
 $twig = new \Twig\Environment($loader, ['debug' => true]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
-$twig->addExtension(new StringExtension());
-// define all globals variable usable in twig
+// Define all globals variable usable in twig
+
+
+
 
 $getID = new TwigFunction('get_ID', function () {
-
-   $host = $_SERVER['REQUEST_URI'];
-   $id = explode('id=', $host);
-   $id = end($id);
-   return $id;
+    $server = new GlobalServer();
+    if ($server->getServer('REQUEST_URI') !== null) {
+        $host = $server->getServer('REQUEST_URI');
+        $identifier = explode('id=', $host);
+        $identifier = end($identifier);
+        return $identifier;
+    }
 });
 
 $twig->addFunction($getID);
 
 
-$displayAuthor = new TwigFunction('displayAuthor', function (int $id) {
+$displayAuthor = new TwigFunction('displayAuthor', function (int $identifier) {
+    
+    $connection = new DatabaseConnection();
+    $postRepository = new PostRepository();
+    $postRepository->connection = $connection;
 
-   $connection = new DatabaseConnection();
-   $postRepository = new PostRepository();
-   $postRepository->connection = $connection;
-
-   return $postRepository->getAuthor($id);
+    return $postRepository->getAuthor($identifier);
 });
 
 $twig->addFunction($displayAuthor);
 
+$session = new GlobalSession();
 
 $twig->addGlobal('img_assets', 'http://blog.local/src/assets/img/');
-// $twig->addGlobal('js_folder', ABS_PATH.'/assets/js/');
-if (isset($_SESSION['LOGGED_ADMIN']) && !empty($_SESSION['LOGGED_ADMIN'])) {
-   $twig->addGlobal('admin_session', $_SESSION['LOGGED_ADMIN']);
+
+if ($session->getSession('LOGGED_ADMIN') !== null && empty($session->getSession('LOGGED_ADMIN')) === false) {
+    $twig->addGlobal('admin_session', $session->getSession('LOGGED_ADMIN'));
 }
 
-if (isset($_SESSION['LOGGED_USER']) && !empty($_SESSION['LOGGED_USER'])) {
-   $twig->addGlobal('user_session', $_SESSION['LOGGED_USER']);
+if ($session->getSession('LOGGED_USER') !== null && empty($session->getSession('LOGGED_USER')) === false) {
+    $twig->addGlobal('user_session', $session->getSession('LOGGED_USER'));
 }

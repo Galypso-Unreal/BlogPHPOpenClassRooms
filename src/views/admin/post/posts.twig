@@ -21,13 +21,14 @@
         <tbody>
             {% for post in posts %}
             <tr>
-                <td>{{post.id}}</td>
+                <td>{{post.identifier}}</td>
                 <td>{{post.title}}</td>
                 <td>{{post.created_at}}</td>
                 <td>{{post.modified_at}}</td>
-                <td>{{post.author.firstname}} {{post.author.lastname}}</td>
-                <td class="modify-control"><a href="admin/post/modify/?id={{post.id}}"><i class="fa fa-pencil"
-                            aria-hidden="true"></i></a> <a href="'admin/post/delete/?id={{post.id}}"><i
+                {% set author = displayAuthor(post.fk_user_id) %}
+                <td>{{author.firstname}} {{author.lastname}}</td>
+                <td class="modify-control"><a href="admin/post/modify/?id={{post.identifier}}"><i class="fa fa-pencil"
+                            aria-hidden="true"></i></a> <a href="'admin/post/delete/?id={{post.identifier}}"><i
                             class="fa fa-trash" aria-hidden="true"></i></a></td>
 
             </tr>

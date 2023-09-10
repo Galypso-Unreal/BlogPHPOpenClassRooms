@@ -10,8 +10,8 @@
         <li class="nav-item dropdown">
 
             {% if admin_session %}
-        <li class="nav-item header_account nav-link px-lg-3 py-3 py-lg-4 relative">
-            <div class="floating_window_user admin close">
+        <li class="nav-item header-account  nav-link px-lg-3 py-3 py-lg-4 relative">
+            <div class="floating-window-user admin close">
                 <a href="index.php?action=logoutAdmin">Se déconnecter</a>
 
             </div>
@@ -92,13 +92,13 @@
             <div class="sb-sidenav-footer">
                 <div class="small">Connecté en tant que:</div>
                 {% if admin_session %}
-                    
+
                 {% if admin_session.firstname %}
-                    {{admin_session.firstname}}
+                {{admin_session.firstname}}
                 {% endif %}
 
                 {% if admin_session.lastname %}
-                    {{admin_session.lastname}}
+                {{admin_session.lastname}}
                 {% endif %}
 
                 {% endif %}
