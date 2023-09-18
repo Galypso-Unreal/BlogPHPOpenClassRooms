@@ -4,10 +4,10 @@
 
 .container-form  form {
   display: flex;
-  align-items: center;
   width: 100%;
   flex-flow: column wrap;
   gap: 3rem;
+  align-items: center;
 }
 
 .container-form  form .input.full {
@@ -96,6 +96,7 @@ textarea:focus {
 @media screen and (width >= 992px) {
   .container-form  form {
     flex-direction: row;
+    align-items: unset;
   }
 
   .confirmation-form .informations p {

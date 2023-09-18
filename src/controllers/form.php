@@ -24,40 +24,82 @@ class FormController
     public function confirmationForm()
     {
         $post = new GlobalPost();
-        if ($post->getPost('firstname') === null || $post->getPost('lastname') === null || $post->getPost('email') === null || $post->getPost('message') === null) {
-            echo "Le formulaire n'est pas valide il vous faut : un nom, un prénom, un email et un message";
-            return 0;
-        } else {
-            if ($post->getPost('firstname') !== null) {
-                $firstname = htmlspecialchars($post->getPost('firstname'), ENT_NOQUOTES);
-            }
 
-            if ($post->getPost('lastname') !== null) {
-                $lastname = htmlspecialchars($post->getPost('lastname'), ENT_NOQUOTES);
-            }
+        if ($post->getPost('firstname') !== null) {
+            $firstname = htmlspecialchars($post->getPost('firstname'), ENT_NOQUOTES);
+        }
 
-            if ($post->getPost('email') !== null) {
-                $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
-            }
+        if ($post->getPost('lastname') !== null) {
+            $lastname = htmlspecialchars($post->getPost('lastname'), ENT_NOQUOTES);
+        }
 
-            if ($post->getPost('message') !== null) {
-                $message = htmlspecialchars($post->getPost('message'), ENT_NOQUOTES);
-            }
+        if ($post->getPost('email') !== null) {
+            $email = htmlspecialchars($post->getPost('email'), ENT_NOQUOTES);
+        }
 
-            if (strlen($firstname > 50) === true) {
-                echo "Votre prénom est trop long";
-                return 0;
-            } elseif (strlen($lastname) > 50) {
-                echo "Votre nom est trop long";
-                return 0;
-            } elseif (strlen($email) > 100) {
-                echo "Votre email est trop long";
-                return 0;
-            } elseif (strlen($message) > 500) {
-                echo "Votre message est trop long";
-                return 0;
-            }
+        if ($post->getPost('message') !== null) {
+            $message = htmlspecialchars($post->getPost('message'), ENT_NOQUOTES);
+        }
+        
+        if ((isset($firstname) === true && strlen($firstname) <= 50 === true && strlen($firstname) > 0 === true) && (isset($lastname) === true && strlen($lastname) <= 50 === true && strlen($lastname) > 0 === true) && (isset($email) === true && strlen($email) <= 100 === true && strlen($email) > 0 === true) && (isset($message) === true && strlen($message) <= 500 === true && strlen($message) > 0 === true)) {
             return 1;
+
+        } else {
+            $errors = [];
+
+            // Check existing values
+
+            if(isset($firstname)){
+                $errors['old_firstname'] = $firstname;
+            }
+            if(isset($lastname)){
+                $errors['old_lastname'] = $lastname;
+            }
+            if(isset($email)){
+                $errors['old_email'] = $email;
+            }
+            if(isset($message)){
+                $errors['old_message'] = $message;
+            }
+            
+            // Check form strlen
+
+
+            if (strlen($firstname) > 50 === true) {
+                $errors['firstname'] = "Votre prénom est trop long";
+            }
+            
+            if (strlen($lastname) > 50 === true) {
+                $errors['lastname'] = "Votre nom est trop long";
+            }
+            
+            if (strlen($email) > 100 === true) {
+                $errors['email'] = "Votre email est trop long";
+            }
+            
+            if (strlen($message) > 500 === true) {
+                $errors['message'] = "Votre message est trop long";
+            }
+            
+            // Check form not empty
+
+            if (strlen($firstname) === 0) {
+                $errors['firstname'] = "Votre prénom est vide";
+            }
+            
+            if (strlen($lastname) === 0) {
+                $errors['lastname'] = "Votre nom est vide";
+            }
+            
+            if (strlen($email) === 0) {
+                $errors['email'] = "Votre email est vide";
+            }
+            
+            if (strlen($message) === 0) {
+                $errors['message'] = "Votre message est vide";
+            }
+            return $errors;
+
         }
         // End if
     }

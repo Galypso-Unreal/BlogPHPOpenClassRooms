@@ -5,6 +5,7 @@
 /* informations */
 html {
   font-size: 10px;
+  word-break: break-word;
 }
 
 .relative {
@@ -105,6 +106,7 @@ html {
   padding: 2rem;
   background-color: var(--bs-body-color);
   color: white;
+  word-break: break-word;
 }
 
 .comments {
@@ -163,8 +165,6 @@ footer .contain-listing {
 .post-content {
   padding: 0;
   width: 100%;
-  margin: 0 auto;
-  max-width: 92rem;
 }
 
 .masthead .container {
@@ -178,8 +178,15 @@ footer .contain-listing {
 .post-header .post-heading {
   width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  text-align: center;
+}
+
+.main_content_post .container{
+    padding: 0;
+    text-align: center;
 }
 
 .navbar-toggler {
@@ -194,5 +201,14 @@ footer .contain-listing {
 @media screen and (width >= 992px) {
   footer .contain-listing {
     align-items: unset;
+  }
+
+  .post-header .post-heading{
+    align-items: start;
+    text-align: start;
+  }
+
+  .main_content_post .container{
+    text-align: start;
   }
 }
