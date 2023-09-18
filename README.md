@@ -10,7 +10,7 @@ phpMyAdmin 5.2.1
 Local by flywheels : 6.7.2 ou plus
 
 
-Etape 1
+<h1>Etape 1</h1>
 
 
 Utiliser un serveur local pour le projet. Un serveur local va permettre de coder sur une instance isolée afin de pouvoir faire tous les tests nécessaires avant une mise en production du site.
@@ -26,7 +26,7 @@ MAMP : https://www.mamp.info/en/mamp/windows/
 ATTENTION : Je vous conseille tous de même d’utiliser le même logiciel que celui utilisé pour ce projet (Local by Flywheel) pour éviter d’éventuelles erreurs. Mais, cela n’est pas obligatoire.
 
 
-Etape 2
+<h1>Etape 2</h1>
 
 
 Créer le serveur local.
@@ -62,7 +62,7 @@ Maintenant que tout est en place, aller dans le fichier du site. Vous pouvez dir
 Pour finir, aller dans app > public, supprimer tous les fichiers car ils ne seront pas utiles.
 
 
-Etape 3
+<h1>Etape 3</h1>
 
 
 Cloner le projet du git.
@@ -90,7 +90,7 @@ Linux :  https://www.it-connect.fr/linux-comment-afficher-les-fichiers-et-dossie
 Pour ceux qui sont avec le logiciel Local by Flywheels, il faut bien mettre tous les dossiers le répertoire : public
 
 
-Etape 4
+<h1>Etape 4</h1>
 
 
 Ce site comporte une base de données. Cela est nécessaire pour avoir : les utilisateurs, les posts ... 
@@ -103,7 +103,7 @@ https://www.phpmyadmin.net/ (la version 5.2.1 est conseillée)
 Vous pouvez récupérer un jeu de données à la racine du projet nommé :  database_data_test.sql
 
 
-Etape 5
+<h1>Etape 5</h1>
 
 
 Configurer le branchement de la base de données :
