@@ -5,23 +5,31 @@
 
         <div class="input">
             <label for="firstname">Prénom</label>
-            <input type="text" id="firstname" name="firstname" placeholder="Votre prénom" maxlength="50">
+            <input type="text" id="firstname" name="firstname" placeholder="Votre prénom" maxlength="50" {% if errors.old_firstname %} value={{errors.old_firstname}} {% endif %}>
+            {% if errors.firstname %}<small class="form-errors">{{errors.firstname}}</small>{%
+                endif %}
         </div>
 
 
         <div class="input">
             <label for="lastname">Nom</label>
-            <input type="text" id="lastname" name="lastname" placeholder="Votre nom" maxlength="50">
+            <input type="text" id="lastname" name="lastname" placeholder="Votre nom" maxlength="50" {% if errors.old_lastname %} value={{errors.old_lastname}} {% endif %}>
+            {% if errors.lastname %}<small class="form-errors">{{errors.lastname}}</small>{%
+                endif %}
         </div>
 
         <div class="input">
             <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" placeholder="Votre email" maxlength="50">
+            <input type="email" id="email" name="email" placeholder="Votre email" maxlength="50" {% if errors.old_email %} value={{errors.old_email}} {% endif %}>
+            {% if errors.email %}<small class="form-errors">{{errors.email}}</small>{%
+                endif %}
         </div>
 
         <div class="input full">
             <label for="subject">Message</label>
-            <textarea id="message" name="message" placeholder="Votre message" maxlength="500"></textarea>
+            <textarea id="message" name="message" placeholder="Votre message" maxlength="500">{% if errors.old_message %} {{errors.old_message}} {% endif %}</textarea>
+            {% if errors.message %}<small class="form-errors">{{errors.message}}</small>{%
+                endif %}
         </div>
 
 

@@ -44,6 +44,8 @@ $session = new GlobalSession();
 
 $twig->addGlobal('img_assets', 'http://blog.local/src/assets/img/');
 
+$twig->addGlobal('file_assets', 'http://blog.local/src/assets/file/');
+
 if ($session->getSession('LOGGED_ADMIN') !== null && empty($session->getSession('LOGGED_ADMIN')) === false) {
     $twig->addGlobal('admin_session', $session->getSession('LOGGED_ADMIN'));
 }

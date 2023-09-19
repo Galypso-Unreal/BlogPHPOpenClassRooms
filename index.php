@@ -63,9 +63,13 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         echo $twig->render('post.twig', array('post' => $post,'comments' => $comments));
     }
     if ($get->getKey('action') === 'confirmationForm') {
-        if ((new FormController())->confirmationForm() === 1) {
+        $confirm = (new FormController())->confirmationForm();
+        if ($confirm === 1) {
             $informations = (new FormController())->sendMailContact();
             echo $twig->render('elements/confirm.twig', array('informations' => $informations));
+        }
+        else{
+            echo $twig->render('index.twig', array('errors' => $confirm));
         }
     }
     if ($get->getKey('action') === 'addPost') {
