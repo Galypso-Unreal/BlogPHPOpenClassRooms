@@ -91,8 +91,8 @@ if ($get->getKey('action') !== null && $get->getKey('action') !== '') {
         $user = new UserController();
         $create = $user->createAccount();
 
-        if (is_array($create) === 1) {
-            echo $twig->render('register.twig', array('errors' => $create,'before' => $post->getAllPost()));
+        if (isset($create['errors']) === true) {
+            echo $twig->render('register.twig', array('errors' => $create['errors'],'before' => $post->getAllPost()));
         } else {
             echo $twig->render('register-send.twig', array());
         }

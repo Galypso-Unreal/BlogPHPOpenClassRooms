@@ -86,37 +86,61 @@ class UserController
             characters) to ensure they are within the allowed limits.
         */
 
-        if ((isset($firstname) === true &&  strlen($firstname) > 0 === true && strlen($firstname) <= 60 === true) && (isset($lastname) === true && strlen($lastname) > 0 === true && strlen($lastname) <= 60 === true) && (isset($email) === true && strlen($email) > 0 === true && strlen($email) <= 100 === true) && (isset($password) === true && strlen($password) > 0 === true) && (isset($confirmepassword) === true && strlen($confirmepassword) > 0 === true) && $password === $confirmepassword && $this->checkUniqueEmail() === 1) {
+        if ((isset($firstname) === true &&  strlen($firstname) > 0 === true && strlen($firstname) <= 60 === true) && (isset($lastname) === true && strlen($lastname) > 0 === true && strlen($lastname) <= 60 === true) && (isset($email) === true && strlen($email) > 0 === true && strlen($email) <= 100 === true) && (isset($password) === true && strlen($password) > 12 === true && preg_match('~[0-9]+~', $password) === 1 && preg_match('/[A-Z]/', $password) === 1 && preg_match('/[^a-zA-Z\d]/', $password) === 1) && (isset($confirmepassword) === true && strlen($confirmepassword) > 0 === true) && $password === $confirmepassword && $this->checkUniqueEmail() === 1) {
             return $userRepository->createAccount();
         } else {
 
             $errors = [];
 
             if (isset($firstname) === false || $firstname === '') {
-                $errors['firstname'] = 'Veuillez enregister votre prénom';
+                $errors['errors']['firstname'] = 'Veuillez enregister votre prénom';
             }
 
             if (isset($lastname) === false || $lastname === '') {
-                $errors['lastname'] = 'Veuillez enregister votre nom';
+                $errors['errors']['lastname'] = 'Veuillez enregister votre nom';
             }
 
             if (isset($email) === false || $email === '') {
-                $errors['email'] = 'Veuillez enregister votre email';
+                $errors['errors']['email'] = 'Veuillez enregister votre email';
             }
 
             if (isset($password) === false || $password === '') {
-                $errors['password'] = 'Veuillez enregister votre mot de passe';
+                $errors['errors']['password'] = 'Veuillez enregister votre mot de passe';
+            }
+
+            // Checking if password have at least 12 caracters
+            
+            if ($password !== '' && strlen($password) < 12) {
+                $errors['errors']['password'] = 'Votre mot de passe doit comporter au moins 12 caractères';
+            }
+
+            // Checking if password have at least one number
+
+            if (preg_match('~[0-9]+~', $password) === 0 && isset($password) === true && $password !== '') {
+                $errors['errors']['password'] = 'Votre mot de passe doit comporter au moins un nombre';
+            }
+
+            // Checking if password have at least one Uppercase caracter
+
+            if (preg_match("/[A-Z]/", $password) === 0 && isset($password) === true && $password !== ''){
+                $errors['errors']['password'] = 'Votre mot de passe doit comporter au moins une lettre en majuscule';
+            }
+
+            // Checking if password have at least one special caracter
+
+            if(preg_match('/[^a-zA-Z\d]/', $password) === 0 && isset($password) === true && $password !== ''){
+                $errors['errors']['password'] = 'Votre mot de passe doit comporter au moins un caractère spécial';
             }
 
             if (isset($confirmepassword) === false || $confirmepassword === '') {
-                $errors['confirmepassword'] = 'Veuillez confirmer votre mot de passe';
+                $errors['errors']['confirmepassword'] = 'Veuillez confirmer votre mot de passe';
             }
             if ($confirmepassword !== $password) {
-                $errors['confirmepassword'] = "Le mot de passe de confirmation n'est pas correcte";
+                $errors['errors']['confirmepassword'] = "Le mot de passe de confirmation n'est pas correcte";
             }
 
-            if ($this->checkUniqueEmail() === 0) {
-                $errors['email'] = 'Cet email est déjà existant';
+            if ($this->checkUniqueEmail() === 0 && isset($email) === true && $email !== '') {
+                $errors['errors']['email'] = 'Cet email est déjà existant';
             }
 
             return $errors;

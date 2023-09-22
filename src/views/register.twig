@@ -48,8 +48,8 @@
                                     <input class="form-control" id="inputPassword" name="password" type="password"
                                         placeholder="Create a password" />
                                     <label for="inputPassword">Mot de passe</label>
-                                    {% if errors.password %}<small class="form-errors">{{errors.password}}</small>{%
-                                    endif %}
+                                    <small class="passwordNeed">Le mot de passe doit contenir au moins : 12 caractères, 1 chiffre, 1 majuscule et 1 caractère spécial</small>
+                                    {% if errors.password %}<div><small class="form-errors">{{errors.password}}</small></div>{% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
