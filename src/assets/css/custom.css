@@ -212,3 +212,8 @@ footer .contain-listing {
     text-align: start;
   }
 }
+
+.passwordNeed{
+    font-size: 14px;
+    font-weight: bold;
+}
